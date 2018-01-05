@@ -1,107 +1,119 @@
 package com.example.adi.catalogoatc.fragmentos;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.adi.catalogoatc.R;
+import com.example.adi.catalogoatc.Recursos.Basic;
+import com.example.adi.catalogoatc.adapters.HistorialAdapter;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link HistorialCreditoFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link HistorialCreditoFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class HistorialCreditoFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import org.json.JSONArray;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
+public class HistorialCreditoFragment extends Fragment implements Basic, Response.Listener<JSONArray>, Response.ErrorListener {
+    private ListView listView;
+    private ProgressDialog progressDialog;
+    String url;
+    private HistorialFragment.OnFragmentInteractionListener mListener;
 
-    public HistorialCreditoFragment() {
-        // Required empty public constructor
-    }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HistorialCreditoFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static HistorialCreditoFragment newInstance(String param1, String param2) {
-        HistorialCreditoFragment fragment = new HistorialCreditoFragment();
+    public static TelefonoFragment newInstance(String param1, String param2) {
+        TelefonoFragment fragment = new TelefonoFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
 
+
+    //Cuando se crea el fragmento
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //compara si hay algun elemento guardado
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_historial_credito, container, false);
+        View view = inflater.inflate(R.layout.fragment_historial_credito, container, false);
+        listView = (ListView)view.findViewById(R.id.ListaHistorialCredito);
+
+        //Coloca el dialogo de carga
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setTitle("En Proceso");
+        progressDialog.setMessage("Un momento...");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+
+        //Inicia la peticion
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+        String consulta = "SELECT o.folio, o.fecha, c.total" +
+                " from credito c, orden o" +
+                " where c.orden_id = o.id" +
+                " and o.cliente_id="+IDUsusario+";";
+
+        consulta = consulta.replace(" ", "%20");
+        String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
+        url= SERVER + RUTA + "consultaGeneral.php" + cadena;
+        Log.i("info", url);
+
+        //Hace la petición String
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, this, this);
+
+        //Agrega y ejecuta la cola
+        queue.add(request);
+
+
+        return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
+
+
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
     }
 
+
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
+    public void onErrorResponse(VolleyError error) {
+        progressDialog.hide();
+        Log.i("mensaje", error.toString());
+        Toast.makeText(getContext(), "Error en el WebService", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), url, Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+    public void onResponse(JSONArray response) {
+        progressDialog.hide();
+
+        HistorialAdapter adapter = new HistorialAdapter(getContext(), response);
+        listView.setAdapter(adapter);
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

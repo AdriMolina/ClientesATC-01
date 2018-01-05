@@ -1,0 +1,25 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.adi.catalogoatc.fragmentos.DetallesComprasFragment">
+
+
+    <TextView
+        android:id="@+id/TiuloDetalles"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Compras"
+        android:textSize="25dp"/>
+
+    <ListView
+        android:id="@+id/listaDetalles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp">
+
+    </ListView>
+
+
+
+</FrameLayout>

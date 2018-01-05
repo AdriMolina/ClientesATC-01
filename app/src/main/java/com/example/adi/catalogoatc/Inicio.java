@@ -21,6 +21,7 @@ import com.example.adi.catalogoatc.adapters.HistorialAdapter;
 import com.example.adi.catalogoatc.fragmentos.AccesoriosFragment;
 import com.example.adi.catalogoatc.fragmentos.CatalogoFragment;
 import com.example.adi.catalogoatc.fragmentos.ChipFragment;
+import com.example.adi.catalogoatc.fragmentos.DetallesComprasFragment;
 import com.example.adi.catalogoatc.fragmentos.HistorialContadoFragment;
 import com.example.adi.catalogoatc.fragmentos.HistorialCreditoFragment;
 import com.example.adi.catalogoatc.fragmentos.HistorialFragment;
@@ -36,7 +37,8 @@ public class Inicio extends AppCompatActivity
         PerfilFragment.OnFragmentInteractionListener,
         HistorialFragment.OnFragmentInteractionListener,
         HistorialCreditoFragment.OnFragmentInteractionListener,
-        HistorialContadoFragment.OnFragmentInteractionListener
+        HistorialContadoFragment.OnFragmentInteractionListener,
+        DetallesComprasFragment.OnFragmentInteractionListener
 {
 
     ImageButton floatButton;
@@ -51,14 +53,7 @@ public class Inicio extends AppCompatActivity
 
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

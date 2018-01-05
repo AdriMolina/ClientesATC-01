@@ -20,28 +20,28 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.adi.catalogoatc.R;
 import com.example.adi.catalogoatc.Recursos.Basic;
+import com.example.adi.catalogoatc.adapters.ComprasAdapter;
 import com.example.adi.catalogoatc.adapters.HistorialAdapter;
-import com.example.adi.catalogoatc.adapters.TelefonoAdapter;
 
 import org.json.JSONArray;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link HistorialContadoFragment.OnFragmentInteractionListener} interface
+ * {@link DetallesComprasFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link HistorialContadoFragment#newInstance} factory method to
+ * Use the {@link DetallesComprasFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HistorialContadoFragment extends Fragment implements Basic, Response.Listener<JSONArray>, Response.ErrorListener {
+public class DetallesComprasFragment extends Fragment implements Basic, Response.Listener<JSONArray>, Response.ErrorListener {
     private ListView listView;
     private ProgressDialog progressDialog;
     String url;
     private HistorialFragment.OnFragmentInteractionListener mListener;
 
 
-    public static TelefonoFragment newInstance(String param1, String param2) {
-        TelefonoFragment fragment = new TelefonoFragment();
+    public static DetallesComprasFragment newInstance(String param1, String param2) {
+        DetallesComprasFragment fragment = new DetallesComprasFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -64,7 +64,7 @@ public class HistorialContadoFragment extends Fragment implements Basic, Respons
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_historial_contado, container, false);
+        View view = inflater.inflate(R.layout.fragment_detalles_compras, container, false);
         listView = (ListView)view.findViewById(R.id.ListaHistorial);
 
         //Coloca el dialogo de carga
@@ -76,11 +76,16 @@ public class HistorialContadoFragment extends Fragment implements Basic, Respons
 
         //Inicia la peticion
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String consulta = "SELECT o.folio, oc.fecha, oc.total" +
-                " from orden_completa oc, orden o" +
-                " where o.id not in(Select orden_id from credito)" +
-                " and oc.orden_id = o.id" +
-                " and o.cliente_id="+IDUsusario+";";
+        String consulta = "SELECT ta.nombre, ma.nombre, mo.nombre , od.cantidad, oc.total" +
+                " FROM tipo_articulo ta, marca ma, modelo mo, orden_descripcion od,orden_completa oc, orden ord, cantidad ca, articulo ar" +
+                " where od.tipoVentaId = ca.id" +
+                " and ord.id = od.orden_id" +
+                " and ord.id = oc.orden_id" +
+                "and mo.id = ar.modelo_id" +
+                "and ma.id = mo.marca_id" +
+                "and ca.articulo_id = ar.id" +
+                "and ar.tipoArticulo_id = ta.id" +
+                "and ord.folio = '000331/2017';";
 
         consulta = consulta.replace(" ", "%20");
         String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
@@ -119,7 +124,7 @@ public class HistorialContadoFragment extends Fragment implements Basic, Respons
     public void onResponse(JSONArray response) {
         progressDialog.hide();
 
-        HistorialAdapter adapter = new HistorialAdapter(getContext(), response);
+        ComprasAdapter adapter = new ComprasAdapter(getContext(), response);
         listView.setAdapter(adapter);
     }
 

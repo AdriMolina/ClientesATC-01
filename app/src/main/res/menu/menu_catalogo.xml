@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:aplicación="http://schemas.android.com/tools">
+    <item
+        android:id="@+id/miCompose"
+        android:icon="@drawable/ic_carrito_mas"
+        app:showAsAction="always"
+        android:title="Buscar"
+        aplicación:showAsAction = "ifRoom|collapseActionView"
+        aplicación:actionViewClass = "android.support .v7.widget.SearchView "
+        >
+    </item>
+
+
+
+
+
+
+</menu>

@@ -80,7 +80,7 @@ public class HistorialAdapter extends BaseAdapter {
         {
             folio = getItem(position).getString("0");
             fecha = getItem(position).getString("1");
-            total = getItem(position).getString("2");
+            total = "$"+ getItem(position).getString("2");
 
         }
         catch (JSONException e)

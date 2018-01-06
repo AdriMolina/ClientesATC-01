@@ -3,79 +3,80 @@ package com.example.adi.catalogoatc.fragmentos;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.example.adi.catalogoatc.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link EditarPerfilFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link EditarPerfilFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+/
 public class EditarPerfilFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    //Variables
+    private static final String NOMBRE = "nombre";
+    private static final String DIRECCION = "direccion";
+    private static final String TELEFONO= "telefono";
+    private static  String nombreEditar;
+    private static String direccionEditar;
+    private static String telefonoEditar;
+    private EditText edtNombre, edtDireccion, edtTelefono;
     private OnFragmentInteractionListener mListener;
 
     public EditarPerfilFragment() {
-        // Required empty public constructor
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment EditarPerfilFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static EditarPerfilFragment newInstance(String param1, String param2) {
+    public static EditarPerfilFragment newInstance(String nombre, String direccion, String telefono) {
         EditarPerfilFragment fragment = new EditarPerfilFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(NOMBRE, nombre);
+        args.putString(DIRECCION, direccion);
+        args.putString(TELEFONO, telefono);
         fragment.setArguments(args);
         return fragment;
     }
 
+    //Cuando se crea el fragmento
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
+            nombreEditar = getArguments().getString(NOMBRE);
+            direccionEditar = getArguments().getString(DIRECCION);
+            telefonoEditar = getArguments().getString(TELEFONO);
+
+
         }
     }
 
+    //Cuando se crea la vista
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
+
         return inflater.inflate(R.layout.fragment_editar_perfil, container, false);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        edtNombre = (EditText)view.findViewById(R.id.editNombre);
+        edtDireccion = (EditText)view.findViewById(R.id.editDireccion);
+        edtTelefono = (EditText)view.findViewById(R.id.editTelefono);
+    }
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
     }
 
-    @Override
+   /* @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {

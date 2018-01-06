@@ -2,9 +2,11 @@ package com.example.adi.catalogoatc.fragmentos;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -91,6 +93,22 @@ public class PerfilFragment extends Fragment implements Basic, Response.Listener
         //Agrega y ejecuta la cola
         queue.add(request);
 
+        //ejecuta la accion de boton editar
+
+
+        btnEditar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Fragment nuevofragmento = new EditarPerfilFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.content_main, nuevofragmento);
+                transaction.addToBackStack(null);
+                transaction.commit();
+
+            }
+        });
+
         return view;
 
     }
@@ -154,6 +172,13 @@ public class PerfilFragment extends Fragment implements Basic, Response.Listener
             txtNombre.setText(nombre);
             txtTelefono.setText(telefono);
             txtCorreo.setText(correo);
+
+            Bundle bundle = new Bundle();
+            bundle.putString("nombre", );
+            bundle.putString("TIPO", TIPO_ADMIN);
+            Intent intent = new Intent(Login.this, Recargas.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
 
         }
     }

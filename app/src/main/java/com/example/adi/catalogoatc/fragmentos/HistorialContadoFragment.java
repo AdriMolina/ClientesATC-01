@@ -5,10 +5,14 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -37,16 +41,21 @@ public class HistorialContadoFragment extends Fragment implements Basic, Respons
     private ListView listView;
     private ProgressDialog progressDialog;
     String url;
+    ImageButton imageButton;
     private HistorialFragment.OnFragmentInteractionListener mListener;
 
 
-    public static TelefonoFragment newInstance(String param1, String param2) {
-        TelefonoFragment fragment = new TelefonoFragment();
+    public static HistorialContadoFragment newInstance(String param1, String param2) {
+       HistorialContadoFragment fragment = new HistorialContadoFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
 
     //Cuando se crea el fragmento
     @Override
@@ -93,8 +102,28 @@ public class HistorialContadoFragment extends Fragment implements Basic, Respons
         //Agrega y ejecuta la cola
         queue.add(request);
 
+        /*Button btn = (Button)view.findViewById(R.id.Detalles);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Fragment nuevofragmento = new DetallesComprasFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.content_main, nuevofragmento);
+                transaction.addToBackStack(null);
+                transaction.commit();
+
+            }
+        });*/
+
+
+
+
 
         return view;
+
+
+
     }
 
 

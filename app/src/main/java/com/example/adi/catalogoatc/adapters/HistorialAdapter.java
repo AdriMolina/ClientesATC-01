@@ -1,16 +1,18 @@
 package com.example.adi.catalogoatc.adapters;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
+
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v4.app.Fragment;
 
 import com.example.adi.catalogoatc.R;
 import com.example.adi.catalogoatc.fragmentos.DetallesComprasFragment;
@@ -35,8 +37,7 @@ public class HistorialAdapter extends BaseAdapter {
         this.array = array;
     }
 
-    public HistorialAdapter(FragmentManager fragmentManager) {
-    }
+
 
     @Override
     public int getCount()
@@ -80,7 +81,7 @@ public class HistorialAdapter extends BaseAdapter {
         TextView txtFolio = (TextView)view.findViewById(R.id.txtFolio);
         TextView txtFecha = (TextView)view.findViewById(R.id.txtFecha);
         TextView txtTotal = (TextView)view.findViewById(R.id.txtTotal);
-        ImageButton imgBoton = (ImageButton)view.findViewById(R.id.Detalles);
+
         String folio, fecha, total;
         try
         {
@@ -105,28 +106,8 @@ public class HistorialAdapter extends BaseAdapter {
 
         }
 
-        imgBoton.setOnClickListener(new View.OnClickListener() {
-            private FragmentManager fragmentManager;
-
-            public FragmentManager getFragmentManager() {
-                return fragmentManager;
-            }
-
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(context, "Mas detalles", Toast.LENGTH_SHORT).show();
 
 
-                /* Crea el nuevo fragmento y la transacción.
-                Fragment nuevoFragmento = new DetallesComprasFragment();
-
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.idViewPagerHistorial, nuevoFragmento);
-                transaction.addToBackStack(null);
-*/
-
-            }
-        });
 
         return view;
     }

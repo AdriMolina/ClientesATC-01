@@ -32,8 +32,8 @@ public class HistorialCreditoFragment extends Fragment implements Basic, Respons
     private HistorialFragment.OnFragmentInteractionListener mListener;
 
 
-    public static TelefonoFragment newInstance(String param1, String param2) {
-        TelefonoFragment fragment = new TelefonoFragment();
+    public static HistorialCreditoFragment newInstance(String param1, String param2) {
+        HistorialCreditoFragment fragment = new HistorialCreditoFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;

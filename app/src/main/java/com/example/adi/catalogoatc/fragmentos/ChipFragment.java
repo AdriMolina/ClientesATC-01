@@ -34,8 +34,8 @@ public class ChipFragment extends Fragment implements Basic, Response.Listener<J
 
 
     // TODO: Rename and change types and number of parameters
-    public static TelefonoFragment newInstance(String param1, String param2) {
-        TelefonoFragment fragment = new TelefonoFragment();
+    public static ChipFragment newInstance(String param1, String param2) {
+        ChipFragment fragment = new ChipFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;

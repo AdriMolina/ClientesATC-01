@@ -19,6 +19,7 @@ import android.widget.ImageButton;
 
 import com.example.adi.catalogoatc.adapters.HistorialAdapter;
 import com.example.adi.catalogoatc.fragmentos.AccesoriosFragment;
+import com.example.adi.catalogoatc.fragmentos.BuzonFragment;
 import com.example.adi.catalogoatc.fragmentos.CatalogoFragment;
 import com.example.adi.catalogoatc.fragmentos.ChipFragment;
 import com.example.adi.catalogoatc.fragmentos.DetallesComprasFragment;
@@ -38,7 +39,8 @@ public class Inicio extends AppCompatActivity
         HistorialFragment.OnFragmentInteractionListener,
         HistorialCreditoFragment.OnFragmentInteractionListener,
         HistorialContadoFragment.OnFragmentInteractionListener,
-        DetallesComprasFragment.OnFragmentInteractionListener
+        DetallesComprasFragment.OnFragmentInteractionListener,
+        BuzonFragment.OnFragmentInteractionListener
 {
 
     ImageButton floatButton;
@@ -53,7 +55,7 @@ public class Inicio extends AppCompatActivity
 
 
 
-        
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -137,8 +139,11 @@ public class Inicio extends AppCompatActivity
 
         } else if (id == R.id.nav_localizacion) {
 
+
         } else if (id == R.id.nav_buzon) {
 
+            miFragment = new BuzonFragment();
+            fragmentSeleccionado = true;
         } else if (id == R.id.nav_ayuda) {
 
         }

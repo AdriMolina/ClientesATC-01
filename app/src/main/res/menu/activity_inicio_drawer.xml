@@ -20,7 +20,7 @@
             android:title="Historial" />
         <item
             android:id="@+id/nav_localizacion"
-            android:icon="@drawable/reporte"
+            android:icon="@drawable/gps"
             android:title="Localización" />
     </group>
 

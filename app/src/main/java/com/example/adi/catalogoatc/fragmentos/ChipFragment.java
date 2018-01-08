@@ -5,10 +5,12 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -88,6 +90,18 @@ public class ChipFragment extends Fragment implements Basic, Response.Listener<J
 
         //Agrega y ejecuta la cola
         queue.add(request);
+
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Object listItem = listView.getItemAtPosition(position);
+
+
+                Toast.makeText(getContext(), "preciono......", Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
 
         return view;

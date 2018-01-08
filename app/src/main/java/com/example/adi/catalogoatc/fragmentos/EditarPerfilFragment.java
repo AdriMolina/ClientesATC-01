@@ -29,13 +29,7 @@ public class EditarPerfilFragment extends Fragment {
     }
 
     public static EditarPerfilFragment newInstance(String nombre, String direccion, String telefono) {
-        EditarPerfilFragment fragment = new EditarPerfilFragment();
-        Bundle args = new Bundle();
-        args.putString(NOMBRE, nombre);
-        args.putString(DIRECCION, direccion);
-        args.putString(TELEFONO, telefono);
-        fragment.setArguments(args);
-        return fragment;
+
     }
 
     //Cuando se crea el fragmento
@@ -75,6 +69,14 @@ public class EditarPerfilFragment extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
+
+
+
+    Bundle mBundle = new Bundle();
+    mBundle = getArguments();
+    mBundle.getString(key);  // key must be same which was given in first fragment
+
+
 
    /* @Override
     public void onAttach(Context context) {

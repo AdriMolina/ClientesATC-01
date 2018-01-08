@@ -64,6 +64,7 @@
                 android:layout_alignParentRight="true"
                 android:src="@drawable/agregar"
                 android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
                 android:layout_alignParentTop="true" />
             </RelativeLayout>
 

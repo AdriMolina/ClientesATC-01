@@ -49,16 +49,15 @@
                 android:textSize="10dp" />
 
 
+            <ImageButton
+                android:id="@+id/btnEditar"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/editar"
+                android:layout_marginTop="250dp"
+                android:scaleType="fitCenter"
+                android:layout_centerHorizontal="true"
+                android:background="@android:color/transparent"
+                />
 
-
-
-
-
-    <ImageButton
-        android:id="@+id/btnEditar"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/editar"
-        android:layout_marginTop="250dp"
-        />
 </RelativeLayout>

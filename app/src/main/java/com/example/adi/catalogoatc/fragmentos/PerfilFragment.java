@@ -106,6 +106,15 @@ public class PerfilFragment extends Fragment implements Basic, Response.Listener
                 transaction.addToBackStack(null);
                 transaction.commit();
 
+/*
+                Bundle bundle = new Bundle();
+                bundle.putString("key","value"); // use as per your need
+                nuevofragmento.setArguments(bundle);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.replace(viewID,nuevofragmento);
+                */
+
+
             }
         });
 

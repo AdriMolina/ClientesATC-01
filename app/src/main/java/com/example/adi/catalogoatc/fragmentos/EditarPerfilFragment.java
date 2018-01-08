@@ -12,7 +12,7 @@ import android.widget.EditText;
 
 import com.example.adi.catalogoatc.R;
 
-/
+
 public class EditarPerfilFragment extends Fragment {
     //Variables
     private static final String NOMBRE = "nombre";

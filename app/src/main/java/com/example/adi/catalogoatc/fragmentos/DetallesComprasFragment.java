@@ -25,19 +25,12 @@ import com.example.adi.catalogoatc.adapters.HistorialAdapter;
 
 import org.json.JSONArray;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link DetallesComprasFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link DetallesComprasFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class DetallesComprasFragment extends Fragment implements Basic, Response.Listener<JSONArray>, Response.ErrorListener {
     private ListView listView;
     private ProgressDialog progressDialog;
     String url;
-    private HistorialFragment.OnFragmentInteractionListener mListener;
+    private OnFragmentInteractionListener mListener;
 
 
     public static DetallesComprasFragment newInstance(String param1, String param2) {
@@ -65,7 +58,7 @@ public class DetallesComprasFragment extends Fragment implements Basic, Response
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_detalles_compras, container, false);
-        listView = (ListView)view.findViewById(R.id.ListaHistorial);
+        listView = (ListView)view.findViewById(R.id.listaDetalles);
 
         //Coloca el dialogo de carga
         progressDialog = new ProgressDialog(getContext());
@@ -77,15 +70,15 @@ public class DetallesComprasFragment extends Fragment implements Basic, Response
         //Inicia la peticion
         RequestQueue queue = Volley.newRequestQueue(getContext());
         String consulta = "SELECT ta.nombre, ma.nombre, mo.nombre , od.cantidad, oc.total" +
-                " FROM tipo_articulo ta, marca ma, modelo mo, orden_descripcion od,orden_completa oc, orden ord, cantidad ca, articulo ar" +
+                " FROM tipo_articulo ta,marca ma, modelo mo, orden_descripcion od,orden_completa oc, orden ord, cantidad ca, articulo ar" +
                 " where od.tipoVentaId = ca.id" +
                 " and ord.id = od.orden_id" +
                 " and ord.id = oc.orden_id" +
-                "and mo.id = ar.modelo_id" +
-                "and ma.id = mo.marca_id" +
-                "and ca.articulo_id = ar.id" +
-                "and ar.tipoArticulo_id = ta.id" +
-                "and ord.folio = '000331/2017';";
+                " and mo.id = ar.modelo_id" +
+                " and ma.id = mo.marca_id" +
+                " and ca.articulo_id = ar.id" +
+                " and ar.tipoArticulo_id = ta.id" +
+                " and ord.folio = '000331/2017';";
 
         consulta = consulta.replace(" ", "%20");
         String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;

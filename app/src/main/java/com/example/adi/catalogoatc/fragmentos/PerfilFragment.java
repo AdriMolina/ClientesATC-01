@@ -173,12 +173,13 @@ public class PerfilFragment extends Fragment implements Basic, Response.Listener
             txtTelefono.setText(telefono);
             txtCorreo.setText(correo);
 
-            Bundle bundle = new Bundle();
+            /*Bundle bundle = new Bundle();
             bundle.putString("nombre", );
             bundle.putString("TIPO", TIPO_ADMIN);
             Intent intent = new Intent(Login.this, Recargas.class);
             intent.putExtras(bundle);
             startActivity(intent);
+            */
 
         }
     }

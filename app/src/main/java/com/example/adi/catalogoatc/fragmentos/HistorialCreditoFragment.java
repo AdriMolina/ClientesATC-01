@@ -5,10 +5,12 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -68,10 +70,11 @@ public class HistorialCreditoFragment extends Fragment implements Basic, Respons
 
         //Inicia la peticion
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String consulta = "SELECT o.folio, o.fecha, c.total" +
+        String consulta = "SELECT o.folio,DATE(o.fecha),c.total" +
                 " from credito c, orden o" +
                 " where c.orden_id = o.id" +
-                " and o.cliente_id="+IDUsusario+";";
+                " and o.cliente_id="+IDUsusario+"" +
+                " order by o.fecha desc;";
 
         consulta = consulta.replace(" ", "%20");
         String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
@@ -84,6 +87,23 @@ public class HistorialCreditoFragment extends Fragment implements Basic, Respons
         //Agrega y ejecuta la cola
         queue.add(request);
 
+
+
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Object listItem = listView.getItemAtPosition(position);
+
+
+                Toast.makeText(getContext(), "preciono......", Toast.LENGTH_SHORT).show();
+                Fragment nuevofragmento = new DetallesComprasFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.content_main, nuevofragmento);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
 
         return view;
     }

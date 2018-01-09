@@ -1,0 +1,27 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.adi.catalogoatc.fragmentos.LocalizacionFragment">
+
+    <TextView android:id="@+id/lblLatitud"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="latitud" />
+
+    <TextView android:id="@+id/lblLongitud"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lblLatitud"
+        android:text="longitud" />
+
+    <Button
+        android:id="@+id/btnActualizar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textOff="iniciar_actualizaciones"
+        android:textOn="parar_actualizaciones"
+        android:layout_below="@+id/lblLongitud"/>
+
+</RelativeLayout>

@@ -28,9 +28,6 @@ public class EditarPerfilFragment extends Fragment {
 
     }
 
-    public static EditarPerfilFragment newInstance(String nombre, String direccion, String telefono) {
-
-    }
 
     //Cuando se crea el fragmento
     @Override
@@ -70,11 +67,6 @@ public class EditarPerfilFragment extends Fragment {
         }
     }
 
-
-
-    Bundle mBundle = new Bundle();
-    mBundle = getArguments();
-    mBundle.getString(key);  // key must be same which was given in first fragment
 
 
 

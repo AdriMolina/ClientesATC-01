@@ -26,6 +26,7 @@ import com.example.adi.catalogoatc.fragmentos.DetallesComprasFragment;
 import com.example.adi.catalogoatc.fragmentos.HistorialContadoFragment;
 import com.example.adi.catalogoatc.fragmentos.HistorialCreditoFragment;
 import com.example.adi.catalogoatc.fragmentos.HistorialFragment;
+import com.example.adi.catalogoatc.fragmentos.LocalizacionFragment;
 import com.example.adi.catalogoatc.fragmentos.PerfilFragment;
 import com.example.adi.catalogoatc.fragmentos.TelefonoFragment;
 
@@ -40,7 +41,8 @@ public class Inicio extends AppCompatActivity
         HistorialCreditoFragment.OnFragmentInteractionListener,
         HistorialContadoFragment.OnFragmentInteractionListener,
         DetallesComprasFragment.OnFragmentInteractionListener,
-        BuzonFragment.OnFragmentInteractionListener
+        BuzonFragment.OnFragmentInteractionListener,
+        LocalizacionFragment.OnFragmentInteractionListener
 {
 
     ImageButton floatButton;
@@ -138,7 +140,8 @@ public class Inicio extends AppCompatActivity
             fragmentSeleccionado = true;
 
         } else if (id == R.id.nav_localizacion) {
-
+            miFragment = new LocalizacionFragment();
+            fragmentSeleccionado = true;
 
         } else if (id == R.id.nav_buzon) {
 

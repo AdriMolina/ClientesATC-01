@@ -93,15 +93,19 @@ public class HistorialCreditoFragment extends Fragment implements Basic, Respons
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
                 Object listItem = listView.getItemAtPosition(position);
 
 
-                Toast.makeText(getContext(), "preciono......", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "preciono......"+listItem, Toast.LENGTH_SHORT).show();
                 Fragment nuevofragmento = new DetallesComprasFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.content_main, nuevofragmento);
                 transaction.addToBackStack(null);
                 transaction.commit();
+
+
             }
         });
 

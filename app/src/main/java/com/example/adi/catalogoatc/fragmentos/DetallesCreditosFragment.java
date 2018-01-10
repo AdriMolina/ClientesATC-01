@@ -4,10 +4,13 @@ import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -29,6 +32,7 @@ public class DetallesCreditosFragment extends Fragment implements Basic, Respons
     private ProgressDialog progressDialog;
     String url;
     private OnFragmentInteractionListener mListener;
+    Button mas;
 
 
     public static DetallesCreditosFragment newInstance(String param1, String param2) {
@@ -90,7 +94,21 @@ public class DetallesCreditosFragment extends Fragment implements Basic, Respons
         queue.add(request);
 
 
+        mas = (Button)view.findViewById(R.id.btnMasDetalles);
+
+        mas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "preciono......", Toast.LENGTH_SHORT).show();
+                Fragment nuevofragmento = new AbonosFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.content_main, nuevofragmento);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
         return view;
+
     }
 
 

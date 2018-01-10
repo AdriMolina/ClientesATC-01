@@ -99,7 +99,7 @@ public class HistorialCreditoFragment extends Fragment implements Basic, Respons
 
 
                 Toast.makeText(getContext(), "preciono......"+listItem, Toast.LENGTH_SHORT).show();
-                Fragment nuevofragmento = new DetallesComprasFragment();
+                Fragment nuevofragmento = new DetallesCreditosFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.content_main, nuevofragmento);
                 transaction.addToBackStack(null);

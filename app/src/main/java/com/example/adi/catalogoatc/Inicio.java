@@ -122,7 +122,7 @@ public class Inicio extends AppCompatActivity
         boolean fragmentSeleccionado=false;
 
         if (id == R.id.nav_inicio) {
-            // Handle the camera action
+
 
         } else if (id == R.id.nav_pefil) {
             miFragment = new PerfilFragment();

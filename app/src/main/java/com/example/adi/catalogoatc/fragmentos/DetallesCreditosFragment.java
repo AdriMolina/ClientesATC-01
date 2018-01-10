@@ -1,7 +1,6 @@
 package com.example.adi.catalogoatc.fragmentos;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -20,30 +19,20 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.adi.catalogoatc.R;
 import com.example.adi.catalogoatc.Recursos.Basic;
-import com.example.adi.catalogoatc.adapters.TelefonoAdapter;
+import com.example.adi.catalogoatc.adapters.ComprasAdapter;
 
 import org.json.JSONArray;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link AccesoriosFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link AccesoriosFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class AccesoriosFragment extends Fragment implements Basic, Response.Listener<JSONArray>, Response.ErrorListener {
+
+public class DetallesCreditosFragment extends Fragment implements Basic, Response.Listener<JSONArray>, Response.ErrorListener {
     private ListView listView;
     private ProgressDialog progressDialog;
-
     String url;
-    private TelefonoFragment.OnFragmentInteractionListener mListener;
+    private OnFragmentInteractionListener mListener;
 
 
-
-    // TODO: Rename and change types and number of parameters
-    public static TelefonoFragment newInstance(String param1, String param2) {
-        TelefonoFragment fragment = new TelefonoFragment();
+    public static DetallesCreditosFragment newInstance(String param1, String param2) {
+        DetallesCreditosFragment fragment = new DetallesCreditosFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -66,8 +55,8 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_telefono, container, false);
-        listView = (ListView)view.findViewById(R.id.ListaTelfono);
+        View view = inflater.inflate(R.layout.fragment_detalles_creditos, container, false);
+        listView = (ListView)view.findViewById(R.id.listaDetalles);
 
         //Coloca el dialogo de carga
         progressDialog = new ProgressDialog(getContext());
@@ -78,19 +67,17 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
 
         //Inicia la peticion
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String consulta = "select distinct ta.nombre, ma.nombre,a.precio" +
-                "                from marca ma, modelo mo, articulo a, punto_venta pv, cantidad ca, tipo_articulo ta" +
-                "                where a.modelo_id = mo.id" +
-                "                and mo.marca_id = ma.id" +
-                "                and ca.puntoVenta_id = pv.id" +
-                "                and ca.articulo_id = a.id" +
-                "                and a.tipoArticulo_id = ta.id" +
-                "                and ta.nombre !='Teléfono'" +
-                "                and ta.nombre !='Chip'" +
-                "                and pv.tipo <> 'Local Zaragoza'" +
-                "               and pv.tipo <> 'Local Juarez'" +
-                "                and pv.tipo <> 'Local Atc'" +
-                "                and ca.valor > 0;";
+        String consulta = "SELECT ta.nombre, ma.nombre, mo.nombre , od.cantidad, oc.total" +
+                " FROM tipo_articulo ta,marca ma, modelo mo, orden_descripcion od,orden_completa oc, orden ord, cantidad ca, articulo ar" +
+                " where od.tipoVentaId = ca.id" +
+                " and ord.id = od.orden_id" +
+                " and ord.id = oc.orden_id" +
+                " and mo.id = ar.modelo_id" +
+                " and ma.id = mo.marca_id" +
+                " and ca.articulo_id = ar.id" +
+                " and ar.tipoArticulo_id = ta.id" +
+                " and ord.folio = '000331/2017';";
+
         consulta = consulta.replace(" ", "%20");
         String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
         url= SERVER + RUTA + "consultaGeneral.php" + cadena;
@@ -128,7 +115,7 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
     public void onResponse(JSONArray response) {
         progressDialog.hide();
 
-        TelefonoAdapter adapter = new TelefonoAdapter(getContext(), response);
+        ComprasAdapter adapter = new ComprasAdapter(getContext(), response);
         listView.setAdapter(adapter);
     }
 

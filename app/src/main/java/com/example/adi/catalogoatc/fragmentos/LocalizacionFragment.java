@@ -20,7 +20,7 @@ import org.json.JSONArray;
 
 
 public class LocalizacionFragment extends Fragment implements Basic, Response.Listener<JSONArray>, Response.ErrorListener {
-   
+
 
 
 
@@ -53,8 +53,7 @@ public class LocalizacionFragment extends Fragment implements Basic, Response.Li
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_localizacion, container, false);
 
-        lblLatitud = (TextView)view.findViewById(R.id.lblLatitud);
-        lblLongitud =  (TextView)view.findViewById(R.id.lblLongitud);
+
         Button btnActualizar = (Button)view.findViewById(R.id.btnActualizar);
         return view;
 
@@ -90,13 +89,5 @@ public class LocalizacionFragment extends Fragment implements Basic, Response.Li
     }
 
 
-    private void updateUI(Location loc) {
-        if (loc != null) {
-            lblLatitud.setText("Latitud: " + String.valueOf(loc.getLatitude()));
-            lblLongitud.setText("Longitud: " + String.valueOf(loc.getLongitude()));
-        } else {
-            lblLatitud.setText("Latitud: (desconocida)");
-            lblLongitud.setText("Longitud: (desconocida)");
-        }
-    }
+
 }

@@ -1,20 +1,36 @@
 package com.example.adi.catalogoatc.fragmentos;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
+import android.icu.text.DateFormat;
+import android.icu.util.Calendar;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.adi.catalogoatc.R;
+import com.example.adi.catalogoatc.Recursos.Basic;
 
-public class AbonosFragment extends Fragment {
+public class AbonosFragment extends Fragment implements Basic{
     ImageButton btnBucar;
+    EditText edtFecha;
+    int anio, mes, dia;
+    int anioF, mesF, diaF;
+    TextView txtfecha;
+    String fechaActual, fechaInicial, FechaFinal;
 
     private OnFragmentInteractionListener mListener;
 
@@ -39,14 +55,57 @@ public class AbonosFragment extends Fragment {
         }
     }
 
+    //evento del calendario
+    private void shoDatePikerDialog(){
+
+
+    }
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view =inflater.inflate(R.layout.fragment_abonos, container, false);
 
+        edtFecha = (EditText)view.findViewById(R.id.edtFecha);
         btnBucar = (ImageButton)view.findViewById(R.id.BuscarAbono);
 
+
+
+        //fecha actual
+        final Calendar c = Calendar.getInstance();
+        anio = c.get(Calendar.YEAR);
+        mes = c.get(Calendar.MONTH);
+        dia = c.get(Calendar.DAY_OF_MONTH);
+
+        fechaActual = anio+"/"+mes+"/"+dia;
+
+
+        //Evento del edit text de la fecha
+
+        edtFecha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final  DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener(){
+
+
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                        mesF = datePicker.getDayOfMonth();
+                        anioF = datePicker.getYear();
+                        diaF = datePicker.getDayOfMonth();
+
+                        FechaFinal = String.valueOf(anioF)+"/"+String.valueOf(mesF)+"/"+String.valueOf(diaF);
+                        edtFecha.setText(FechaFinal);
+                    }
+                },anio, mes, dia);
+                datePickerDialog.show();
+
+            }
+
+
+        });
+//Evento del boton buscar
         btnBucar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,6 +126,8 @@ public class AbonosFragment extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
+
+
 
     /*@Override
     public void onAttach(Context context) {

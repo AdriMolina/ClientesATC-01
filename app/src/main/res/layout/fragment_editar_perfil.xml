@@ -14,7 +14,7 @@
         android:src="@drawable/usuario"
         android:layout_centerHorizontal="true"/>
     <TextView
-        android:id="@+id/txtNombre"
+        android:id="@+id/txtedtNombreTitulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/imgUsuarioEdit"
@@ -24,7 +24,7 @@
         android:id="@+id/editNombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/txtNombre"
+        android:layout_below="@id/txtedtNombreTitulo"
          />
     <TextView
         android:id="@+id/txtDireccion"
@@ -53,6 +53,7 @@
         android:layout_below="@id/txtTelefono"
         />
     <ImageButton
+        android:id="@+id/btnAceptar"
         android:layout_width="80dp"
         android:layout_height="50dp"
         android:src="@drawable/aceptar"

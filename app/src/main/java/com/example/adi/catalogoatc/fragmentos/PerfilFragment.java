@@ -38,9 +38,10 @@ public class PerfilFragment extends Fragment implements Basic, Response.Listener
 
     String nombre, telefono, correo, id;
     private ProgressDialog progressDialog;
+    View view;
     String url;
     private TelefonoFragment.OnFragmentInteractionListener mListener;
-    View view;
+
 
 
     // TODO: Rename and change types and number of parameters
@@ -181,13 +182,7 @@ public class PerfilFragment extends Fragment implements Basic, Response.Listener
             txtTelefono.setText(telefono);
             txtdireccion.setText(correo);
 
-            /*Bundle bundle = new Bundle();
-            bundle.putString("nombre", );
-            bundle.putString("TIPO", TIPO_ADMIN);
-            Intent intent = new Intent(Login.this, Recargas.class);
-            intent.putExtras(bundle);
-            startActivity(intent);
-            */
+
 
         }
     }

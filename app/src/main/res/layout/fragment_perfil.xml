@@ -25,28 +25,44 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 android:hint="Nombre"
-                android:textSize="20dp"
+                android:textSize="25dp"
                 android:textStyle="bold" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dirección:"
+        android:id="@+id/txtTituloDireccion"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/txtNombre"/>
 
 
              <TextView
-                android:id="@+id/txtTelefonoPerfil"
+                android:id="@+id/txtDireccion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/txtNombre"
-                android:layout_centerHorizontal="true"
+                android:layout_below="@id/txtTituloDireccion"
                 android:layout_marginRight="10dp"
+                android:text="direccion"
+                android:textSize="15dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Teléfono:"
+        android:id="@+id/txtTelefonoTitulo"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/txtDireccion"
+        />
+
+
+    <TextView
+                android:id="@+id/txtTelefono"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtTelefonoTitulo"
                 android:text="Telefono"
                 android:textSize="15dp" />
-
-            <TextView
-                android:id="@+id/txtCorreo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@id/txtTelefonoPerfil"
-                android:text="Correo"
-                android:textSize="10dp" />
 
 
             <ImageButton
@@ -54,7 +70,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/editar"
-                android:layout_marginTop="250dp"
+                android:layout_marginTop="300dp"
                 android:scaleType="fitCenter"
                 android:layout_centerHorizontal="true"
                 android:background="@android:color/transparent"

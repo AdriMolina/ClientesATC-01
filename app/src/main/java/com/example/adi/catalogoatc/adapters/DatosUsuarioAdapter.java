@@ -66,10 +66,9 @@ public class DatosUsuarioAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.item, null);
 
 
-        TextView txtNombre = (TextView)view.findViewById(R.id.txtNombre);
-        TextView txtTelefono = (TextView)view.findViewById(R.id.txtTelefonoPerfil);
-        TextView txtCorreo = (TextView)view.findViewById(R.id.txtCorreo);
-
+        TextView txtNombre = (TextView) view.findViewById(R.id.txtNombre);
+        TextView txtdireccion = (TextView)view.findViewById(R.id.txtDireccion);
+        TextView txtTelefono = (TextView)view.findViewById(R.id.txtTelefono);
 
         String nombre, telefono, correo;
         try
@@ -91,7 +90,7 @@ public class DatosUsuarioAdapter extends BaseAdapter {
         {
             txtNombre.setText(nombre);
             txtTelefono.setText(telefono);
-            txtCorreo.setText(correo);
+            txtdireccion.setText(correo);
 
         }
 

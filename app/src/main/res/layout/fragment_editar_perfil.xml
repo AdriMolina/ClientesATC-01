@@ -11,14 +11,15 @@
         android:id="@+id/imgUsuarioEdit"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/ic_editar"
+        android:src="@drawable/usuario"
         android:layout_centerHorizontal="true"/>
     <TextView
         android:id="@+id/txtNombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/imgUsuarioEdit"
-        android:text="Nombre:"/>
+        android:text="Nombre:"
+        android:textStyle="bold"/>
     <EditText
         android:id="@+id/editNombre"
         android:layout_width="match_parent"
@@ -29,6 +30,7 @@
         android:id="@+id/txtDireccion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textStyle="bold"
         android:layout_below="@id/editNombre"
         android:text="Dirección:"/>
     <EditText
@@ -41,6 +43,7 @@
         android:id="@+id/txtTelefono"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textStyle="bold"
         android:layout_below="@id/editDireccion"
         android:text="Telefono:"/>
     <EditText
@@ -50,9 +53,11 @@
         android:layout_below="@id/txtTelefono"
         />
     <ImageButton
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_below="@id/editTelefono"
-        android:src="@drawable/ic_beenhere_black_24dp"/>
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:src="@drawable/aceptar"
+        android:scaleType="fitCenter"
+        android:layout_below="@+id/editTelefono"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

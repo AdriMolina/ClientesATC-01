@@ -36,6 +36,7 @@ import org.json.JSONObject;
 public class PerfilFragment extends Fragment implements Basic, Response.Listener<JSONArray>, Response.ErrorListener {
 
 
+    String nombre, telefono, correo, id;
     private ProgressDialog progressDialog;
     String url;
     private TelefonoFragment.OnFragmentInteractionListener mListener;
@@ -79,7 +80,7 @@ public class PerfilFragment extends Fragment implements Basic, Response.Listener
 
         //Inicia la peticion
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String consulta = "select nombre, direccion, telefono, email" +
+        String consulta = "select id, nombre, direccion, telefono, email" +
                             " from cliente" +
                             " where id="+IDUsusario+";";
         consulta = consulta.replace(" ", "%20");
@@ -100,11 +101,13 @@ public class PerfilFragment extends Fragment implements Basic, Response.Listener
             @Override
             public void onClick(View view) {
 
-                Fragment nuevofragmento = new EditarPerfilFragment();
+
+                Fragment nuevofragmento = EditarPerfilFragment.newInstance(id);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.content_main, nuevofragmento);
                 transaction.addToBackStack(null);
                 transaction.commit();
+
 
 
 
@@ -139,8 +142,8 @@ public class PerfilFragment extends Fragment implements Basic, Response.Listener
     public void onResponse(JSONArray response) {
         progressDialog.hide();
         TextView txtNombre = (TextView) view.findViewById(R.id.txtNombre);
-        TextView txtTelefono = (TextView)view.findViewById(R.id.txtTelefonoPerfil);
-        TextView txtCorreo = (TextView)view.findViewById(R.id.txtCorreo);
+        TextView txtdireccion = (TextView)view.findViewById(R.id.txtDireccion);
+        TextView txtTelefono = (TextView)view.findViewById(R.id.txtTelefono);
 
         JSONObject jsonObject;
 
@@ -155,12 +158,13 @@ public class PerfilFragment extends Fragment implements Basic, Response.Listener
 
 
 
-        String nombre, telefono, correo;
+
         try
         {
-            nombre = jsonObject.getString("0");
-            telefono = jsonObject.getString("1");
+            id = jsonObject.getString("0");
+            nombre = jsonObject.getString("1");
             correo = jsonObject.getString("2");
+            telefono = jsonObject.getString("3");
 
         }
         catch (JSONException e)
@@ -175,7 +179,7 @@ public class PerfilFragment extends Fragment implements Basic, Response.Listener
         {
             txtNombre.setText(nombre);
             txtTelefono.setText(telefono);
-            txtCorreo.setText(correo);
+            txtdireccion.setText(correo);
 
             /*Bundle bundle = new Bundle();
             bundle.putString("nombre", );

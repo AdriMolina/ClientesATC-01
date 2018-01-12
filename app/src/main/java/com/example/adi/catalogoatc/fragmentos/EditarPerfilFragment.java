@@ -138,8 +138,6 @@ public class EditarPerfilFragment extends Fragment implements Basic, Response.Li
                     queue.add(request);
                     Toast.makeText(getContext(), "Se actualizó correctamente"+nombre+" "+nombreFinal+" "+direccion+" "+direccionFinal+" "+telefono+" "+telefonoFinal, Toast.LENGTH_SHORT).show();
 
-
-
                 }else{
                     Toast.makeText(getContext(), "No hay cambios", Toast.LENGTH_SHORT).show();
                 }

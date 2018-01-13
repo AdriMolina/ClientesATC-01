@@ -83,9 +83,6 @@ public class TelefonoFragment extends Fragment implements Basic, Response.Listen
                 "                                and ca.articulo_id = a.id" +
                 "                                and a.tipoArticulo_id = ta.id" +
                 "                                and ta.nombre = 'Teléfono'" +
-                "                                and pv.tipo <> 'Local Zaragoza'" +
-                "                                and pv.tipo <> 'Local Juarez'" +
-                "                                and pv.tipo <> 'Local Atc'" +
                 "                                and ca.valor > 0" +
                 "                                order by ma.nombre asc;";
 

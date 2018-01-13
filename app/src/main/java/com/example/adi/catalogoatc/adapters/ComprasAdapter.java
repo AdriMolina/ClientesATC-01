@@ -77,14 +77,15 @@ public class ComprasAdapter extends BaseAdapter {
         TextView txtTotal = (TextView)view.findViewById(R.id.txtPrecioTotal);
 
 
-        String tipo, marca, modelo, cantidad, total;
+        String id, tipo, marca, modelo, cantidad, total;
         try
         {
-            tipo = getItem(position).getString("0");
-            marca = getItem(position).getString("1");
-            modelo = getItem(position).getString("2");
-            cantidad = getItem(position).getString("3");
-            total = "$"+ getItem(position).getString("4");
+            id = getItem(position).getString("0");
+            tipo = getItem(position).getString("1");
+            marca = getItem(position).getString("2");
+            modelo = getItem(position).getString("3");
+            cantidad = getItem(position).getString("4");
+            total = "$"+ getItem(position).getString("5");
 
         }
         catch (JSONException e)

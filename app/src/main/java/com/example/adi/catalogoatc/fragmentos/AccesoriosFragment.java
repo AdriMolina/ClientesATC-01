@@ -87,9 +87,6 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
                 "                and a.tipoArticulo_id = ta.id" +
                 "                and ta.nombre !='Teléfono'" +
                 "                and ta.nombre !='Chip'" +
-                "                and pv.tipo <> 'Local Zaragoza'" +
-                "               and pv.tipo <> 'Local Juarez'" +
-                "                and pv.tipo <> 'Local Atc'" +
                 "                and ca.valor > 0;";
         consulta = consulta.replace(" ", "%20");
         String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;

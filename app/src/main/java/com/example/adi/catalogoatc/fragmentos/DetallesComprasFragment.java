@@ -1,7 +1,6 @@
 package com.example.adi.catalogoatc.fragmentos;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -20,8 +19,8 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.adi.catalogoatc.R;
 import com.example.adi.catalogoatc.Recursos.Basic;
-import com.example.adi.catalogoatc.adapters.ComprasAdapter;
-import com.example.adi.catalogoatc.adapters.HistorialAdapter;
+import com.example.adi.catalogoatc.adapters.DetallesComprasAdapter;
+import com.example.adi.catalogoatc.ModeloLista.modeloDetallosCatalogo;
 
 import org.json.JSONArray;
 
@@ -117,7 +116,7 @@ public class DetallesComprasFragment extends Fragment implements Basic, Response
     public void onResponse(JSONArray response) {
         progressDialog.hide();
 
-        ComprasAdapter adapter = new ComprasAdapter(getContext(),response);
+        DetallesComprasAdapter adapter = new DetallesComprasAdapter(getContext(),modeloDetallosCatalogo.sacarListaClientes(response));
         listView.setAdapter(adapter);
     }
 

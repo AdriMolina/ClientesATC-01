@@ -1,11 +1,9 @@
 package com.example.adi.catalogoatc.fragmentos;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,10 +20,10 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.adi.catalogoatc.R;
 import com.example.adi.catalogoatc.Recursos.Basic;
-import com.example.adi.catalogoatc.adapters.TelefonoAdapter;
+import com.example.adi.catalogoatc.adapters.CatalogoAdapter;
+import com.example.adi.catalogoatc.ModeloLista.modeloCatalogo;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 
 
 public class ChipFragment extends Fragment implements Basic, Response.Listener<JSONArray>, Response.ErrorListener{
@@ -73,7 +71,7 @@ public class ChipFragment extends Fragment implements Basic, Response.Listener<J
 
         //Inicia la peticion
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String consulta = "select distinct ma.nombre as marca, mo.nombre as  modelo,a.precio" +
+        String consulta = "select distinct ca.id, ma.nombre as marca, mo.nombre as  modelo,a.precio" +
                 "                               from marca ma, modelo mo, articulo a, punto_venta pv, cantidad ca, tipo_articulo ta" +
                 "                                where a.modelo_id = mo.id" +
                 "                                and mo.marca_id = ma.id" +
@@ -138,7 +136,7 @@ public class ChipFragment extends Fragment implements Basic, Response.Listener<J
 
 
 
-        TelefonoAdapter adapter = new TelefonoAdapter(getContext(), response);
+        CatalogoAdapter adapter = new CatalogoAdapter(getContext(), modeloCatalogo.sacarListaClientes(response));
         listView.setAdapter(adapter);
     }
 

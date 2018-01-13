@@ -11,19 +11,22 @@ import java.util.List;
  * Created by Adi on 29/12/2017.
  */
 
-public class modeloCatalogo {
+public class modeloDetallosCatalogo {
 
     private int id;
+    private String articulo;
     private String marca;
     private String modelo;
-    private String precio;
+    private String cantidad;
+    private String telefono;
 
-
-    public modeloCatalogo(int id, String marca, String modelo, String precio) {
+    public modeloDetallosCatalogo(int id, String string, String articulo, String marca, String modelo, String cantidad) {
         this.id = id;
+        this.articulo = articulo;
         this.marca = marca;
         this.modelo = modelo;
-        this.precio = precio;
+        this.cantidad = cantidad;
+        this.telefono = telefono;
     }
 
     public int getId() {
@@ -32,6 +35,14 @@ public class modeloCatalogo {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getArticulo() {
+        return articulo;
+    }
+
+    public void setArticulo(String articulo) {
+        this.articulo = articulo;
     }
 
     public String getMarca() {
@@ -50,26 +61,36 @@ public class modeloCatalogo {
         this.modelo = modelo;
     }
 
-    public String getPrecio() {
-        return precio;
+    public String getCantidad() {
+        return cantidad;
     }
 
-    public void setPrecio(String precio) {
-        this.precio = precio;
+    public void setCantidad(String cantidad) {
+        this.cantidad = cantidad;
     }
 
-    public static List<modeloCatalogo> sacarListaClientes(JSONArray array)
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public static List<modeloDetallosCatalogo> sacarListaClientes(JSONArray array)
     {
-        List<modeloCatalogo> lista = new ArrayList<>();
+        List<modeloDetallosCatalogo> lista = new ArrayList<>();
         try
         {
             for (int i = 0; i < array.length(); i++)
             {
                 JSONObject jsonObject = array.getJSONObject(i);
-                modeloCatalogo catalogo = new modeloCatalogo(Integer.parseInt(jsonObject.getString("0")),
+                modeloDetallosCatalogo catalogo = new modeloDetallosCatalogo(Integer.parseInt(jsonObject.getString("0")),
                                                                 jsonObject.getString("1"),
                                                                 jsonObject.getString("2"),
-                                                                jsonObject.getString("3"));
+                                                                jsonObject.getString("3"),
+                                                                jsonObject.getString("4"),
+                        jsonObject.getString("5"));
 
                 lista.add(catalogo);
             }

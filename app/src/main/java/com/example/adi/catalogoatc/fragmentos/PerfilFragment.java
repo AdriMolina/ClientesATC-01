@@ -1,8 +1,6 @@
 package com.example.adi.catalogoatc.fragmentos;
 
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,9 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,8 +21,6 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.adi.catalogoatc.R;
 import com.example.adi.catalogoatc.Recursos.Basic;
-import com.example.adi.catalogoatc.adapters.DatosUsuarioAdapter;
-import com.example.adi.catalogoatc.adapters.TelefonoAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;

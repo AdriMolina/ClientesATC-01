@@ -23,7 +23,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.adi.catalogoatc.R;
 import com.example.adi.catalogoatc.Recursos.Basic;
 import com.example.adi.catalogoatc.adapters.HistorialAdapter;
-
+import com.example.adi.catalogoatc.ModeloLista.modeloHistorial;
 import org.json.JSONArray;
 
 
@@ -70,7 +70,7 @@ public class HistorialCreditoFragment extends Fragment implements Basic, Respons
 
         //Inicia la peticion
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String consulta = "SELECT o.folio,DATE(o.fecha),c.total" +
+        String consulta = "SELECT o.id, o.folio,DATE(o.fecha),c.total" +
                 " from credito c, orden o" +
                 " where c.orden_id = o.id" +
                 " and o.cliente_id="+IDUsusario+"" +
@@ -134,7 +134,7 @@ public class HistorialCreditoFragment extends Fragment implements Basic, Respons
     public void onResponse(JSONArray response) {
         progressDialog.hide();
 
-        HistorialAdapter adapter = new HistorialAdapter(getContext(), response);
+        HistorialAdapter adapter = new HistorialAdapter(getContext(), modeloHistorial.sacarListaClientes(response));
         listView.setAdapter(adapter);
     }
 

@@ -8,13 +8,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.adi.catalogoatc.ModeloLista.modeloCatalogo;
+import com.example.adi.catalogoatc.ModeloLista.modeloDetallosCatalogo;
 import com.example.adi.catalogoatc.ModeloLista.modeloHistorial;
 import com.example.adi.catalogoatc.R;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -22,17 +18,17 @@ import java.util.List;
  * Created by Adi on 05/01/2018.
  */
 
-public class ComprasAdapter extends BaseAdapter {
+public class DetallesComprasAdapter extends BaseAdapter {
     private Context context;
-    private List<modeloHistorial> lista;
+    private List<modeloDetallosCatalogo> lista;
 
-    public ComprasAdapter(Context context, List<modeloHistorial> lista)
+    public DetallesComprasAdapter(Context context, List<modeloDetallosCatalogo> lista)
     {
         this.context = context;
         this.lista = lista;
     }
 
-    public ComprasAdapter(FragmentManager fragmentManager) {
+    public DetallesComprasAdapter(FragmentManager fragmentManager) {
     }
 
     @Override
@@ -43,7 +39,7 @@ public class ComprasAdapter extends BaseAdapter {
     }
 
     @Override
-    public modeloHistorial getItem(int i)
+    public modeloDetallosCatalogo getItem(int i)
     {
         return lista.get(i);
     }

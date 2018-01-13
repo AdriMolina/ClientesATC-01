@@ -1,7 +1,6 @@
 package com.example.adi.catalogoatc.fragmentos;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -20,18 +19,12 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.adi.catalogoatc.R;
 import com.example.adi.catalogoatc.Recursos.Basic;
-import com.example.adi.catalogoatc.adapters.TelefonoAdapter;
+import com.example.adi.catalogoatc.adapters.CatalogoAdapter;
+import com.example.adi.catalogoatc.ModeloLista.modeloCatalogo;
 
 import org.json.JSONArray;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link AccesoriosFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link AccesoriosFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class AccesoriosFragment extends Fragment implements Basic, Response.Listener<JSONArray>, Response.ErrorListener {
     private ListView listView;
     private ProgressDialog progressDialog;
@@ -78,7 +71,7 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
 
         //Inicia la peticion
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String consulta = "select distinct ta.nombre, ma.nombre,a.precio" +
+        String consulta = "select distinct ca.id, ta.nombre, ma.nombre,a.precio" +
                 "                from marca ma, modelo mo, articulo a, punto_venta pv, cantidad ca, tipo_articulo ta" +
                 "                where a.modelo_id = mo.id" +
                 "                and mo.marca_id = ma.id" +
@@ -125,7 +118,7 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
     public void onResponse(JSONArray response) {
         progressDialog.hide();
 
-        TelefonoAdapter adapter = new TelefonoAdapter(getContext(), response);
+        CatalogoAdapter adapter = new CatalogoAdapter(getContext(), modeloCatalogo.sacarListaClientes(response));
         listView.setAdapter(adapter);
     }
 

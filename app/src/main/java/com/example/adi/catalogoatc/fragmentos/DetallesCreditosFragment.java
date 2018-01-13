@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -22,8 +21,8 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.adi.catalogoatc.R;
 import com.example.adi.catalogoatc.Recursos.Basic;
-import com.example.adi.catalogoatc.adapters.ComprasAdapter;
-import com.example.adi.catalogoatc.ModeloLista.modeloCatalogo;
+import com.example.adi.catalogoatc.adapters.DetallesComprasAdapter;
+import com.example.adi.catalogoatc.ModeloLista.modeloDetallosCatalogo;
 
 import org.json.JSONArray;
 
@@ -134,7 +133,7 @@ public class DetallesCreditosFragment extends Fragment implements Basic, Respons
     public void onResponse(JSONArray response) {
         progressDialog.hide();
 
-        ComprasAdapter adapter = new ComprasAdapter(getContext(), modeloCatalogo.sacarListaClientes(response));
+        DetallesComprasAdapter adapter = new DetallesComprasAdapter(getContext(), modeloDetallosCatalogo.sacarListaClientes(response));
         listView.setAdapter(adapter);
     }
 

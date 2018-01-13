@@ -5,14 +5,12 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -26,7 +24,6 @@ import com.android.volley.toolbox.Volley;
 import com.example.adi.catalogoatc.R;
 import com.example.adi.catalogoatc.Recursos.Basic;
 import com.example.adi.catalogoatc.adapters.HistorialAdapter;
-import com.example.adi.catalogoatc.adapters.TelefonoAdapter;
 import com.example.adi.catalogoatc.ModeloLista.modeloHistorial;
 
 import org.json.JSONArray;
@@ -87,7 +84,7 @@ public class HistorialContadoFragment extends Fragment implements Basic, Respons
 
         //Inicia la peticion
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String consulta = "SELECT o.folio,DATE(o.fecha),oc.total" +
+        String consulta = "SELECT o.id, o.folio,DATE(o.fecha),oc.total" +
                 " from orden_completa oc, orden o" +
                 " where o.id not in(Select orden_id from credito)" +
                 " and oc.orden_id = o.id" +

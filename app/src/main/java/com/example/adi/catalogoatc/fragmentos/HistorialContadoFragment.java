@@ -27,6 +27,7 @@ import com.example.adi.catalogoatc.R;
 import com.example.adi.catalogoatc.Recursos.Basic;
 import com.example.adi.catalogoatc.adapters.HistorialAdapter;
 import com.example.adi.catalogoatc.adapters.TelefonoAdapter;
+import com.example.adi.catalogoatc.ModeloLista.modeloHistorial;
 
 import org.json.JSONArray;
 
@@ -164,7 +165,7 @@ public class HistorialContadoFragment extends Fragment implements Basic, Respons
     public void onResponse(JSONArray response) {
         progressDialog.hide();
 
-        HistorialAdapter adapter = new HistorialAdapter(getContext(), response);
+        HistorialAdapter adapter = new HistorialAdapter(getContext(), modeloHistorial.sacarListaClientes(response));
         listView.setAdapter(adapter);
     }
 

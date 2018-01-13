@@ -117,7 +117,7 @@ public class DetallesComprasFragment extends Fragment implements Basic, Response
     public void onResponse(JSONArray response) {
         progressDialog.hide();
 
-        ComprasAdapter adapter = new ComprasAdapter(getContext(), response);
+        ComprasAdapter adapter = new ComprasAdapter(getContext(),response);
         listView.setAdapter(adapter);
     }
 

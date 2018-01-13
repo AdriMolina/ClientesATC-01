@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v4.app.Fragment;
 
+import com.example.adi.catalogoatc.ModeloLista.modeloHistorial;
 import com.example.adi.catalogoatc.R;
 import com.example.adi.catalogoatc.fragmentos.DetallesComprasFragment;
 import com.example.adi.catalogoatc.fragmentos.HistorialContadoFragment;
@@ -22,6 +23,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
+
 /**
  * Created by Adi on 04/01/2018.
  */
@@ -29,12 +32,12 @@ import org.json.JSONObject;
 public class HistorialAdapter extends BaseAdapter {
 
     private Context context;
-    private JSONArray array;
+    private List<modeloHistorial> list;
 
-    public HistorialAdapter(Context context, JSONArray array)
+    public HistorialAdapter(Context context, List<modeloHistorial> list)
     {
         this.context = context;
-        this.array = array;
+        this.list = list;
     }
 
 
@@ -43,30 +46,19 @@ public class HistorialAdapter extends BaseAdapter {
     public int getCount()
 
     {
-        return array.length();
+        return list.size();
     }
 
     @Override
-    public JSONObject getItem(int position)
+    public modeloHistorial getItem(int position)
     {
-        JSONObject jsonObject;
-
-        try
-        {
-            jsonObject = array.getJSONObject(position);
-        }
-        catch (JSONException e)
-        {
-            jsonObject = null;
-        }
-
-        return jsonObject;
+        return list.get(position);
     }
 
     @Override
     public long getItemId(int position)
     {
-        return position;
+        return list.get(position).getId();
     }
 
     @Override
@@ -77,36 +69,15 @@ public class HistorialAdapter extends BaseAdapter {
         if (convertView == null)
             view = inflater.inflate(R.layout.item_historial, null);
 
-
+        //Referencia los view
         TextView txtFolio = (TextView)view.findViewById(R.id.txtFolio);
         TextView txtFecha = (TextView)view.findViewById(R.id.txtFecha);
         TextView txtTotal = (TextView)view.findViewById(R.id.txtTotal);
 
-        String folio, fecha, total;
-        try
-        {
-            folio = getItem(position).getString("0");
-            fecha = getItem(position).getString("1");
-            total = "$"+ getItem(position).getString("2");
 
-        }
-        catch (JSONException e)
-        {
-            folio = null;
-            fecha = null;
-            total = null;
-
-        }
-
-        if (folio != null)
-        {
-            txtFolio.setText(folio);
-            txtFecha.setText(fecha);
-            txtTotal.setText(total);
-
-        }
-
-
+            txtFolio.setText(getItem(position).getFolio());
+            txtFecha.setText(getItem(position).getFecha());
+            txtTotal.setText(getItem(position).getTotal());
 
 
         return view;

@@ -8,11 +8,15 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.adi.catalogoatc.ModeloLista.modeloCatalogo;
+import com.example.adi.catalogoatc.ModeloLista.modeloHistorial;
 import com.example.adi.catalogoatc.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 
 /**
  * Created by Adi on 05/01/2018.
@@ -20,12 +24,12 @@ import org.json.JSONObject;
 
 public class ComprasAdapter extends BaseAdapter {
     private Context context;
-    private JSONArray array;
+    private List<modeloHistorial> lista;
 
-    public ComprasAdapter(Context context, JSONArray array)
+    public ComprasAdapter(Context context, List<modeloHistorial> lista)
     {
         this.context = context;
-        this.array = array;
+        this.lista = lista;
     }
 
     public ComprasAdapter(FragmentManager fragmentManager) {
@@ -35,78 +39,44 @@ public class ComprasAdapter extends BaseAdapter {
     public int getCount()
 
     {
-        return array.length();
+        return lista.size();
     }
 
     @Override
-    public JSONObject getItem(int position)
+    public modeloHistorial getItem(int i)
     {
-        JSONObject jsonObject;
-
-        try
-        {
-            jsonObject = array.getJSONObject(position);
-        }
-        catch (JSONException e)
-        {
-            jsonObject = null;
-        }
-
-        return jsonObject;
+        return lista.get(i);
     }
 
     @Override
-    public long getItemId(int position)
+    public long getItemId(int i)
     {
-        return position;
+        return lista.get(i).getId();
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent)
+    public View getView(int i, View convertView, ViewGroup parent)
     {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = convertView;
         if (convertView == null)
             view = inflater.inflate(R.layout.item_detalles_compras, null);
 
-
+        //Referencia a los view
         TextView txtArticulo = (TextView)view.findViewById(R.id.txtArticulo);
         TextView txtMarca = (TextView)view.findViewById(R.id.txtMarca);
         TextView txtModelo = (TextView)view.findViewById(R.id.txtModelo);
         TextView txtCantidad = (TextView)view.findViewById(R.id.txtCantidad);
         TextView txtTotal = (TextView)view.findViewById(R.id.txtPrecioTotal);
 
+        //Asigna los valores
 
-        String id, tipo, marca, modelo, cantidad, total;
-        try
-        {
-            id = getItem(position).getString("0");
-            tipo = getItem(position).getString("1");
-            marca = getItem(position).getString("2");
-            modelo = getItem(position).getString("3");
-            cantidad = getItem(position).getString("4");
-            total = "$"+ getItem(position).getString("5");
+            txtArticulo.setText(getItem(i).getArticulo());
+            txtMarca.setText(getItem(i).getMarca());
+            txtModelo.setText(getItem(i).getModelo());
+            txtCantidad.setText(getItem(i).getCantidad());
 
-        }
-        catch (JSONException e)
-        {
-            tipo = null;
-            marca = null;
-            modelo = null;
-            cantidad = null;
-            total = null;
 
-        }
-
-        if (tipo != null)
-        {
-            txtArticulo.setText(tipo);
-            txtMarca.setText(marca);
-            txtModelo.setText(modelo);
-            txtCantidad.setText(cantidad);
-            txtTotal.setText(total);
-
-        }
 
         return view;
     }

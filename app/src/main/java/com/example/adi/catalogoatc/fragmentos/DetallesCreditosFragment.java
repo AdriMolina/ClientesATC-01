@@ -23,6 +23,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.adi.catalogoatc.R;
 import com.example.adi.catalogoatc.Recursos.Basic;
 import com.example.adi.catalogoatc.adapters.ComprasAdapter;
+import com.example.adi.catalogoatc.ModeloLista.modeloCatalogo;
 
 import org.json.JSONArray;
 
@@ -133,7 +134,7 @@ public class DetallesCreditosFragment extends Fragment implements Basic, Respons
     public void onResponse(JSONArray response) {
         progressDialog.hide();
 
-        ComprasAdapter adapter = new ComprasAdapter(getContext(), response);
+        ComprasAdapter adapter = new ComprasAdapter(getContext(), modeloCatalogo.sacarListaClientes(response));
         listView.setAdapter(adapter);
     }
 

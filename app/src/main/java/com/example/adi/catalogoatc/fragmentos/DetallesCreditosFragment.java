@@ -33,11 +33,13 @@ public class DetallesCreditosFragment extends Fragment implements Basic, Respons
     String url;
     private OnFragmentInteractionListener mListener;
     Button mas;
+    int articulo_id;
 
 
-    public static DetallesCreditosFragment newInstance(String param1, String param2) {
+    public static DetallesCreditosFragment newInstance(int id) {
         DetallesCreditosFragment fragment = new DetallesCreditosFragment();
         Bundle args = new Bundle();
+        args.putInt("Articulo_ID", id);
         fragment.setArguments(args);
         return fragment;
     }
@@ -50,7 +52,7 @@ public class DetallesCreditosFragment extends Fragment implements Basic, Respons
 
         //compara si hay algun elemento guardado
         if (getArguments() != null) {
-
+            articulo_id = getArguments().getInt("Articulo_ID");
         }
     }
 
@@ -71,7 +73,7 @@ public class DetallesCreditosFragment extends Fragment implements Basic, Respons
 
         //Inicia la peticion
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String consulta = "SELECT od.tipoVentaId, ta.nombre, ma.nombre, mo.nombre , od.cantidad, oc.total" +
+        String consulta = "SELECT od.tipoVentaId, ta.nombre, ma.nombre, mo.nombre , od.cantidad, oc.total, (od.cantidad * od.precio_final)" +
                 " FROM tipo_articulo ta,marca ma, modelo mo, orden_descripcion od,orden_completa oc, orden ord, cantidad ca, articulo ar" +
                 " where od.tipoVentaId = ca.id" +
                 " and ord.id = od.orden_id" +
@@ -80,7 +82,7 @@ public class DetallesCreditosFragment extends Fragment implements Basic, Respons
                 " and ma.id = mo.marca_id" +
                 " and ca.articulo_id = ar.id" +
                 " and ar.tipoArticulo_id = ta.id" +
-                " and ord.folio = '000331/2017';";
+                " and od.orden_id ="+articulo_id;
 
         consulta = consulta.replace(" ", "%20");
         String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;

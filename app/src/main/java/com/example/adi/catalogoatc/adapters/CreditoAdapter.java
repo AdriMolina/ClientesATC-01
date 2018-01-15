@@ -74,17 +74,20 @@ public class CreditoAdapter extends BaseAdapter {
         TextView txtMarca = (TextView)view.findViewById(R.id.txtMarca);
         TextView txtModelo = (TextView)view.findViewById(R.id.txtModelo);
         TextView txtCantidad = (TextView)view.findViewById(R.id.txtCantidad);
-        TextView txtTotal = (TextView)view.findViewById(R.id.txtPrecioTotal);
+        TextView txtPrecio = (TextView)view.findViewById(R.id.txtPrecio);
+        TextView txtPrecioPagar = (TextView)view.findViewById(R.id.txtPrecioTotal);
 
 
-        String tipo, marca, modelo, cantidad, total;
+        String id, tipo, marca, modelo, cantidad, preciof, totalPagar;
         try
         {
-            tipo = getItem(position).getString("0");
-            marca = getItem(position).getString("1");
-            modelo = getItem(position).getString("2");
-            cantidad = getItem(position).getString("3");
-            total = "$"+ getItem(position).getString("4");
+            id = getItem(position).getString("0");
+            tipo = getItem(position).getString("1");
+            marca = getItem(position).getString("2");
+            modelo = getItem(position).getString("3");
+            cantidad = getItem(position).getString("4");
+            preciof = "$"+ getItem(position).getString("5");
+            totalPagar = "$"+ getItem(position).getString("6");
 
         }
         catch (JSONException e)
@@ -93,7 +96,8 @@ public class CreditoAdapter extends BaseAdapter {
             marca = null;
             modelo = null;
             cantidad = null;
-            total = null;
+            preciof = null;
+            totalPagar = null;
 
         }
 
@@ -103,7 +107,8 @@ public class CreditoAdapter extends BaseAdapter {
             txtMarca.setText(marca);
             txtModelo.setText(modelo);
             txtCantidad.setText(cantidad);
-            txtTotal.setText(total);
+            txtPrecio.setText(preciof);
+            txtPrecioPagar.setText(totalPagar);
 
         }
 

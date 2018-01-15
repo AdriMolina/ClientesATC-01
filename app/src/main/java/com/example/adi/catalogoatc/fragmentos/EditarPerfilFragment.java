@@ -109,13 +109,15 @@ public class EditarPerfilFragment extends Fragment implements Basic, Response.Li
                 direccionFinal = edtdireccion.getText().toString();
                 telefonoFinal = edttelefono.getText().toString();
                 //verifica que hubo un cambio en el nombre
-                if(nombre != nombreFinal || direccion!=direccionFinal || telefono!=telefonoFinal ){
+                if(nombre.equals(nombreFinal)  && direccion.equals(direccionFinal) && telefono.equals(telefonoFinal) ){
+                    Toast.makeText(getContext(), "No hay cambios", Toast.LENGTH_SHORT).show();
 
+                }else{
                     //Inicia la actualizacion
                     RequestQueue queue = Volley.newRequestQueue(getContext());
                     String consulta = "UPDATE cliente" +
-                                        " SET nombre='"+nombreFinal+"'"+",direccion="+"'"+direccionFinal+"'"+",telefono="+"'"+telefono+"'"+
-                                        " WHERE id = "+cliente_id+";";
+                            " SET nombre='"+nombreFinal+"'"+",direccion="+"'"+direccionFinal+"'"+",telefono="+"'"+telefono+"'"+
+                            " WHERE id = "+cliente_id+";";
                     consulta = consulta.replace(" ", "%20");
                     String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
                     url= SERVER + RUTA + "consultaGeneral.php" + cadena;
@@ -136,10 +138,8 @@ public class EditarPerfilFragment extends Fragment implements Basic, Response.Li
 
                     //Agrega y ejecuta la cola
                     queue.add(request);
-                    Toast.makeText(getContext(), "Se actualizó correctamente"+nombre+" "+nombreFinal+" "+direccion+" "+direccionFinal+" "+telefono+" "+telefonoFinal, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Se actualizó correctamente"+url, Toast.LENGTH_SHORT).show();
 
-                }else{
-                    Toast.makeText(getContext(), "No hay cambios", Toast.LENGTH_SHORT).show();
                 }
 
 

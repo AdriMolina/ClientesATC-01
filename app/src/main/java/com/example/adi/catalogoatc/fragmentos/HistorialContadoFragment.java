@@ -40,6 +40,8 @@ public class HistorialContadoFragment extends Fragment implements Basic, Respons
     private ListView listView;
     private ProgressDialog progressDialog;
     String url;
+    int idProducto;
+    HistorialAdapter adapter;
     ImageButton imageButton;
     private HistorialFragment.OnFragmentInteractionListener mListener;
 
@@ -107,9 +109,10 @@ public class HistorialContadoFragment extends Fragment implements Basic, Respons
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Object listItem = listView.getItemAtPosition(position);
+                idProducto =  (int)adapter.getItemId(position);
 
                 Toast.makeText(getContext(), "preciono......", Toast.LENGTH_SHORT).show();
-                Fragment nuevofragmento = new DetallesComprasFragment();
+                Fragment nuevofragmento = DetallesComprasFragment.newInstance(idProducto);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.content_main, nuevofragmento);
                 transaction.addToBackStack(null);
@@ -162,7 +165,7 @@ public class HistorialContadoFragment extends Fragment implements Basic, Respons
     public void onResponse(JSONArray response) {
         progressDialog.hide();
 
-        HistorialAdapter adapter = new HistorialAdapter(getContext(), modeloHistorial.sacarListaClientes(response));
+        adapter = new HistorialAdapter(getContext(), modeloHistorial.sacarListaClientes(response));
         listView.setAdapter(adapter);
     }
 

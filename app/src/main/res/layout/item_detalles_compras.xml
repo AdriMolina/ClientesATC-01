@@ -52,13 +52,21 @@
                 android:layout_marginRight="10dp"
                 android:layout_below="@+id/txtModelo"/>
             <TextView
-                android:id="@+id/txtPrecioTotal"
+                android:id="@+id/txtPrecio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Precio"
                 android:textSize="15dp"
                 android:layout_marginRight="10dp"
                 android:layout_below="@id/txtCantidad"/>
+            <TextView
+                android:id="@+id/txtPrecioTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total"
+                android:textSize="15dp"
+                android:layout_marginRight="10dp"
+                android:layout_below="@id/txtPrecio"/>
 
 
 

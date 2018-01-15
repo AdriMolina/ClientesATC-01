@@ -71,7 +71,7 @@ public class DetallesCreditosFragment extends Fragment implements Basic, Respons
 
         //Inicia la peticion
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String consulta = "SELECT ta.nombre, ma.nombre, mo.nombre , od.cantidad, oc.total" +
+        String consulta = "SELECT od.tipoVentaId, ta.nombre, ma.nombre, mo.nombre , od.cantidad, oc.total" +
                 " FROM tipo_articulo ta,marca ma, modelo mo, orden_descripcion od,orden_completa oc, orden ord, cantidad ca, articulo ar" +
                 " where od.tipoVentaId = ca.id" +
                 " and ord.id = od.orden_id" +

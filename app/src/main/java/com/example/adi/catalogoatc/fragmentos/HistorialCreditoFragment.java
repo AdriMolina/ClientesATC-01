@@ -22,6 +22,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.adi.catalogoatc.R;
 import com.example.adi.catalogoatc.Recursos.Basic;
+import com.example.adi.catalogoatc.adapters.DetallesComprasAdapter;
 import com.example.adi.catalogoatc.adapters.HistorialAdapter;
 import com.example.adi.catalogoatc.ModeloLista.modeloHistorial;
 import org.json.JSONArray;
@@ -32,7 +33,8 @@ public class HistorialCreditoFragment extends Fragment implements Basic, Respons
     private ProgressDialog progressDialog;
     String url;
     private HistorialFragment.OnFragmentInteractionListener mListener;
-
+    int idProducto;
+    HistorialAdapter adapter;
 
     public static HistorialCreditoFragment newInstance(String param1, String param2) {
         HistorialCreditoFragment fragment = new HistorialCreditoFragment();
@@ -96,9 +98,9 @@ public class HistorialCreditoFragment extends Fragment implements Basic, Respons
 
 
                 Object listItem = listView.getItemAtPosition(position);
+                idProducto =  (int)adapter.getItemId(position);
 
-
-                Toast.makeText(getContext(), "preciono......"+listItem, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "preciono......"+String.valueOf(idProducto), Toast.LENGTH_SHORT).show();
                 Fragment nuevofragmento = new DetallesCreditosFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.content_main, nuevofragmento);
@@ -134,7 +136,7 @@ public class HistorialCreditoFragment extends Fragment implements Basic, Respons
     public void onResponse(JSONArray response) {
         progressDialog.hide();
 
-        HistorialAdapter adapter = new HistorialAdapter(getContext(), modeloHistorial.sacarListaClientes(response));
+         adapter = new HistorialAdapter(getContext(), modeloHistorial.sacarListaClientes(response));
         listView.setAdapter(adapter);
     }
 

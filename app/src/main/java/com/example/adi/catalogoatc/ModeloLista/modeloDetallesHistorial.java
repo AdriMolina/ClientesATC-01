@@ -77,7 +77,7 @@ public class modeloDetallesHistorial {
         this.telefono = telefono;
     }
 
-    public static List<modeloDetallesHistorial> sacarListaClientes(JSONArray array)
+    public static List<modeloDetallesHistorial> sacarDetallesCompra(JSONArray array)
     {
         List<modeloDetallesHistorial> lista = new ArrayList<>();
         try

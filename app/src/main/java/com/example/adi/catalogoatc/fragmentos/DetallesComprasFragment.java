@@ -30,11 +30,13 @@ public class DetallesComprasFragment extends Fragment implements Basic, Response
     private ProgressDialog progressDialog;
     String url;
     private OnFragmentInteractionListener mListener;
+    int articulo_id;
 
 
-    public static DetallesComprasFragment newInstance(String param1, String param2) {
+    public static DetallesComprasFragment newInstance(int id) {
         DetallesComprasFragment fragment = new DetallesComprasFragment();
         Bundle args = new Bundle();
+        args.putInt("Articulo_ID", id);
         fragment.setArguments(args);
         return fragment;
     }
@@ -47,7 +49,7 @@ public class DetallesComprasFragment extends Fragment implements Basic, Response
 
         //compara si hay algun elemento guardado
         if (getArguments() != null) {
-
+            articulo_id = getArguments().getInt("Articulo_ID");
         }
     }
 

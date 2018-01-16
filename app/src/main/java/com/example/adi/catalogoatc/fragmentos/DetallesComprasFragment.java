@@ -17,6 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.adi.catalogoatc.ModeloLista.modeloDetallesHistorial;
 import com.example.adi.catalogoatc.R;
 import com.example.adi.catalogoatc.Recursos.Basic;
 import com.example.adi.catalogoatc.adapters.DetallesComprasAdapter;
@@ -31,7 +32,7 @@ public class DetallesComprasFragment extends Fragment implements Basic, Response
     String url;
     private OnFragmentInteractionListener mListener;
     int articulo_id;
-
+    DetallesComprasAdapter adapter;
 
     public static DetallesComprasFragment newInstance(int id) {
         DetallesComprasFragment fragment = new DetallesComprasFragment();
@@ -118,7 +119,7 @@ public class DetallesComprasFragment extends Fragment implements Basic, Response
     public void onResponse(JSONArray response) {
         progressDialog.hide();
 
-        DetallesComprasAdapter adapter = new DetallesComprasAdapter(getContext(),modeloDetallosCatalogo.sacarListaClientes(response));
+         adapter = new DetallesComprasAdapter(getContext(), modeloDetallesHistorial.sacarDetallesCompra(response));
         listView.setAdapter(adapter);
     }
 

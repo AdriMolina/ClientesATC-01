@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.adi.catalogoatc.ModeloLista.modeloDetallesHistorial;
 import com.example.adi.catalogoatc.ModeloLista.modeloDetallosCatalogo;
 import com.example.adi.catalogoatc.ModeloLista.modeloHistorial;
 import com.example.adi.catalogoatc.R;
@@ -20,16 +21,14 @@ import java.util.List;
 
 public class DetallesComprasAdapter extends BaseAdapter {
     private Context context;
-    private List<modeloDetallosCatalogo> lista;
+    private List<modeloDetallesHistorial> lista;
 
-    public DetallesComprasAdapter(Context context, List<modeloDetallosCatalogo> lista)
+    public DetallesComprasAdapter(Context context, List<modeloDetallesHistorial> lista)
     {
         this.context = context;
         this.lista = lista;
     }
 
-    public DetallesComprasAdapter(FragmentManager fragmentManager) {
-    }
 
     @Override
     public int getCount()
@@ -39,7 +38,7 @@ public class DetallesComprasAdapter extends BaseAdapter {
     }
 
     @Override
-    public modeloDetallosCatalogo getItem(int i)
+    public modeloDetallesHistorial getItem(int i)
     {
         return lista.get(i);
     }
@@ -63,6 +62,7 @@ public class DetallesComprasAdapter extends BaseAdapter {
         TextView txtMarca = (TextView)view.findViewById(R.id.txtMarca);
         TextView txtModelo = (TextView)view.findViewById(R.id.txtModelo);
         TextView txtCantidad = (TextView)view.findViewById(R.id.txtCantidad);
+        TextView txtPrecio = (TextView)view.findViewById(R.id.txtPrecio);
         TextView txtTotal = (TextView)view.findViewById(R.id.txtPrecioTotal);
 
         //Asigna los valores
@@ -71,6 +71,9 @@ public class DetallesComprasAdapter extends BaseAdapter {
             txtMarca.setText(getItem(i).getMarca());
             txtModelo.setText(getItem(i).getModelo());
             txtCantidad.setText(getItem(i).getCantidad());
+            txtPrecio.setText("$"+getItem(i).getPrecio());
+            txtTotal.setText("$"+getItem(i).getTotal());
+
 
 
 

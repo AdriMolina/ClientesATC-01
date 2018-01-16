@@ -19,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.adi.catalogoatc.ModeloLista.modeloDetallesHistorial;
 import com.example.adi.catalogoatc.R;
 import com.example.adi.catalogoatc.Recursos.Basic;
 import com.example.adi.catalogoatc.adapters.DetallesComprasAdapter;
@@ -62,7 +63,7 @@ public class DetallesCreditosFragment extends Fragment implements Basic, Respons
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_detalles_creditos, container, false);
-        listView = (ListView)view.findViewById(R.id.listaDetalles);
+        listView = (ListView)view.findViewById(R.id.listaDetallesCreditos);
 
         //Coloca el dialogo de carga
         progressDialog = new ProgressDialog(getContext());
@@ -135,7 +136,7 @@ public class DetallesCreditosFragment extends Fragment implements Basic, Respons
     public void onResponse(JSONArray response) {
         progressDialog.hide();
 
-        DetallesComprasAdapter adapter = new DetallesComprasAdapter(getContext(), modeloDetallosCatalogo.sacarListaClientes(response));
+        DetallesComprasAdapter adapter = new DetallesComprasAdapter(getContext(), modeloDetallesHistorial.sacarDetallesCompra(response));
         listView.setAdapter(adapter);
     }
 

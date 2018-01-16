@@ -18,15 +18,19 @@ public class modeloDetallesHistorial {
     private String marca;
     private String modelo;
     private String cantidad;
-    private String telefono;
+    private String Precio;
+    private String Total;
 
-    public modeloDetallesHistorial(int id, String string, String articulo, String marca, String modelo, String cantidad) {
+
+
+    public modeloDetallesHistorial(int id, String articulo, String marca, String modelo, String cantidad, String precio, String Total) {
         this.id = id;
         this.articulo = articulo;
         this.marca = marca;
         this.modelo = modelo;
         this.cantidad = cantidad;
-        this.telefono = telefono;
+        this.Precio = precio;
+        this.Total = Total;
     }
 
     public int getId() {
@@ -69,12 +73,20 @@ public class modeloDetallesHistorial {
         this.cantidad = cantidad;
     }
 
-    public String getTelefono() {
-        return telefono;
+    public String getPrecio() {
+        return Precio;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setPrecio(String precio) {
+        Precio = precio;
+    }
+
+    public String getTotal() {
+        return Total;
+    }
+
+    public void setTotal(String total) {
+        Total = total;
     }
 
     public static List<modeloDetallesHistorial> sacarDetallesCompra(JSONArray array)
@@ -90,7 +102,9 @@ public class modeloDetallesHistorial {
                                                                 jsonObject.getString("2"),
                                                                 jsonObject.getString("3"),
                                                                 jsonObject.getString("4"),
-                        jsonObject.getString("5"));
+                                                                jsonObject.getString("5"),
+
+                        jsonObject.getString("6"));
 
                 lista.add(catalogo);
             }

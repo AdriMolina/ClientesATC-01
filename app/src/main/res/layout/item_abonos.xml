@@ -26,18 +26,27 @@
                 android:textSize="25dp"
                 android:textStyle="bold"/>
             <TextView
+                android:id="@+id/txtFolio"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Folio"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_below="@+id/txtFecha"/>
+            <TextView
                 android:id="@+id/txtCantidadAbono"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cantidad"
                 android:textSize="15dp"
                 android:layout_marginRight="10dp"
-                android:layout_below="@+id/txtFecha"/>
+                android:layout_below="@+id/txtFolio"/>
             <TextView
                 android:id="@+id/txtTotalMomento"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Modelo"
+                android:text="CantidadMomento"
                 android:textSize="15dp"
                 android:layout_below="@+id/txtCantidadAbono"
                 android:layout_alignParentEnd="true"

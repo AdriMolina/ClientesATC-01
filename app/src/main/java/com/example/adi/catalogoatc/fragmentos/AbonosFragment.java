@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +36,7 @@ public class AbonosFragment extends Fragment implements Basic, Response.Listener
     int anioF, mesF, diaF;
     int anioi, mesi, diai;
     TextView txtfecha;
+    ListView list;
     String fechaActual, fechaInicial, FechaFinal;
 
     private OnFragmentInteractionListener mListener;
@@ -44,10 +46,12 @@ public class AbonosFragment extends Fragment implements Basic, Response.Listener
     }
 
 
-    public static AbonosFragment newInstance(String param1, String param2) {
+    public static AbonosFragment newInstance(int cliente_id, int orden_id) {
+
         AbonosFragment fragment = new AbonosFragment();
         Bundle args = new Bundle();
-
+        args.putInt("CLIENTE_ID", cliente_id);
+        args.putInt("ORDEN_ID", orden_id);
         fragment.setArguments(args);
         return fragment;
     }

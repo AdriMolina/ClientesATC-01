@@ -35,6 +35,7 @@ public class DetallesCreditosFragment extends Fragment implements Basic, Respons
     private OnFragmentInteractionListener mListener;
     Button mas;
     int articulo_id;
+    int orden_id, credito_id;
 
 
     public static DetallesCreditosFragment newInstance(int id) {
@@ -103,7 +104,7 @@ public class DetallesCreditosFragment extends Fragment implements Basic, Respons
             @Override
             public void onClick(View view) {
                 Toast.makeText(getContext(), "preciono......", Toast.LENGTH_SHORT).show();
-                Fragment nuevofragmento = new AbonosFragment();
+                Fragment nuevofragmento = AbonosFragment.newInstance(orden_id, credito_id);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.content_main, nuevofragmento);
                 transaction.addToBackStack(null);

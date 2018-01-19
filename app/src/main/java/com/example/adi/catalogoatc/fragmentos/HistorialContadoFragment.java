@@ -40,7 +40,7 @@ public class HistorialContadoFragment extends Fragment implements Basic, Respons
     private ListView listView;
     private ProgressDialog progressDialog;
     String url;
-    int idProducto;
+    int idOrden;
     HistorialAdapter adapter;
     ImageButton imageButton;
     private HistorialFragment.OnFragmentInteractionListener mListener;
@@ -86,7 +86,7 @@ public class HistorialContadoFragment extends Fragment implements Basic, Respons
 
         //Inicia la peticion
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String consulta = "SELECT o.id, o.folio,DATE(o.fecha),oc.total" +
+        String consulta = "SELECT o.id, oc.id, o.folio,DATE(o.fecha),oc.total" +
                 " from orden_completa oc, orden o" +
                 " where o.id not in(Select orden_id from credito)" +
                 " and oc.orden_id = o.id" +
@@ -109,10 +109,10 @@ public class HistorialContadoFragment extends Fragment implements Basic, Respons
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Object listItem = listView.getItemAtPosition(position);
-                idProducto =  (int)adapter.getItemId(position);
+                idOrden =  (int)adapter.getItemId(position);
 
                 Toast.makeText(getContext(), "preciono......", Toast.LENGTH_SHORT).show();
-                Fragment nuevofragmento = DetallesComprasFragment.newInstance(idProducto);
+                Fragment nuevofragmento = DetallesComprasFragment.newInstance(idOrden);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.content_main, nuevofragmento);
                 transaction.addToBackStack(null);

@@ -33,7 +33,7 @@ public class HistorialCreditoFragment extends Fragment implements Basic, Respons
     private ProgressDialog progressDialog;
     String url;
     private HistorialFragment.OnFragmentInteractionListener mListener;
-    int idProducto;
+    int idOrden, idCredito;
     HistorialAdapter adapter;
 
     public static HistorialCreditoFragment newInstance(String param1, String param2) {
@@ -72,7 +72,7 @@ public class HistorialCreditoFragment extends Fragment implements Basic, Respons
 
         //Inicia la peticion
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String consulta = "SELECT o.id, o.folio,DATE(o.fecha),c.total" +
+        String consulta = "SELECT o.id, c.id, o.folio,DATE(o.fecha),c.total" +
                 " from credito c, orden o" +
                 " where c.orden_id = o.id" +
                 " and o.cliente_id="+IDUsusario+"" +
@@ -98,10 +98,13 @@ public class HistorialCreditoFragment extends Fragment implements Basic, Respons
 
 
                 Object listItem = listView.getItemAtPosition(position);
-                idProducto =  (int)adapter.getItemId(position);
+                idOrden =  (int)adapter.getItemId(position);
+                idCredito = (int)adapter.getOtroId(position);
+                int idUsusario = Integer.parseInt(IDUsusario);
 
-                Toast.makeText(getContext(), "preciono......"+String.valueOf(idProducto), Toast.LENGTH_SHORT).show();
-                Fragment nuevofragmento = DetallesCreditosFragment.newInstance(idProducto);
+
+
+                Fragment nuevofragmento = DetallesCreditosFragment.newInstance(idOrden,idCredito, idUsusario);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.content_main, nuevofragmento);
                 transaction.addToBackStack(null);

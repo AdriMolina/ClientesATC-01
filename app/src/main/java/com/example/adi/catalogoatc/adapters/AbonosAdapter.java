@@ -20,9 +20,9 @@ public class AbonosAdapter extends BaseAdapter {
     Context context;
     List<modeloAbonos> list;
 
-    public AbonosAdapter(Context context, java.util.List<modeloAbonos> list) {
+    public AbonosAdapter(Context context,List<modeloAbonos> list) {
         this.context = context;
-        list = list;
+        this.list = list;
     }
 
     @Override
@@ -48,8 +48,8 @@ public class AbonosAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.item_abonos, null);
 
         //Referencia a los view
-        TextView txtFecha = (TextView)view.findViewById(R.id.txtFecha);
-        TextView txtFolio = (TextView)view.findViewById(R.id.txtFolio);
+        TextView txtFecha = (TextView)view.findViewById(R.id.txtFechaAbono);
+        TextView txtFolio = (TextView)view.findViewById(R.id.txtFolioAbono);
         TextView txtAbono = (TextView)view.findViewById(R.id.txtCantidadAbono);
         TextView txtTotal = (TextView)view.findViewById(R.id.txtTotalMomento);
 
@@ -57,8 +57,8 @@ public class AbonosAdapter extends BaseAdapter {
         //Asigna los valores
         txtFecha.setText(getItem(i).getFecha());
         txtFolio.setText(getItem(i).getFolio());
-        txtAbono.setText(getItem(i).getAbono());
-        txtTotal.setText(getItem(i).getTotral());
+        txtAbono.setText("$"+getItem(i).getAbono());
+        txtTotal.setText("$"+getItem(i).getTotral());
 
 
 

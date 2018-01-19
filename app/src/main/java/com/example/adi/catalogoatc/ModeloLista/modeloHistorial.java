@@ -13,24 +13,34 @@ import java.util.List;
 
 public class modeloHistorial {
 
-    private int id;
+    private int idOrden;
+    private int idOtro;
     private String folio;
     private String fecha;
     private String total;
 
-    public modeloHistorial(int id, String folio, String fecha, String total) {
-        this.id = id;
+    public modeloHistorial(int id, int id_otro, String folio, String fecha, String total) {
+        this.idOrden = id;
+        this.idOtro = id_otro;
         this.folio = folio;
         this.fecha = fecha;
         this.total = total;
     }
 
     public int getId() {
-        return id;
+        return idOrden;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.idOrden = id;
+    }
+
+    public int getIdOtro() {
+        return idOtro;
+    }
+
+    public void setIdOtro(int id) {
+        this.idOtro = id;
     }
 
     public String getFolio() {
@@ -66,9 +76,10 @@ public class modeloHistorial {
             {
                 JSONObject jsonObject = array.getJSONObject(i);
                 modeloHistorial historial = new modeloHistorial(Integer.parseInt(jsonObject.getString("0")),
-                        jsonObject.getString("1"),
+                        Integer.parseInt(jsonObject.getString("1")),
                         jsonObject.getString("2"),
-                        jsonObject.getString("3"));
+                        jsonObject.getString("3"),
+                        jsonObject.getString("4"));
 
                 lista.add(historial);
             }

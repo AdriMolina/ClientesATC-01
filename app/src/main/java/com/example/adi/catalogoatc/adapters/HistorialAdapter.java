@@ -60,6 +60,9 @@ public class HistorialAdapter extends BaseAdapter {
     {
         return list.get(position).getId();
     }
+    public long getOtroId(int position){
+        return list.get(position).getIdOtro();
+    }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent)

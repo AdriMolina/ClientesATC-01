@@ -34,14 +34,15 @@ public class DetallesCreditosFragment extends Fragment implements Basic, Respons
     String url;
     private OnFragmentInteractionListener mListener;
     Button mas;
-    int articulo_id;
-    int orden_id, credito_id;
+    int orden_id, cliente_id, credito_id;
 
 
-    public static DetallesCreditosFragment newInstance(int id) {
+    public static DetallesCreditosFragment newInstance(int id_orden, int id_credito, int id_cliente) {
         DetallesCreditosFragment fragment = new DetallesCreditosFragment();
         Bundle args = new Bundle();
-        args.putInt("Articulo_ID", id);
+        args.putInt("ORDEN_ID", id_orden);
+        args.putInt("CREDITO_ID", id_credito);
+        args.putInt("CLIENTE_ID", id_cliente);
         fragment.setArguments(args);
         return fragment;
     }
@@ -54,7 +55,9 @@ public class DetallesCreditosFragment extends Fragment implements Basic, Respons
 
         //compara si hay algun elemento guardado
         if (getArguments() != null) {
-            articulo_id = getArguments().getInt("Articulo_ID");
+            orden_id = getArguments().getInt("ORDEN_ID");
+            credito_id = getArguments().getInt("CREDITO_ID");
+            cliente_id = getArguments().getInt("CLIENTE_ID");
         }
     }
 
@@ -84,7 +87,7 @@ public class DetallesCreditosFragment extends Fragment implements Basic, Respons
                 " and ma.id = mo.marca_id" +
                 " and ca.articulo_id = ar.id" +
                 " and ar.tipoArticulo_id = ta.id" +
-                " and od.orden_id ="+articulo_id;
+                " and od.orden_id ="+orden_id;
 
         consulta = consulta.replace(" ", "%20");
         String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
@@ -104,7 +107,7 @@ public class DetallesCreditosFragment extends Fragment implements Basic, Respons
             @Override
             public void onClick(View view) {
                 Toast.makeText(getContext(), "preciono......", Toast.LENGTH_SHORT).show();
-                Fragment nuevofragmento = AbonosFragment.newInstance(orden_id, credito_id);
+                Fragment nuevofragmento = AbonosFragment.newInstance( credito_id, orden_id, cliente_id);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.content_main, nuevofragmento);
                 transaction.addToBackStack(null);

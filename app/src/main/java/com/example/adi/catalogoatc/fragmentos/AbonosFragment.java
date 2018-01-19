@@ -170,7 +170,7 @@ public class AbonosFragment extends Fragment implements Basic, Response.Listener
 
         //Inicia la peticion
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String consulta = "SELECT Distinct c.id, o.folio, DATE(o.fecha) AS fecha,bc.cantidad, (c.total -" +
+        String consulta = "SELECT Distinct c.id, o.folio, DATE(bc.fecha) AS fecha,bc.cantidad, (c.total -" +
                         " (SELECT Sum(bc.cantidad) as total_abonos"+
                         " FROM credito c, orden o, bono_credito bc"+
                         " WHERE c.orden_id = o.id"+

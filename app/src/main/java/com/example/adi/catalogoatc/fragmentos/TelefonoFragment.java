@@ -4,10 +4,12 @@ import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -28,8 +30,9 @@ import org.json.JSONArray;
 public class TelefonoFragment extends Fragment implements Basic, Response.Listener<JSONArray>, Response.ErrorListener {
     private ListView listView;
     private ProgressDialog progressDialog;
-
+    int idArticulo;
     String url;
+    CatalogoAdapter adapter;
     private OnFragmentInteractionListener mListener;
 
     public TelefonoFragment() {
@@ -97,6 +100,19 @@ public class TelefonoFragment extends Fragment implements Basic, Response.Listen
         queue.add(request);
 
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //SACA EL ID DEL ARTICULO
+                idArticulo =  (int)adapter.getItemId(i);
+                Fragment nuevofragmento = DetallesCatalogoFragment.newInstance(idArticulo);
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.content_main, nuevofragmento);
+                transaction.addToBackStack(null);
+                transaction.commit();
+                Toast.makeText(getContext(), "Error en el WebService", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
 
@@ -125,7 +141,7 @@ public class TelefonoFragment extends Fragment implements Basic, Response.Listen
     public void onResponse(JSONArray response) {
         progressDialog.hide();
 
-        CatalogoAdapter adapter = new CatalogoAdapter(getContext(), modeloCatalogo.sacarListaClientes(response));
+         adapter = new CatalogoAdapter(getContext(), modeloCatalogo.sacarListaClientes(response));
         listView.setAdapter(adapter);
     }
 

@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,7 @@ public class ChipFragment extends Fragment implements Basic, Response.Listener<J
     private ListView listView;
     private ProgressDialog progressDialog;
     String url;
+    CatalogoAdapter adapter;
     private TelefonoFragment.OnFragmentInteractionListener mListener;
 
 
@@ -102,6 +104,13 @@ public class ChipFragment extends Fragment implements Basic, Response.Listener<J
             @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Object listItem = listView.getItemAtPosition(position);
 
+                //SACA EL ID DEL ARTICULO
+                int idArticulo =  (int)adapter.getItemId(position);
+                Fragment nuevofragmento = DetallesCatalogoFragment.newInstance(idArticulo);
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.content_main, nuevofragmento);
+                transaction.addToBackStack(null);
+                transaction.commit();
 
                 Toast.makeText(getContext(), "preciono......", Toast.LENGTH_SHORT).show();
 
@@ -136,7 +145,7 @@ public class ChipFragment extends Fragment implements Basic, Response.Listener<J
 
 
 
-        CatalogoAdapter adapter = new CatalogoAdapter(getContext(), modeloCatalogo.sacarListaClientes(response));
+        adapter = new CatalogoAdapter(getContext(), modeloCatalogo.sacarListaClientes(response));
         listView.setAdapter(adapter);
     }
 

@@ -99,10 +99,11 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                Toast.makeText(getContext(), "Error en el WebService", Toast.LENGTH_SHORT).show();
+
 
                 //SACA EL ID DEL ARTICULO
                 int idArticulo =  (int)adapter.getItemId(i);
+                Toast.makeText(getContext(), String.valueOf(idArticulo), Toast.LENGTH_SHORT).show();
                 Fragment nuevofragmento = DetallesCatalogoFragment.newInstance(idArticulo);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.content_main, nuevofragmento);

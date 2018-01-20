@@ -1,22 +1,38 @@
 package com.example.adi.catalogoatc.fragmentos;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.adi.catalogoatc.R;
+import com.example.adi.catalogoatc.Recursos.Basic;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
-public class DetallesCatalogoFragment extends Fragment {
+public class DetallesCatalogoFragment extends Fragment implements Basic, Response.Listener<JSONArray>, Response.ErrorListener {
    int id_cantidad;
     private OnFragmentInteractionListener mListener;
-
+    private ProgressDialog progressDialog;
+    String url;
+    View view;
     public DetallesCatalogoFragment() {
-        // Required empty public constructor
+
     }
 
 
@@ -40,8 +56,44 @@ public class DetallesCatalogoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detalles_catalogo, container, false);
+        view = inflater.inflate(R.layout.fragment_detalles_catalogo, container, false);
+
+        //Coloca el dialogo de carga
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setTitle("En Proceso");
+        progressDialog.setMessage("Un momento...");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+
+        //Inicia la peticion
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+        String consulta = "select ma.nombre, mo.nombre,ar.precio,("+
+                           " SELECT SUM(ca.valor)"+
+                           " FROM cantidad ca, articulo ar, punto_venta pv"+
+                           " WHERE ca.articulo_id = ar.id"+
+                           " AND ca.puntoVenta_id = pv.id"+
+                           " AND ca.id = "+id_cantidad+
+                           " AND ca.id = ca.id) as CantidadTotal"+
+                           " from marca ma, modelo mo, articulo ar, punto_venta pv, cantidad ca, tipo_articulo ta"+
+                           " WHERE ca.articulo_id = ar.id"+
+                           " and ar.modelo_id = mo.id"+
+                           " and ca.puntoVenta_id = pv.id"+
+                           " and mo.marca_id = ma.id"+
+                           " and ar.tipoArticulo_id = ta.id"+
+                           " and ca.id = "+id_cantidad;
+
+        consulta = consulta.replace(" ", "%20");
+        String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
+        url= SERVER + RUTA + "consultaGeneral.php" + cadena;
+        Log.i("info", url);
+
+        //Hace la petición String
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, this, this);
+
+        //Agrega y ejecuta la cola
+        queue.add(request);
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -51,6 +103,59 @@ public class DetallesCatalogoFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onErrorResponse(VolleyError error) {
+
+    }
+
+    @Override
+    public void onResponse(JSONArray response) {
+        progressDialog.hide();
+        TextView txtMarca = (TextView) view.findViewById(R.id.MarcaDetalles);
+        TextView txtModelo = (TextView)view.findViewById(R.id.ModeloDetalles);
+        TextView txtPrecio = (TextView)view.findViewById(R.id.PrecioDetalles);
+        TextView txtCantidad = (TextView)view.findViewById(R.id.CantidadDetalles);
+
+        JSONObject jsonObject;
+
+        try
+        {
+            jsonObject = response.getJSONObject(0);
+        }
+        catch (JSONException e)
+        {
+            jsonObject = new JSONObject();
+        }
+
+            String modelo, marca, precio, cantidad;
+        try
+        {
+            marca = jsonObject.getString("0");
+            modelo = jsonObject.getString("1");
+            precio = jsonObject.getString("2");
+            cantidad = jsonObject.getString("3");
+
+        }
+        catch (JSONException e)
+        {
+            marca = null;
+            modelo = null;
+            precio = null;
+            cantidad = null;
+
+        }
+
+        if (marca != null)
+        {
+            txtMarca.setText(marca);
+            txtModelo.setText(modelo);
+            txtPrecio.setText("$"+precio);
+            txtCantidad.setText(cantidad);
+
+
+
+        }
+    }
 
 
     public interface OnFragmentInteractionListener {

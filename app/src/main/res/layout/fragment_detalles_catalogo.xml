@@ -13,26 +13,81 @@
        android:src="@drawable/catalogo"/>
 
    <TextView
+   android:layout_width="wrap_content"
+   android:layout_height="wrap_content"
+   android:id="@+id/txtMarcaDetalles"
+   android:textSize="35dp"
+   android:layout_below="@+id/imgArticulo"
+   android:text="Marca: "
+   />
+   <TextView
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:id="@+id/MarcaDetalles"
+       android:textSize="35dp"
+       android:layout_toEndOf="@+id/txtMarcaDetalles"
        android:layout_below="@+id/imgArticulo"
        android:text="Marca"
        />
    <TextView
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
+       android:id="@+id/txtModeloDetalles"
+       android:layout_below="@+id/MarcaDetalles"
+       android:textSize="20dp"
+       android:text="Modelo: "
+
+       />
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
        android:id="@+id/ModeloDetalles"
        android:layout_below="@+id/MarcaDetalles"
+       android:layout_toEndOf="@+id/txtModeloDetalles"
+       android:textSize="20dp"
        android:text="Modelo"
 
        />
    <TextView
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       android:id="@+id/PrecioDetalles"
+       android:id="@+id/txtPrecioDetalles"
+       android:textSize="35dp"
        android:layout_below="@+id/ModeloDetalles"
-       android:text="Marca"
+       android:text="Precio: "
        />
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:id="@+id/PrecioDetalles"
+       android:layout_toEndOf="@+id/txtPrecioDetalles"
+       android:textSize="35dp"
+       android:layout_below="@+id/ModeloDetalles"
+       android:text="Precio"
+       />
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:id="@+id/txtCantidadDetalles"
+       android:textSize="25dp"
+       android:layout_below="@+id/PrecioDetalles"
+       android:text="Existencia: "
+       />
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:id="@+id/CantidadDetalles"
+       android:layout_toEndOf="@+id/txtCantidadDetalles"
+       android:textSize="25dp"
+       android:layout_below="@+id/PrecioDetalles"
+       android:text="Cantidad"
+       />
+   <Button
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_below="@+id/CantidadDetalles"
+       android:id="@+id/AgrgarCarrito"
+       android:text="Agregar"/>
+
 
 </RelativeLayout>

@@ -138,6 +138,8 @@ public class Inicio extends AppCompatActivity
         } else if (id == R.id.nav_busquedas) {
             miFragment = new HistorialFragment();
             fragmentSeleccionado = true;
+        } else if (id == R.id.nav_pedidos) {
+              
 
         } else if (id == R.id.nav_localizacion) {
             miFragment = new LocalizacionFragment();

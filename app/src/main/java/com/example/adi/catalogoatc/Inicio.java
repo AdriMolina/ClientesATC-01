@@ -27,6 +27,7 @@ import com.example.adi.catalogoatc.fragmentos.HistorialContadoFragment;
 import com.example.adi.catalogoatc.fragmentos.HistorialCreditoFragment;
 import com.example.adi.catalogoatc.fragmentos.HistorialFragment;
 import com.example.adi.catalogoatc.fragmentos.LocalizacionFragment;
+import com.example.adi.catalogoatc.fragmentos.PedidosFragment;
 import com.example.adi.catalogoatc.fragmentos.PerfilFragment;
 import com.example.adi.catalogoatc.fragmentos.TelefonoFragment;
 
@@ -42,7 +43,8 @@ public class Inicio extends AppCompatActivity
         HistorialContadoFragment.OnFragmentInteractionListener,
         DetallesComprasFragment.OnFragmentInteractionListener,
         BuzonFragment.OnFragmentInteractionListener,
-        LocalizacionFragment.OnFragmentInteractionListener
+        LocalizacionFragment.OnFragmentInteractionListener,
+        PedidosFragment.OnFragmentInteractionListener
 {
 
     ImageButton floatButton;
@@ -123,13 +125,11 @@ public class Inicio extends AppCompatActivity
 
         if (id == R.id.nav_inicio) {
 
-
         } else if (id == R.id.nav_pefil) {
             miFragment = new PerfilFragment();
             fragmentSeleccionado = true;
 
         } else if (id == R.id.nav_catalogo) {
-
             miFragment = new CatalogoFragment();
             Log.i("Entrada", "Contenedor");
             fragmentSeleccionado = true;
@@ -138,8 +138,10 @@ public class Inicio extends AppCompatActivity
         } else if (id == R.id.nav_busquedas) {
             miFragment = new HistorialFragment();
             fragmentSeleccionado = true;
+
         } else if (id == R.id.nav_pedidos) {
-              
+            miFragment = new PedidosFragment();
+            fragmentSeleccionado = true;
 
         } else if (id == R.id.nav_localizacion) {
             miFragment = new LocalizacionFragment();

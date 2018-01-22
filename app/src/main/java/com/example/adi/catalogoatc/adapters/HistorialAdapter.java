@@ -80,7 +80,7 @@ public class HistorialAdapter extends BaseAdapter {
 
             txtFolio.setText(getItem(position).getFolio());
             txtFecha.setText(getItem(position).getFecha());
-            txtTotal.setText(getItem(position).getTotal());
+            txtTotal.setText("$"+getItem(position).getTotal());
 
 
         return view;

@@ -64,7 +64,7 @@ public class CatalogoAdapter extends BaseAdapter{
 
             //Asigna los valores
             txtTitulo.setText(getItem(position).getMarca());
-            txtPrecio.setText(getItem(position).getPrecio());
+            txtPrecio.setText("$"+getItem(position).getPrecio());
             txtDesc.setText(getItem(position).getModelo());
 
 

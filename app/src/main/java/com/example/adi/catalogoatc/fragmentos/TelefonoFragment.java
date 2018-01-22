@@ -77,7 +77,7 @@ public class TelefonoFragment extends Fragment implements Basic, Response.Listen
 
         //Inicia la peticion
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String consulta = "select distinct ca.id, ma.nombre, mo.nombre,a.precio" +
+        String consulta = "select distinct a.id, ma.nombre, mo.nombre,a.precio" +
                 "                                from marca ma, modelo mo, articulo a, punto_venta pv, cantidad ca, tipo_articulo ta" +
                 "                                where a.modelo_id = mo.id" +
                 "                                and mo.marca_id = ma.id" +

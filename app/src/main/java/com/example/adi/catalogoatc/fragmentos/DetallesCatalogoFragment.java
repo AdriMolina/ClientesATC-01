@@ -67,20 +67,20 @@ public class DetallesCatalogoFragment extends Fragment implements Basic, Respons
 
         //Inicia la peticion
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String consulta = "select ma.nombre, mo.nombre,ar.precio,("+
+        String consulta = "select ar.id, ma.nombre, mo.nombre,ar.precio,("+
                            " SELECT SUM(ca.valor)"+
                            " FROM cantidad ca, articulo ar, punto_venta pv"+
                            " WHERE ca.articulo_id = ar.id"+
                            " AND ca.puntoVenta_id = pv.id"+
-                           " AND ca.id = "+id_cantidad+
-                           " AND ca.id = ca.id) as CantidadTotal"+
+                           " AND ar.id = "+id_cantidad+
+                           " AND ar.id = ar.id) as CantidadTotal"+
                            " from marca ma, modelo mo, articulo ar, punto_venta pv, cantidad ca, tipo_articulo ta"+
                            " WHERE ca.articulo_id = ar.id"+
                            " and ar.modelo_id = mo.id"+
                            " and ca.puntoVenta_id = pv.id"+
                            " and mo.marca_id = ma.id"+
                            " and ar.tipoArticulo_id = ta.id"+
-                           " and ca.id = "+id_cantidad;
+                           " and ar.id = "+id_cantidad;
 
         consulta = consulta.replace(" ", "%20");
         String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
@@ -127,13 +127,14 @@ public class DetallesCatalogoFragment extends Fragment implements Basic, Respons
             jsonObject = new JSONObject();
         }
 
-            String modelo, marca, precio, cantidad;
+            String modelo, marca, precio, cantidad, id;
         try
         {
-            marca = jsonObject.getString("0");
-            modelo = jsonObject.getString("1");
-            precio = jsonObject.getString("2");
-            cantidad = jsonObject.getString("3");
+            id = jsonObject.getString("0");
+            marca = jsonObject.getString("1");
+            modelo = jsonObject.getString("2");
+            precio = jsonObject.getString("3");
+            cantidad = jsonObject.getString("4");
 
         }
         catch (JSONException e)

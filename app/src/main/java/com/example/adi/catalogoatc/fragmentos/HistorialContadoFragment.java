@@ -86,11 +86,17 @@ public class HistorialContadoFragment extends Fragment implements Basic, Respons
 
         //Inicia la peticion
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String consulta = "SELECT o.id, oc.id, o.folio,DATE(o.fecha),oc.total" +
-                " from orden_completa oc, orden o" +
+        String consulta = "SELECT Distinct o.id, o.id, o.folio,  DATE(o.fecha), oc.total" +
+                " from orden_completa oc, orden o, cantidad ca, articulo ar, orden_descripcion od, tipo_articulo ta" +
                 " where o.id not in(Select orden_id from credito)" +
                 " and oc.orden_id = o.id" +
-                " and o.cliente_id="+IDUsusario+"" +
+                " and o.id = od.orden_id" +
+                " and ar.tipoArticulo_id = ta.id" +
+                " and ca.articulo_id = ar.id" +
+                " and od.tipoVentaId = ca.id" +
+                " and oc.total >0"+
+                " and o.cliente_id ="+IDUsusario+
+                " and ta.nombre != 'Chip'" +
                 " order by o.fecha desc;";
 
         consulta = consulta.replace(" ", "%20");

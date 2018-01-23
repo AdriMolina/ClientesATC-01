@@ -31,7 +31,7 @@ public class DetallesComprasFragment extends Fragment implements Basic, Response
     private ProgressDialog progressDialog;
     String url;
     private OnFragmentInteractionListener mListener;
-    int articulo_id;
+    int orden_id;
     DetallesComprasAdapter adapter;
 
     public static DetallesComprasFragment newInstance(int id) {
@@ -50,7 +50,7 @@ public class DetallesComprasFragment extends Fragment implements Basic, Response
 
         //compara si hay algun elemento guardado
         if (getArguments() != null) {
-            articulo_id = getArguments().getInt("Articulo_ID");
+            orden_id = getArguments().getInt("Articulo_ID");
         }
     }
 
@@ -80,7 +80,7 @@ public class DetallesComprasFragment extends Fragment implements Basic, Response
                 " and ma.id = mo.marca_id" +
                 " and ca.articulo_id = ar.id" +
                 " and ar.tipoArticulo_id = ta.id" +
-                " and od.orden_id = "+articulo_id;
+                " and od.orden_id = "+orden_id;
 
         consulta = consulta.replace(" ", "%20");
         String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;

@@ -6,17 +6,20 @@
     tools:context="com.example.adi.catalogoatc.fragmentos.DetallesCatalogoFragment">
 
    <ImageView
-       android:layout_width="300dp"
-       android:layout_height="300dp"
+       android:layout_width="260dp"
+       android:layout_height="260dp"
        android:layout_centerHorizontal="true"
        android:id="@+id/imgArticulo"
-       android:src="@drawable/catalogo"/>
+       android:src="@drawable/catalogo"
+       android:layout_marginTop="35dp"
+       />
 
    <TextView
    android:layout_width="wrap_content"
    android:layout_height="wrap_content"
    android:id="@+id/txtMarcaDetalles"
        android:textStyle="bold"
+       android:layout_marginLeft="15dp"
    android:textSize="18dp"
    android:layout_below="@+id/imgArticulo"
    android:text="Marca: "
@@ -35,7 +38,8 @@
        android:layout_height="wrap_content"
        android:id="@+id/txtModeloDetalles"
        android:layout_below="@+id/MarcaDetalles"
-       android:textSize="20dp"
+       android:textSize="18dp"
+       android:layout_marginLeft="15dp"
        android:textStyle="bold"
        android:text="Modelo: "
 
@@ -46,7 +50,7 @@
        android:id="@+id/ModeloDetalles"
        android:layout_below="@+id/MarcaDetalles"
        android:layout_toEndOf="@+id/txtModeloDetalles"
-       android:textSize="20dp"
+       android:textSize="18dp"
        android:text="Modelo"
 
        />
@@ -54,7 +58,9 @@
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:id="@+id/txtPrecioDetalles"
-       android:textSize="35dp"
+       android:textStyle="bold"
+       android:textSize="18dp"
+       android:layout_marginLeft="15dp"
        android:layout_below="@+id/ModeloDetalles"
        android:text="Precio: "
        />
@@ -63,7 +69,7 @@
        android:layout_height="wrap_content"
        android:id="@+id/PrecioDetalles"
        android:layout_toEndOf="@+id/txtPrecioDetalles"
-       android:textSize="35dp"
+       android:textSize="18dp"
        android:layout_below="@+id/ModeloDetalles"
        android:text="Precio"
        />
@@ -71,7 +77,9 @@
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:id="@+id/txtCantidadDetalles"
-       android:textSize="25dp"
+       android:textSize="18dp"
+       android:textStyle="bold"
+       android:layout_marginLeft="15dp"
        android:layout_below="@+id/PrecioDetalles"
        android:text="Existencia: "
        />
@@ -80,13 +88,15 @@
        android:layout_height="wrap_content"
        android:id="@+id/CantidadDetalles"
        android:layout_toEndOf="@+id/txtCantidadDetalles"
-       android:textSize="25dp"
+       android:textSize="18dp"
        android:layout_below="@+id/PrecioDetalles"
        android:text="Cantidad"
        />
    <Button
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
+       android:layout_marginLeft="15dp"
+       android:layout_marginRight="15dp"
        android:layout_below="@+id/CantidadDetalles"
        android:id="@+id/AgrgarCarrito"
        android:text="Agregar"/>

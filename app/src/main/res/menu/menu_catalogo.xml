@@ -3,14 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:aplicación="http://schemas.android.com/tools">
     <item
-        android:id="@+id/miCompose"
-        android:icon="@drawable/ic_carrito_mas"
+        android:id="@+id/itemBuscar"
         app:showAsAction="always"
         android:title="Buscar"
-        aplicación:showAsAction = "ifRoom|collapseActionView"
-        aplicación:actionViewClass = "android.support .v7.widget.SearchView "
-        >
+        app:actionViewClass="android.wiget.SearchView">
     </item>
+
+    <item
+        android:id="@+id/itemCarrito"
+        android:icon="@drawable/carrito_blanco"
+        app:showAsAction="always"
+        android:title="Carrito"
+       ></item>
+
+
 
 
 

@@ -25,6 +25,8 @@ import com.example.adi.catalogoatc.Recursos.Basic;
 import com.example.adi.catalogoatc.adapters.DetallesComprasAdapter;
 import com.example.adi.catalogoatc.adapters.HistorialAdapter;
 import com.example.adi.catalogoatc.ModeloLista.modeloHistorial;
+import com.example.adi.catalogoatc.adapters.HistorialCreditoAdapter;
+import com.example.adi.catalogoatc.ModeloLista.modeloHistorialCredito;
 import org.json.JSONArray;
 
 
@@ -34,7 +36,7 @@ public class HistorialCreditoFragment extends Fragment implements Basic, Respons
     String url;
     private HistorialFragment.OnFragmentInteractionListener mListener;
     int idOrden, idCredito;
-    HistorialAdapter adapter;
+    HistorialCreditoAdapter adapter;
 
     public static HistorialCreditoFragment newInstance(String param1, String param2) {
         HistorialCreditoFragment fragment = new HistorialCreditoFragment();
@@ -72,7 +74,7 @@ public class HistorialCreditoFragment extends Fragment implements Basic, Respons
 
         //Inicia la peticion
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String consulta = "SELECT o.id, c.id, o.folio,DATE(o.fecha),c.total" +
+        String consulta = "SELECT o.id, c.id, o.folio,DATE(o.fecha),c.total, c.estado" +
                 " from credito c, orden o" +
                 " where c.orden_id = o.id" +
                 " and o.cliente_id="+IDUsusario+"" +
@@ -139,7 +141,7 @@ public class HistorialCreditoFragment extends Fragment implements Basic, Respons
     public void onResponse(JSONArray response) {
         progressDialog.hide();
 
-         adapter = new HistorialAdapter(getContext(), modeloHistorial.sacarListaClientes(response));
+         adapter = new HistorialCreditoAdapter(getContext(), modeloHistorialCredito.sacarCreditos(response));
         listView.setAdapter(adapter);
     }
 

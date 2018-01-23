@@ -16,7 +16,8 @@
    android:layout_width="wrap_content"
    android:layout_height="wrap_content"
    android:id="@+id/txtMarcaDetalles"
-   android:textSize="35dp"
+       android:textStyle="bold"
+   android:textSize="18dp"
    android:layout_below="@+id/imgArticulo"
    android:text="Marca: "
    />
@@ -24,7 +25,7 @@
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:id="@+id/MarcaDetalles"
-       android:textSize="35dp"
+       android:textSize="18dp"
        android:layout_toEndOf="@+id/txtMarcaDetalles"
        android:layout_below="@+id/imgArticulo"
        android:text="Marca"
@@ -35,6 +36,7 @@
        android:id="@+id/txtModeloDetalles"
        android:layout_below="@+id/MarcaDetalles"
        android:textSize="20dp"
+       android:textStyle="bold"
        android:text="Modelo: "
 
        />

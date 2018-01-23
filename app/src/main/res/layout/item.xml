@@ -68,10 +68,11 @@
                     android:layout_alignParentTop="true"
                     android:background="@drawable/agregar"
                     android:focusable="false"
+                    android:layout_marginTop="10dp"
                     android:focusableInTouchMode="false"
                     android:scaleType="fitCenter"
 
-                    android:text="ok" />
+                     />
             </RelativeLayout>
 
         </LinearLayout>

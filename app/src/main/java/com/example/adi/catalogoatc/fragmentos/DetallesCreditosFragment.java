@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -35,14 +36,17 @@ public class DetallesCreditosFragment extends Fragment implements Basic, Respons
     private OnFragmentInteractionListener mListener;
     Button mas;
     int orden_id, cliente_id, credito_id;
+    String total;
+    TextView txtTotal;
 
 
-    public static DetallesCreditosFragment newInstance(int id_orden, int id_credito, int id_cliente) {
+    public static DetallesCreditosFragment newInstance(int id_orden, int id_credito, int id_cliente, String total) {
         DetallesCreditosFragment fragment = new DetallesCreditosFragment();
         Bundle args = new Bundle();
         args.putInt("ORDEN_ID", id_orden);
         args.putInt("CREDITO_ID", id_credito);
         args.putInt("CLIENTE_ID", id_cliente);
+        args.putString("TOTAL", total);
         fragment.setArguments(args);
         return fragment;
     }
@@ -58,6 +62,7 @@ public class DetallesCreditosFragment extends Fragment implements Basic, Respons
             orden_id = getArguments().getInt("ORDEN_ID");
             credito_id = getArguments().getInt("CREDITO_ID");
             cliente_id = getArguments().getInt("CLIENTE_ID");
+            total = getArguments().getString("TOTAL");
         }
     }
 
@@ -68,6 +73,7 @@ public class DetallesCreditosFragment extends Fragment implements Basic, Respons
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_detalles_creditos, container, false);
         listView = (ListView)view.findViewById(R.id.listaDetallesCreditos);
+        txtTotal = (TextView)view.findViewById(R.id.txtTotalCredito);
 
         //Coloca el dialogo de carga
         progressDialog = new ProgressDialog(getContext());
@@ -99,7 +105,7 @@ public class DetallesCreditosFragment extends Fragment implements Basic, Respons
 
         //Agrega y ejecuta la cola
         queue.add(request);
-
+        txtTotal.setText(" "+total);
 
         mas = (Button)view.findViewById(R.id.btnMasDetalles);
 

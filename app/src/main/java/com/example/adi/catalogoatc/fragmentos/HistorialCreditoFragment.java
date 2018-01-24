@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -33,7 +34,7 @@ import org.json.JSONArray;
 public class HistorialCreditoFragment extends Fragment implements Basic, Response.Listener<JSONArray>, Response.ErrorListener {
     private ListView listView;
     private ProgressDialog progressDialog;
-    String url;
+    String url, total;
     private HistorialFragment.OnFragmentInteractionListener mListener;
     int idOrden, idCredito;
     HistorialCreditoAdapter adapter;
@@ -98,15 +99,17 @@ public class HistorialCreditoFragment extends Fragment implements Basic, Respons
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-
+                TextView txtTotal = (TextView)view.findViewById(R.id.txtTotal);
                 Object listItem = listView.getItemAtPosition(position);
                 idOrden =  (int)adapter.getItemId(position);
                 idCredito = (int)adapter.getOtroId(position);
+                total = txtTotal.getText().toString();
+
                 int idUsusario = Integer.parseInt(IDUsusario);
 
 
 
-                Fragment nuevofragmento = DetallesCreditosFragment.newInstance(idOrden,idCredito, idUsusario);
+                Fragment nuevofragmento = DetallesCreditosFragment.newInstance(idOrden,idCredito, idUsusario, total);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.content_main, nuevofragmento);
                 transaction.addToBackStack(null);

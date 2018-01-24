@@ -1,14 +1,20 @@
 package com.example.adi.catalogoatc.fragmentos;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -17,6 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.adi.catalogoatc.Inicio;
 import com.example.adi.catalogoatc.R;
 import com.example.adi.catalogoatc.Recursos.Basic;
 
@@ -57,6 +64,7 @@ public class DetallesCatalogoFragment extends Fragment implements Basic, Respons
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_detalles_catalogo, container, false);
+        Button agregar = (Button)view.findViewById(R.id.AgrgarCarrito);
 
         //Coloca el dialogo de carga
         progressDialog = new ProgressDialog(getContext());
@@ -92,6 +100,34 @@ public class DetallesCatalogoFragment extends Fragment implements Basic, Respons
 
         //Agrega y ejecuta la cola
         queue.add(request);
+
+        //notificacion
+
+
+        agregar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext());
+                Intent intent= new Intent(getContext(), Inicio.class);
+
+
+
+                PendingIntent pendingIntent = PendingIntent.getActivity(getContext(),0,intent,0);
+
+                builder.setContentTitle("Nuevo producto agregado")
+                        .setContentText("Se agrego un nuevo produto al carrito")
+                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setVibrate( new long[]{100,100,100,400})
+                        .setAutoCancel(true);
+                builder.setContentIntent(pendingIntent);
+
+                 NotificationManager manager = (NotificationManager)getContext().getSystemService(getContext().NOTIFICATION_SERVICE);
+                manager.notify(0,builder.build());
+
+
+
+            }
+        });
 
         return view;
     }

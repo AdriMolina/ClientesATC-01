@@ -117,7 +117,7 @@ public class DetallesCatalogoFragment extends Fragment implements Basic, Respons
                 builder.setContentTitle("Nuevo producto agregado")
                         .setContentText("Se agrego un nuevo produto al carrito")
                         .setSmallIcon(R.mipmap.ic_launcher)
-                        .setVibrate( new long[]{100,100,100,400})
+                        .setVibrate( new long[]{100,100,100,1000})
                         .setAutoCancel(true);
                 builder.setContentIntent(pendingIntent);
 

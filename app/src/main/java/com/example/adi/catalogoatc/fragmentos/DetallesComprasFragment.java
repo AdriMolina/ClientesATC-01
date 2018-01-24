@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -29,15 +30,17 @@ import org.json.JSONArray;
 public class DetallesComprasFragment extends Fragment implements Basic, Response.Listener<JSONArray>, Response.ErrorListener {
     private ListView listView;
     private ProgressDialog progressDialog;
-    String url;
+    String url, totalContado;
+    TextView txtTotalContado;
     private OnFragmentInteractionListener mListener;
     int orden_id;
     DetallesComprasAdapter adapter;
 
-    public static DetallesComprasFragment newInstance(int id) {
+    public static DetallesComprasFragment newInstance(int id, String total) {
         DetallesComprasFragment fragment = new DetallesComprasFragment();
         Bundle args = new Bundle();
         args.putInt("Articulo_ID", id);
+        args.putString("TOTAL", total);
         fragment.setArguments(args);
         return fragment;
     }
@@ -51,6 +54,7 @@ public class DetallesComprasFragment extends Fragment implements Basic, Response
         //compara si hay algun elemento guardado
         if (getArguments() != null) {
             orden_id = getArguments().getInt("Articulo_ID");
+            totalContado = getArguments().getString("TOTAL");
         }
     }
 
@@ -61,6 +65,7 @@ public class DetallesComprasFragment extends Fragment implements Basic, Response
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_detalles_compras, container, false);
         listView = (ListView)view.findViewById(R.id.listaDetalles);
+        txtTotalContado = (TextView)view.findViewById(R.id.txtTotalContado);
 
         //Coloca el dialogo de carga
         progressDialog = new ProgressDialog(getContext());
@@ -93,6 +98,7 @@ public class DetallesComprasFragment extends Fragment implements Basic, Response
         //Agrega y ejecuta la cola
         queue.add(request);
 
+        txtTotalContado.setText(" "+totalContado);
 
         return view;
     }

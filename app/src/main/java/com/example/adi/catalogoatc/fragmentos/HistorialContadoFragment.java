@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -39,7 +40,7 @@ import org.json.JSONArray;
 public class HistorialContadoFragment extends Fragment implements Basic, Response.Listener<JSONArray>, Response.ErrorListener {
     private ListView listView;
     private ProgressDialog progressDialog;
-    String url;
+    String url, totalContado;
     int idOrden;
     HistorialAdapter adapter;
     ImageButton imageButton;
@@ -115,10 +116,12 @@ public class HistorialContadoFragment extends Fragment implements Basic, Respons
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Object listItem = listView.getItemAtPosition(position);
+                TextView txtTotal = (TextView)view.findViewById(R.id.txtTotal);
+                 totalContado = txtTotal.getText().toString();
                 idOrden =  (int)adapter.getItemId(position);
 
                 Toast.makeText(getContext(), "preciono......", Toast.LENGTH_SHORT).show();
-                Fragment nuevofragmento = DetallesComprasFragment.newInstance(idOrden);
+                Fragment nuevofragmento = DetallesComprasFragment.newInstance(idOrden, totalContado);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.content_main, nuevofragmento);
                 transaction.addToBackStack(null);

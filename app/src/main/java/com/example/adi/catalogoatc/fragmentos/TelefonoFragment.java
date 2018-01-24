@@ -52,6 +52,7 @@ public class TelefonoFragment extends Fragment implements Basic, Response.Listen
     //Cuando se crea el fragmento
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
 
         //compara si hay algun elemento guardado

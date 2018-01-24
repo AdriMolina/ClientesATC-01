@@ -2,19 +2,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:aplicación="http://schemas.android.com/tools">
-    <item
-        android:id="@+id/itemBuscar"
-        app:showAsAction="always"
-        android:title="Buscar"
-        app:actionViewClass="android.wiget.SearchView">
-    </item>
 
     <item
         android:id="@+id/itemCarrito"
         android:icon="@drawable/carrito_blanco"
         app:showAsAction="always"
         android:title="Carrito"
+
        ></item>
+    <item
+        android:id="@+id/itembucar"
+        android:icon="@drawable/buscar"
+        android:title="Search"
+        android:orderInCategory="100"
+        app:actionViewClass="android.widget.SearchView"
+        app:showAsAction="always" />
 
 
 

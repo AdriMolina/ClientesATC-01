@@ -1,5 +1,6 @@
 package com.example.adi.catalogoatc.fragmentos;
 
+import android.content.ClipData;
 import android.content.Context;
 import android.graphics.Color;
 import android.net.Uri;
@@ -28,7 +29,7 @@ public class CatalogoFragment extends Fragment {
     private AppBarLayout appBar;
     private TabLayout pestanas;
     private ViewPager viewPager;
-
+    ClipData.Item item;
     public CatalogoFragment() {
 
     }
@@ -41,12 +42,14 @@ public class CatalogoFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
 
         vista = inflater.inflate(R.layout.fragment_catalogo, container, false);
 
@@ -59,6 +62,7 @@ public class CatalogoFragment extends Fragment {
 
                 pestanas.setTabTextColors(Color.parseColor("#FFFFFF"), Color.parseColor("#FFFFFF"));
                 appBar.addView(pestanas);
+
 
 
                 viewPager = (ViewPager) vista.findViewById(R.id.idViewPagerInformacion);
@@ -93,6 +97,8 @@ public class CatalogoFragment extends Fragment {
 
     }
 
+
+
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -123,6 +129,7 @@ public class CatalogoFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_catalogo,menu);
+        
     }
 
 

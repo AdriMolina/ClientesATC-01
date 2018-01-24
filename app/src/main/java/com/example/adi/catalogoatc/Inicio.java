@@ -20,6 +20,7 @@ import android.widget.ImageButton;
 import com.example.adi.catalogoatc.adapters.HistorialAdapter;
 import com.example.adi.catalogoatc.fragmentos.AccesoriosFragment;
 import com.example.adi.catalogoatc.fragmentos.BuzonFragment;
+import com.example.adi.catalogoatc.fragmentos.CarritoFragment;
 import com.example.adi.catalogoatc.fragmentos.CatalogoFragment;
 import com.example.adi.catalogoatc.fragmentos.ChipFragment;
 import com.example.adi.catalogoatc.fragmentos.DetallesComprasFragment;
@@ -44,7 +45,8 @@ public class Inicio extends AppCompatActivity
         DetallesComprasFragment.OnFragmentInteractionListener,
         BuzonFragment.OnFragmentInteractionListener,
         LocalizacionFragment.OnFragmentInteractionListener,
-        PedidosFragment.OnFragmentInteractionListener
+        PedidosFragment.OnFragmentInteractionListener,
+        CarritoFragment.OnFragmentInteractionListener
 {
 
     ImageButton floatButton;
@@ -91,8 +93,6 @@ public class Inicio extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.inicio, menu);
-        getMenuInflater().inflate(R.menu.menu_catalogo, menu);
-        itemBuscar = menu.findItem(R.id.itemBuscar);
         itemCarrito = menu.findItem(R.id.itemCarrito);
 
 
@@ -157,6 +157,10 @@ public class Inicio extends AppCompatActivity
             miFragment = new BuzonFragment();
             fragmentSeleccionado = true;
         } else if (id == R.id.nav_ayuda) {
+
+        }else if (id == R.id.itemCarrito) {
+            miFragment = new CarritoFragment();
+            fragmentSeleccionado = true;
 
         }
 

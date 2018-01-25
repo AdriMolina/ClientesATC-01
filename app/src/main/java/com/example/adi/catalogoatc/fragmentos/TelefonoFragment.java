@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -27,7 +28,7 @@ import com.example.adi.catalogoatc.ModeloLista.modeloCatalogo;
 import org.json.JSONArray;
 
 
-public class TelefonoFragment extends Fragment implements Basic, Response.Listener<JSONArray>, Response.ErrorListener {
+public class TelefonoFragment extends Fragment implements Basic, Response.Listener<JSONArray>, Response.ErrorListener, SearchView.OnQueryTextListener {
     private ListView listView;
     private ProgressDialog progressDialog;
     int idArticulo;
@@ -144,6 +145,16 @@ public class TelefonoFragment extends Fragment implements Basic, Response.Listen
 
          adapter = new CatalogoAdapter(getContext(), modeloCatalogo.sacarListaClientes(response));
         listView.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        return false;
     }
 
     public interface OnFragmentInteractionListener {

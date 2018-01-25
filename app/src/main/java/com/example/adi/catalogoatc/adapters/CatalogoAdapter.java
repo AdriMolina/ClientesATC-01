@@ -11,13 +11,14 @@ import com.example.adi.catalogoatc.ModeloLista.modeloCatalogo;
 import com.example.adi.catalogoatc.ModeloLista.modeloDetallosCatalogo;
 import com.example.adi.catalogoatc.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Adi on 29/12/2017.
  */
 
-public class CatalogoAdapter extends BaseAdapter{
+public class CatalogoAdapter extends BaseAdapter {
     private Context context;
     private List<modeloCatalogo> list;
 
@@ -67,9 +68,13 @@ public class CatalogoAdapter extends BaseAdapter{
             txtPrecio.setText("$"+getItem(position).getPrecio());
             txtDesc.setText(getItem(position).getModelo());
 
-
-
         return view;
+    }
+
+    public void setFilter(ArrayList<modeloCatalogo>lista){
+        this.list = new ArrayList<>();
+        this.list.addAll(lista);
+        notifyDataSetChanged();
     }
 
 }

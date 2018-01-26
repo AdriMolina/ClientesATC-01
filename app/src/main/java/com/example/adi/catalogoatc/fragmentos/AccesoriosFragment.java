@@ -5,12 +5,17 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.MenuItemCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -26,12 +31,16 @@ import com.example.adi.catalogoatc.ModeloLista.modeloCatalogo;
 
 import org.json.JSONArray;
 
+import java.util.ArrayList;
+import java.util.List;
 
-public class AccesoriosFragment extends Fragment implements Basic, Response.Listener<JSONArray>, Response.ErrorListener {
+
+public class AccesoriosFragment extends Fragment implements Basic, Response.Listener<JSONArray>, Response.ErrorListener, SearchView.OnQueryTextListener {
     private ListView listView;
     private ProgressDialog progressDialog;
     int id_cantidad;
     CatalogoAdapter adapter;
+    List<modeloCatalogo> listaAdapter;
     String url;
     private TelefonoFragment.OnFragmentInteractionListener mListener;
 
@@ -63,6 +72,7 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_telefono, container, false);
+        setHasOptionsMenu(true);
         listView = (ListView)view.findViewById(R.id.ListaTelfono);
 
         //Coloca el dialogo de carga
@@ -116,6 +126,30 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
     }
 
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_catalogo,menu);
+        MenuItem menuItem =menu.findItem(R.id.itembucar);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+        searchView.setOnQueryTextListener(this);
+
+        MenuItemCompat.setOnActionExpandListener(menuItem, new MenuItemCompat.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                adapter.setFilter(listaAdapter);
+                return true;
+
+            }
+        });
+
+
+    }
 
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -136,9 +170,42 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
     @Override
     public void onResponse(JSONArray response) {
         progressDialog.hide();
-
-        adapter = new CatalogoAdapter(getContext(), modeloCatalogo.sacarListaClientes(response));
+        listaAdapter= modeloCatalogo.sacarListaClientes(response);
+        adapter = new CatalogoAdapter(getContext(), listaAdapter);
         listView.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        try {
+            List<modeloCatalogo> listafiltrada = filter(listaAdapter,s);
+            adapter.setFilter(listafiltrada);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+    private List<modeloCatalogo>filter(List<modeloCatalogo>notas,String texto){
+        List<modeloCatalogo>listaFiltrada= new ArrayList<>();
+        try {
+            texto=texto.toLowerCase();
+            for (modeloCatalogo nota:notas){
+                String nota2 = nota.getMarca().toLowerCase();
+                //Para saber si el texto se encuentra dentro de la nota
+                if (nota2.contains(texto)){
+                    listaFiltrada.add(nota);
+                }
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return listaFiltrada;
     }
 
     public interface OnFragmentInteractionListener {

@@ -71,7 +71,7 @@ public class CatalogoAdapter extends BaseAdapter {
         return view;
     }
 
-    public void setFilter(ArrayList<modeloCatalogo>lista){
+    public void setFilter(List<modeloCatalogo>lista){
         this.list = new ArrayList<>();
         this.list.addAll(lista);
         notifyDataSetChanged();

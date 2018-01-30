@@ -112,8 +112,7 @@ public class DetallesCreditosFragment extends Fragment implements Basic, Respons
         mas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "preciono......", Toast.LENGTH_SHORT).show();
-                Fragment nuevofragmento = AbonosFragment.newInstance( credito_id, orden_id, cliente_id);
+                 Fragment nuevofragmento = AbonosFragment.newInstance( credito_id, orden_id, cliente_id);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.content_main, nuevofragmento);
                 transaction.addToBackStack(null);

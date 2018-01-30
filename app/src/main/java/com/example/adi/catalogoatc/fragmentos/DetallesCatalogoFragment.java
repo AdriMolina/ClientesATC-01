@@ -107,11 +107,10 @@ public class DetallesCatalogoFragment extends Fragment implements Basic, Respons
         agregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //Notificacion
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext());
                 Intent intent= new Intent(getContext(), Inicio.class);
-
-
-
                 PendingIntent pendingIntent = PendingIntent.getActivity(getContext(),0,intent,0);
 
                 builder.setContentTitle("Nuevo producto agregado")
@@ -120,9 +119,11 @@ public class DetallesCatalogoFragment extends Fragment implements Basic, Respons
                         .setVibrate( new long[]{100,100,100,1000})
                         .setAutoCancel(true);
                 builder.setContentIntent(pendingIntent);
-
                  NotificationManager manager = (NotificationManager)getContext().getSystemService(getContext().NOTIFICATION_SERVICE);
                 manager.notify(0,builder.build());
+
+
+                //Alerta para la cantidad
 
 
 

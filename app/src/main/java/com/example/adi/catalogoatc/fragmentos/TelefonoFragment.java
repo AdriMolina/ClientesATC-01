@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -35,7 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class TelefonoFragment extends Fragment implements Basic, Response.Listener<JSONArray>, Response.ErrorListener, SearchView.OnQueryTextListener {
+public class TelefonoFragment extends Fragment implements Basic, Response.Listener<JSONArray>, Response.ErrorListener, SearchView.OnQueryTextListener, SwipeRefreshLayout.OnRefreshListener {
     private ListView listView;
     private ProgressDialog progressDialog;
     int idArticulo;
@@ -131,6 +132,7 @@ public class TelefonoFragment extends Fragment implements Basic, Response.Listen
     }
 
 
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 
@@ -215,6 +217,40 @@ public class TelefonoFragment extends Fragment implements Basic, Response.Listen
             e.printStackTrace();
         }
         return listaFiltrada;
+    }
+
+    @Override
+    public void onRefresh() {
+        //Coloca el dialogo de carga
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setTitle("En Proceso");
+        progressDialog.setMessage("Un momento...");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+
+        //Inicia la peticion
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+        String consulta = "select distinct a.id, ma.nombre, mo.nombre,a.precio" +
+                "                                from marca ma, modelo mo, articulo a, punto_venta pv, cantidad ca, tipo_articulo ta" +
+                "                                where a.modelo_id = mo.id" +
+                "                                and mo.marca_id = ma.id" +
+                "                                and ca.puntoVenta_id = pv.id" +
+                "                                and ca.articulo_id = a.id" +
+                "                                and a.tipoArticulo_id = ta.id" +
+                "                                and ta.nombre = 'Teléfono'" +
+                "                                and ca.valor > 0" +
+                "                                order by ma.nombre asc;";
+
+        consulta = consulta.replace(" ", "%20");
+        String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
+        url= SERVER + RUTA + "consultaGeneral.php" + cadena;
+        Log.i("info", url);
+
+        //Hace la petición String
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, this, this);
+
+        //Agrega y ejecuta la cola
+        queue.add(request);
     }
 
     public interface OnFragmentInteractionListener {

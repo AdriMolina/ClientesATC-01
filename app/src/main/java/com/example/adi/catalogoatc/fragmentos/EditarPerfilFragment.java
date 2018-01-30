@@ -116,7 +116,7 @@ public class EditarPerfilFragment extends Fragment implements Basic, Response.Li
                     //Inicia la actualizacion
                     RequestQueue queue = Volley.newRequestQueue(getContext());
                     String consulta = "UPDATE cliente" +
-                            " SET nombre='"+nombreFinal+"'"+",direccion="+"'"+direccionFinal+"'"+",telefono="+"'"+telefono+"'"+
+                            " SET nombre='"+nombreFinal+"'"+",direccion="+"'"+direccionFinal+"'"+",telefono="+"'"+telefonoFinal+"'"+
                             " WHERE id = "+cliente_id+";";
                     consulta = consulta.replace(" ", "%20");
                     String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;

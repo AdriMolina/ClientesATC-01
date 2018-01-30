@@ -13,68 +13,98 @@
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         app:cardBackgroundColor="@android:color/background_light">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <TextView
                 android:id="@+id/txtArticulo"
-                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
                 android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
                 android:text="Articulo"
                 android:textSize="25dp"
-                android:layout_centerHorizontal="true"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/txtMarca"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Marca"
+                android:layout_below="@+id/txtArticulo"
                 android:layout_marginLeft="15dp"
-                android:textSize="15dp"
                 android:layout_marginRight="10dp"
-                android:layout_below="@+id/txtArticulo"/>
+                android:text="Marca"
+                android:textSize="15dp" />
+
             <TextView
                 android:id="@+id/txtModelo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Modelo"
+                android:layout_below="@+id/txtMarca"
                 android:layout_marginLeft="15dp"
-                android:textSize="15dp"
-                android:layout_below="@+id/txtMarca"/>
+                android:text="Modelo"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/Cantidad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtArticulo"
+                android:layout_marginLeft="225dp"
+                android:layout_marginRight="10dp"
+                android:text="Cantidad:"
+                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/txtCantidad"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:text="Cantidad"
-                android:layout_below="@+id/txtArticulo"
                 android:layout_alignParentRight="true"
-                android:textSize="15dp"
-                android:layout_marginRight="10dp"
-                />
+                android:layout_below="@+id/txtArticulo"
+                android:layout_marginRight="15dp"
+                android:text="Cantidad"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/Precio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtCantidad"
+                android:layout_marginLeft="245dp"
+                android:layout_marginRight="15dp"
+                android:text="Precio:"
+                android:textSize="15dp" />
+
             <TextView
                 android:id="@+id/txtPrecio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Precio"
-                android:layout_marginLeft="15dp"
-                android:textSize="15dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
-                android:layout_below="@id/txtCantidad"/>
+                android:layout_alignStart="@+id/txtCantidad"
+                android:layout_below="@+id/txtCantidad"
+                android:text="Precio" />
+
             <TextView
-                android:id="@+id/txtPrecioTotal"
-                android:layout_marginLeft="15dp"
+                android:id="@+id/PrecioTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/txtPrecio"
+                android:layout_marginLeft="255dp"
+                android:layout_marginRight="15dp"
+                android:text="Total:"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/txtPrecioTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/txtPrecio"
+                android:layout_below="@+id/txtPrecio"
+                
                 android:text="Total"
-                android:layout_alignParentRight="true"
-                android:textSize="15dp"
-                android:layout_marginRight="10dp"
-                android:layout_below="@id/txtPrecio"/>
+                android:textSize="15dp" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 

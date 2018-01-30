@@ -93,7 +93,8 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
                 "                and a.tipoArticulo_id = ta.id" +
                 "                and ta.nombre !='Teléfono'" +
                 "                and ta.nombre !='Chip'" +
-                "                and ca.valor > 0;";
+                "                and ca.valor > 0;" +
+                "                order by ta.nombre asc;";
         consulta = consulta.replace(" ", "%20");
         String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
         url= SERVER + RUTA + "consultaGeneral.php" + cadena;

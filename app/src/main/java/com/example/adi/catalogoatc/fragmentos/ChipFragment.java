@@ -179,7 +179,7 @@ public class ChipFragment extends Fragment implements Basic, Response.Listener<J
         progressDialog.hide();
 
         listaAdapter= modeloCatalogo.sacarListaClientes(response);
-        adapter = new CatalogoAdapter(getContext(), listaAdapter);
+        adapter = new CatalogoAdapter(getContext(), listaAdapter, "Chip");
         listView.setAdapter(adapter);
     }
 

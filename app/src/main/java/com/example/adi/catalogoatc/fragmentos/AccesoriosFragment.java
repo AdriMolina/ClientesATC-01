@@ -172,7 +172,7 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
     public void onResponse(JSONArray response) {
         progressDialog.hide();
         listaAdapter= modeloCatalogo.sacarListaClientes(response);
-        adapter = new CatalogoAdapter(getContext(), listaAdapter);
+        adapter = new CatalogoAdapter(getContext(), listaAdapter, "Accesorios");
         listView.setAdapter(adapter);
     }
 

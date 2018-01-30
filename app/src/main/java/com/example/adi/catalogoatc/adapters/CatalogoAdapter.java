@@ -3,6 +3,7 @@ package com.example.adi.catalogoatc.adapters;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,11 +29,13 @@ import java.util.List;
 public class CatalogoAdapter extends BaseAdapter {
     private Context context;
     private List<modeloCatalogo> list;
+    int resultado;
+    private String nombre;
 
-    public CatalogoAdapter(Context context, List<modeloCatalogo> list)
+    public CatalogoAdapter(Context context, List<modeloCatalogo> list, String nombre )
     {
         this.context = context;
-
+        this.nombre= nombre;
         this.list = list;
     }
 
@@ -61,6 +64,7 @@ public class CatalogoAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
     {
+
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = convertView;
         if (convertView == null)
@@ -76,24 +80,45 @@ public class CatalogoAdapter extends BaseAdapter {
         carrito.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final NumberPicker numberPicker = new NumberPicker(context);
-                numberPicker.setMinValue(1);
-                numberPicker.setMaxValue(1000);
-                AlertDialog.Builder dialogo1 = new AlertDialog.Builder(context);
-                final EditText cantidad = new EditText(context);
-                cantidad.setInputType(InputType.TYPE_CLASS_NUMBER);
-                dialogo1.setTitle("Cantidad");
-                dialogo1.setMessage("¿Escribe la cantidad de articulos que desea comprar?");
-                dialogo1.setView(cantidad);
-                dialogo1.setCancelable(false);
-                dialogo1.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialogo1, int id) {
-                        String resultado = cantidad.getText().toString();
-                        Toast.makeText(context, "Se agrego al carrito"+resultado, Toast.LENGTH_SHORT).show();
 
-                    }
-                });
-                dialogo1.show();
+                if(nombre.equals("Chip")){
+
+
+                }else{
+
+                    final NumberPicker numberPicker = new NumberPicker(context);
+                    numberPicker.setMinValue(1);
+                    numberPicker.setMaxValue(100);
+                    NumberPicker.OnValueChangeListener myValChangedListener = new NumberPicker.OnValueChangeListener() {
+                        @Override
+                        public void onValueChange(NumberPicker numberPicker, int i, int i1) {
+                            resultado = (i1);
+
+                        }
+                    };
+                    numberPicker.setOnValueChangedListener(myValChangedListener);
+                    AlertDialog.Builder dialogo1 = new AlertDialog.Builder(context).setView(numberPicker);
+                    dialogo1.setTitle("Cantidad");
+                    dialogo1.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Toast.makeText(context, String.valueOf(resultado), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                    dialogo1.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    });
+                    dialogo1.show();
+
+
+                }
+
+
+
             }
         });
 

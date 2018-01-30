@@ -180,7 +180,7 @@ public class TelefonoFragment extends Fragment implements Basic, Response.Listen
     public void onResponse(JSONArray response) {
         progressDialog.hide();
         listaAdapter= modeloCatalogo.sacarListaClientes(response);
-         adapter = new CatalogoAdapter(getContext(), listaAdapter);
+         adapter = new CatalogoAdapter(getContext(), listaAdapter, "Telefono");
         listView.setAdapter(adapter);
 
     }

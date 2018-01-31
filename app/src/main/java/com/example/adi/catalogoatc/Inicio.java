@@ -158,9 +158,9 @@ public class Inicio extends AppCompatActivity
             fragmentSeleccionado = true;
         } else if (id == R.id.nav_ayuda) {
 
-        }else if (id == R.id.itemCarrito) {
             miFragment = new CarritoFragment();
             fragmentSeleccionado = true;
+
 
         }
 

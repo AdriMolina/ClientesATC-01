@@ -6,10 +6,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -28,6 +30,7 @@ import com.example.adi.catalogoatc.adapters.HistorialAdapter;
 import com.example.adi.catalogoatc.ModeloLista.modeloHistorial;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,10 +40,11 @@ import org.json.JSONArray;
  * Use the {@link HistorialContadoFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HistorialContadoFragment extends Fragment implements Basic, Response.Listener<JSONArray>, Response.ErrorListener {
+public class HistorialContadoFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, Basic, Response.Listener<JSONArray>, Response.ErrorListener {
     private ListView listView;
     private ProgressDialog progressDialog;
     String url, totalContado;
+    private SwipeRefreshLayout contenedor;
     int idOrden;
     HistorialAdapter adapter;
     ImageButton imageButton;
@@ -77,6 +81,8 @@ public class HistorialContadoFragment extends Fragment implements Basic, Respons
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_historial_contado, container, false);
         listView = (ListView)view.findViewById(R.id.ListaHistorial);
+        contenedor = (SwipeRefreshLayout)view.findViewById(R.id.contenedor1);
+        contenedor.setOnRefreshListener(this);
 
         //Coloca el dialogo de carga
         progressDialog = new ProgressDialog(getContext());
@@ -128,20 +134,22 @@ public class HistorialContadoFragment extends Fragment implements Basic, Respons
                 transaction.commit();
             }
         });
-        /*Button btn = (Button)view.findViewById(R.id.Detalles);
-        btn.setOnClickListener(new View.OnClickListener() {
+        //Parte que recarga el listview solamente si llega al tope
+        listView.setOnScrollListener(new AbsListView.OnScrollListener()
+        {
             @Override
-            public void onClick(View view) {
-
-                Fragment nuevofragmento = new DetallesComprasFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.content_main, nuevofragmento);
-                transaction.addToBackStack(null);
-                transaction.commit();
+            public void onScrollStateChanged(AbsListView view, int scrollState)
+            {
 
             }
-        });*/
 
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount)
+            {
+                int top = (listView == null || listView.getChildCount() == 0) ? 0 : listView.getChildAt(0).getTop();
+                contenedor.setEnabled(firstVisibleItem == 0 && top >= 0);
+            }
+        });
 
 
 
@@ -176,6 +184,60 @@ public class HistorialContadoFragment extends Fragment implements Basic, Respons
 
         adapter = new HistorialAdapter(getContext(), modeloHistorial.sacarListaClientes(response));
         listView.setAdapter(adapter);
+    }
+
+
+//Cuando se da refresh al fragment
+    @Override
+    public void onRefresh() {
+        contenedor.setRefreshing(false);
+        //Inicia la peticion
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+        String consulta = "SELECT Distinct o.id, o.id, o.folio,  DATE(o.fecha), oc.total" +
+                " from orden_completa oc, orden o, cantidad ca, articulo ar, orden_descripcion od, tipo_articulo ta" +
+                " where o.id not in(Select orden_id from credito)" +
+                " and oc.orden_id = o.id" +
+                " and o.id = od.orden_id" +
+                " and ar.tipoArticulo_id = ta.id" +
+                " and ca.articulo_id = ar.id" +
+                " and od.tipoVentaId = ca.id" +
+                " and oc.total >0"+
+                " and o.cliente_id ="+IDUsusario+
+                " and ta.nombre != 'Chip'" +
+                " order by o.fecha desc;";
+
+        consulta = consulta.replace(" ", "%20");
+        String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
+        url= SERVER + RUTA + "consultaGeneral.php" + cadena;
+        Log.i("info", url);
+
+        //Hace la petición String
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                progressDialog.hide();
+
+                adapter = new HistorialAdapter(getContext(), modeloHistorial.sacarListaClientes(response));
+                listView.setAdapter(adapter);
+                contenedor.setRefreshing(false);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.hide();
+                Log.i("mensaje", error.toString());
+                Toast.makeText(getContext(), "Error en el WebService", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), url, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+
+        //Agrega y ejecuta la cola
+        queue.add(request);
+
+
     }
 
     public interface OnFragmentInteractionListener {

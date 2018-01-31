@@ -79,6 +79,7 @@ public class TelefonoFragment extends Fragment implements Basic, Response.Listen
         View view = inflater.inflate(R.layout.fragment_telefono, container, false);
         setHasOptionsMenu(true);
         listView = (ListView)view.findViewById(R.id.ListaTelfono);
+      
 
         //Coloca el dialogo de carga
         progressDialog = new ProgressDialog(getContext());

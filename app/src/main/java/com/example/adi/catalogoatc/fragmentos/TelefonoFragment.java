@@ -117,7 +117,7 @@ public class TelefonoFragment extends Fragment implements Basic, Response.Listen
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //SACA EL ID DEL ARTICULO
                 idArticulo =  (int)adapter.getItemId(i);
-                Fragment nuevofragmento = DetallesCatalogoFragment.newInstance(idArticulo);
+                Fragment nuevofragmento = DetallesCatalogoFragment.newInstance(idArticulo, "Telefono");
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.content_main, nuevofragmento);
                 transaction.addToBackStack(null);

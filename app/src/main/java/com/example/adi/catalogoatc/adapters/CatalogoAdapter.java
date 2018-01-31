@@ -82,7 +82,27 @@ public class CatalogoAdapter extends BaseAdapter {
             public void onClick(View view) {
 
                 if(nombre.equals("Chip")){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
+                    final EditText textoCantidad = new EditText(context);
+                    builder.setTitle("Cantidad");
+                    textoCantidad.setInputType(InputType.TYPE_CLASS_NUMBER);
+                    builder.setView(textoCantidad);
+                    builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            String res =textoCantidad.getText().toString();
+                            resultado = Integer.parseInt(res);
+                            Toast.makeText(context, String.valueOf(resultado), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    });
+                    builder.show();
 
                 }else{
 
@@ -93,7 +113,6 @@ public class CatalogoAdapter extends BaseAdapter {
                         @Override
                         public void onValueChange(NumberPicker numberPicker, int i, int i1) {
                             resultado = (i1);
-
                         }
                     };
                     numberPicker.setOnValueChangedListener(myValChangedListener);

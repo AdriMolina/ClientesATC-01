@@ -115,7 +115,7 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
                 //SACA EL ID DEL ARTICULO
                 int idArticulo =  (int)adapter.getItemId(i);
                 Toast.makeText(getContext(), String.valueOf(idArticulo), Toast.LENGTH_SHORT).show();
-                Fragment nuevofragmento = DetallesCatalogoFragment.newInstance(idArticulo);
+                Fragment nuevofragmento = DetallesCatalogoFragment.newInstance(idArticulo, "Accesorios");
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.content_main, nuevofragmento);
                 transaction.addToBackStack(null);

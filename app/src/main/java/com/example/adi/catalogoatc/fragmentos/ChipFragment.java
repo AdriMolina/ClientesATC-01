@@ -116,7 +116,7 @@ public class ChipFragment extends Fragment implements Basic, Response.Listener<J
 
                 //SACA EL ID DEL ARTICULO
                 int idArticulo =  (int)adapter.getItemId(position);
-                Fragment nuevofragmento = DetallesCatalogoFragment.newInstance(idArticulo);
+                Fragment nuevofragmento = DetallesCatalogoFragment.newInstance(idArticulo, "Chip");
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.content_main, nuevofragmento);
                 transaction.addToBackStack(null);

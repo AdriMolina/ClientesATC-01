@@ -1,21 +1,27 @@
 package com.example.adi.catalogoatc.fragmentos;
 
+import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NotificationCompat;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -33,20 +39,21 @@ import org.json.JSONObject;
 
 
 public class DetallesCatalogoFragment extends Fragment implements Basic, Response.Listener<JSONArray>, Response.ErrorListener {
-   int id_cantidad;
+   int id_cantidad, resultado;
     private OnFragmentInteractionListener mListener;
     private ProgressDialog progressDialog;
-    String url;
+    String url, Titulo;
     View view;
     public DetallesCatalogoFragment() {
 
     }
 
 
-    public static DetallesCatalogoFragment newInstance(int cantidad_id) {
+    public static DetallesCatalogoFragment newInstance(int cantidad_id, String titulo) {
         DetallesCatalogoFragment fragment = new DetallesCatalogoFragment();
         Bundle args = new Bundle();
         args.putInt("ID_CANTIDAD", cantidad_id);
+        args.putString("TITULO", titulo);
         fragment.setArguments(args);
         return fragment;
     }
@@ -56,6 +63,7 @@ public class DetallesCatalogoFragment extends Fragment implements Basic, Respons
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             id_cantidad = getArguments().getInt("ID_CANTIDAD");
+            Titulo = getArguments().getString("TITULO");
 
         }
     }
@@ -108,28 +116,65 @@ public class DetallesCatalogoFragment extends Fragment implements Basic, Respons
             @Override
             public void onClick(View view) {
 
-                //Notificacion
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext());
-                Intent intent= new Intent(getContext(), Inicio.class);
-                PendingIntent pendingIntent = PendingIntent.getActivity(getContext(),0,intent,0);
+                if(Titulo.equals("Chip")){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
-                builder.setContentTitle("Nuevo producto agregado")
-                        .setContentText("Se agrego un nuevo produto al carrito")
-                        .setSmallIcon(R.mipmap.ic_launcher)
-                        .setVibrate( new long[]{100,100,100,1000})
-                        .setAutoCancel(true);
-                builder.setContentIntent(pendingIntent);
-                 NotificationManager manager = (NotificationManager)getContext().getSystemService(getContext().NOTIFICATION_SERVICE);
-                manager.notify(0,builder.build());
+                    final EditText textoCantidad = new EditText(getContext());
+                    builder.setTitle("Cantidad");
+                    textoCantidad.setInputType(InputType.TYPE_CLASS_NUMBER);
+                    builder.setView(textoCantidad);
+                    builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            String res =textoCantidad.getText().toString();
+                            resultado = Integer.parseInt(res);
+                            Toast.makeText(getContext(), String.valueOf(resultado), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    });
+                    builder.show();
+
+                }else{
+
+                    final NumberPicker numberPicker = new NumberPicker(getContext());
+                    numberPicker.setMinValue(1);
+                    numberPicker.setMaxValue(100);
+                    NumberPicker.OnValueChangeListener myValChangedListener = new NumberPicker.OnValueChangeListener() {
+                        @Override
+                        public void onValueChange(NumberPicker numberPicker, int i, int i1) {
+                            resultado = (i1);
+                        }
+                    };
+                    numberPicker.setOnValueChangedListener(myValChangedListener);
+                    AlertDialog.Builder dialogo1 = new AlertDialog.Builder(getContext()).setView(numberPicker);
+                    dialogo1.setTitle("Cantidad");
+                    dialogo1.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Toast.makeText(getContext(), String.valueOf(resultado), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                    dialogo1.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    });
+                    dialogo1.show();
 
 
-                //Alerta para la cantidad
+                }
 
 
 
             }
         });
-
         return view;
     }
 

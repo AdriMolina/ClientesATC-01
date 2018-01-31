@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -13,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -35,10 +37,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ChipFragment extends Fragment implements Basic, Response.Listener<JSONArray>, Response.ErrorListener, SearchView.OnQueryTextListener{
+public class ChipFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, Basic, Response.Listener<JSONArray>,
+        Response.ErrorListener, SearchView.OnQueryTextListener{
     private ListView listView;
     private ProgressDialog progressDialog;
     String url;
+    private SwipeRefreshLayout contenedor;
     List<modeloCatalogo> listaAdapter;
     CatalogoAdapter adapter;
     private TelefonoFragment.OnFragmentInteractionListener mListener;
@@ -70,9 +74,12 @@ public class ChipFragment extends Fragment implements Basic, Response.Listener<J
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_telefono, container, false);
+        View view = inflater.inflate(R.layout.fragment_chip, container, false);
         setHasOptionsMenu(true);
-        listView = (ListView)view.findViewById(R.id.ListaTelfono);
+        listView = (ListView)view.findViewById(R.id.ListaChip);
+        contenedor = (SwipeRefreshLayout)view.findViewById(R.id.contenedorChip);
+        contenedor.setOnRefreshListener(this);
+
 
         //Coloca el dialogo de carga
         progressDialog = new ProgressDialog(getContext());
@@ -126,6 +133,22 @@ public class ChipFragment extends Fragment implements Basic, Response.Listener<J
 
             }
         });
+        //Parte que recarga el listview solamente si llega al tope
+        listView.setOnScrollListener(new AbsListView.OnScrollListener()
+        {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState)
+            {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount)
+            {
+                int top = (listView == null || listView.getChildCount() == 0) ? 0 : listView.getChildAt(0).getTop();
+                contenedor.setEnabled(firstVisibleItem == 0 && top >= 0);
+            }
+        });
 
 
         return view;
@@ -170,7 +193,7 @@ public class ChipFragment extends Fragment implements Basic, Response.Listener<J
         progressDialog.hide();
         Log.i("mensaje", error.toString());
         Toast.makeText(getContext(), "Error en el WebService", Toast.LENGTH_SHORT).show();
-        Toast.makeText(getContext(), url, Toast.LENGTH_SHORT).show();
+
 
     }
 
@@ -217,6 +240,51 @@ public class ChipFragment extends Fragment implements Basic, Response.Listener<J
         }
         return listaFiltrada;
     }
+
+    @Override
+    public void onRefresh() {
+        //Inicia la peticion
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+        String consulta = "select distinct a.id, ma.nombre as marca, mo.nombre as  modelo,a.precio" +
+                "                               from marca ma, modelo mo, articulo a, punto_venta pv, cantidad ca, tipo_articulo ta" +
+                "                                where a.modelo_id = mo.id" +
+                "                                and mo.marca_id = ma.id" +
+                "                                and ca.puntoVenta_id = pv.id" +
+                "                                and ca.articulo_id = a.id" +
+                "                                and a.tipoArticulo_id = ta.id" +
+                "                                and ta.nombre = 'Chip'" +
+                "                                and pv.tipo <> 'Local Zaragoza'" +
+                "                                and pv.tipo <> 'Local Juarez'" +
+                "                                and pv.tipo <> 'Local Atc'" +
+                "                                and ta.nombre = 'Chip'" +
+                "                                and ca.valor > 0" +
+                "                                order by ma.nombre asc;";
+        consulta = consulta.replace(" ", "%20");
+        String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
+        url= SERVER + RUTA + "consultaGeneral.php" + cadena;
+        Log.i("info", url);
+
+        //Hace la petición String
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                listaAdapter= modeloCatalogo.sacarListaClientes(response);
+                adapter = new CatalogoAdapter(getContext(), listaAdapter, "Chip");
+                listView.setAdapter(adapter);
+                contenedor.setRefreshing(false);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("mensaje", error.toString());
+                Toast.makeText(getContext(), "Error en el WebService", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //Agrega y ejecuta la cola
+        queue.add(request);
+    }
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

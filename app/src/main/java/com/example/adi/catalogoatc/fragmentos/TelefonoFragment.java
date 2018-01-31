@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -36,11 +37,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class TelefonoFragment extends Fragment implements Basic, Response.Listener<JSONArray>, Response.ErrorListener, SearchView.OnQueryTextListener, SwipeRefreshLayout.OnRefreshListener {
+public class TelefonoFragment extends Fragment implements  Basic, Response.Listener<JSONArray>, Response.ErrorListener, SearchView.OnQueryTextListener, SwipeRefreshLayout.OnRefreshListener {
     private ListView listView;
     private ProgressDialog progressDialog;
     int idArticulo;
     String url;
+    private SwipeRefreshLayout contenedor;
     List<modeloCatalogo> listaAdapter;
     CatalogoAdapter adapter;
     private OnFragmentInteractionListener mListener;
@@ -79,7 +81,9 @@ public class TelefonoFragment extends Fragment implements Basic, Response.Listen
         View view = inflater.inflate(R.layout.fragment_telefono, container, false);
         setHasOptionsMenu(true);
         listView = (ListView)view.findViewById(R.id.ListaTelfono);
-      
+        contenedor = (SwipeRefreshLayout)view.findViewById(R.id.contenedorTelefono);
+        contenedor.setOnRefreshListener(this);
+
 
         //Coloca el dialogo de carga
         progressDialog = new ProgressDialog(getContext());
@@ -128,6 +132,22 @@ public class TelefonoFragment extends Fragment implements Basic, Response.Listen
         });
 
 
+        //Parte que recarga el listview solamente si llega al tope
+        listView.setOnScrollListener(new AbsListView.OnScrollListener()
+        {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState)
+            {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount)
+            {
+                int top = (listView == null || listView.getChildCount() == 0) ? 0 : listView.getChildAt(0).getTop();
+                contenedor.setEnabled(firstVisibleItem == 0 && top >= 0);
+            }
+        });
 
         return view;
     }
@@ -222,12 +242,6 @@ public class TelefonoFragment extends Fragment implements Basic, Response.Listen
 
     @Override
     public void onRefresh() {
-        //Coloca el dialogo de carga
-        progressDialog = new ProgressDialog(getContext());
-        progressDialog.setTitle("En Proceso");
-        progressDialog.setMessage("Un momento...");
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.show();
 
         //Inicia la peticion
         RequestQueue queue = Volley.newRequestQueue(getContext());
@@ -248,7 +262,21 @@ public class TelefonoFragment extends Fragment implements Basic, Response.Listen
         Log.i("info", url);
 
         //Hace la petición String
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, this, this);
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                listaAdapter= modeloCatalogo.sacarListaClientes(response);
+                adapter = new CatalogoAdapter(getContext(), listaAdapter, "Telefono");
+                listView.setAdapter(adapter);
+                contenedor.setRefreshing(false);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("mensaje", error.toString());
+                Toast.makeText(getContext(), "Error en el WebService", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         //Agrega y ejecuta la cola
         queue.add(request);

@@ -33,7 +33,8 @@ import com.example.adi.catalogoatc.ModeloLista.modeloHistorialCredito;
 import org.json.JSONArray;
 
 
-public class HistorialCreditoFragment extends Fragment implements Basic, Response.Listener<JSONArray>, Response.ErrorListener {
+public class HistorialCreditoFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener,
+        Basic, Response.Listener<JSONArray>, Response.ErrorListener {
     private ListView listView;
     private ProgressDialog progressDialog;
     String url, total;
@@ -68,6 +69,8 @@ public class HistorialCreditoFragment extends Fragment implements Basic, Respons
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_historial_credito, container, false);
         listView = (ListView)view.findViewById(R.id.ListaHistorialCredito);
+        contenedor = (SwipeRefreshLayout)view.findViewById(R.id.contenedorCredito);
+        contenedor.setOnRefreshListener(this);
 
         //Coloca el dialogo de carga
         progressDialog = new ProgressDialog(getContext());
@@ -123,6 +126,24 @@ public class HistorialCreditoFragment extends Fragment implements Basic, Respons
         });
 
 
+        //Parte que recarga el listview solamente si llega al tope
+        listView.setOnScrollListener(new AbsListView.OnScrollListener()
+        {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState)
+            {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount)
+            {
+                int top = (listView == null || listView.getChildCount() == 0) ? 0 : listView.getChildAt(0).getTop();
+                contenedor.setEnabled(firstVisibleItem == 0 && top >= 0);
+            }
+        });
+
+
         return view;
     }
 
@@ -150,6 +171,44 @@ public class HistorialCreditoFragment extends Fragment implements Basic, Respons
 
          adapter = new HistorialCreditoAdapter(getContext(), modeloHistorialCredito.sacarCreditos(response));
         listView.setAdapter(adapter);
+
+    }
+
+    @Override
+    public void onRefresh() {
+        //Inicia la peticion
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+        String consulta = "SELECT o.id, c.id, o.folio,DATE(o.fecha),c.total, c.estado" +
+                " from credito c, orden o" +
+                " where c.orden_id = o.id" +
+                " and o.cliente_id="+IDUsusario+"" +
+                " order by o.fecha desc;";
+
+        consulta = consulta.replace(" ", "%20");
+        String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
+        url= SERVER + RUTA + "consultaGeneral.php" + cadena;
+        Log.i("info", url);
+
+        //Hace la petición String
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                adapter = new HistorialCreditoAdapter(getContext(), modeloHistorialCredito.sacarCreditos(response));
+                listView.setAdapter(adapter);
+                contenedor.setRefreshing(false);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.hide();
+                Log.i("mensaje", error.toString());
+                Toast.makeText(getContext(), "Error en el WebService", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), url, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //Agrega y ejecuta la cola
+        queue.add(request);
     }
 
     public interface OnFragmentInteractionListener {

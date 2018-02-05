@@ -161,8 +161,10 @@ public class ChipFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
         super.onCreateOptionsMenu(menu, inflater);
 
-        inflater.inflate(R.menu.menu_catalogo,menu);
         MenuItem menuItem =menu.findItem(R.id.itembucar);
+        MenuItem menuItem1 =menu.findItem(R.id.itemCarrito);
+        menuItem.setVisible(true);
+        menuItem1.setVisible(true);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
         searchView.setOnQueryTextListener(this);
 

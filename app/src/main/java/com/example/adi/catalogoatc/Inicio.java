@@ -94,6 +94,7 @@ public class Inicio extends AppCompatActivity
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.inicio, menu);
         itemCarrito = menu.findItem(R.id.itemCarrito);
+        getMenuInflater().inflate(R.menu.menu_catalogo, menu);
 
 
 

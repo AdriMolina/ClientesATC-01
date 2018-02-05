@@ -8,12 +8,14 @@
         android:icon="@drawable/carrito_blanco"
         app:showAsAction="always"
         android:title="Carrito"
+        android:visible="false"
 
        ></item>
     <item
         android:id="@+id/itembucar"
         android:icon="@drawable/buscar"
         android:title="Search"
+        android:visible="false"
         android:orderInCategory="100"
         app:actionViewClass="android.widget.SearchView"
         app:showAsAction="always" />

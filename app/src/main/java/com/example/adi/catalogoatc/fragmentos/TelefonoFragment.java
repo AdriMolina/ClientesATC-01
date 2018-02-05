@@ -86,6 +86,7 @@ public class TelefonoFragment extends Fragment implements  Basic, Response.Liste
 
 
         //Coloca el dialogo de carga
+
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setTitle("En Proceso");
         progressDialog.setMessage("Un momento...");
@@ -159,8 +160,11 @@ public class TelefonoFragment extends Fragment implements  Basic, Response.Liste
 
         super.onCreateOptionsMenu(menu, inflater);
 
-        inflater.inflate(R.menu.menu_catalogo,menu);
         MenuItem menuItem =menu.findItem(R.id.itembucar);
+        MenuItem menuItem1 =menu.findItem(R.id.itemCarrito);
+        menuItem.setVisible(true);
+        menuItem1.setVisible(true);
+
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
         searchView.setOnQueryTextListener(this);
 

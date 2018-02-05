@@ -72,7 +72,7 @@ public class CarritoAdapter extends BaseAdapter {
         TextView txtTipo = (TextView) view.findViewById(R.id.txtTipo);
         TextView txtMarca = (TextView) view.findViewById(R.id.txtMarca);
         TextView txtModelo = (TextView) view.findViewById(R.id.txtModelo);
-        TextView txtPrecio = (TextView) view.findViewById(R.id.tvPrice);
+        TextView txtPrecio = (TextView) view.findViewById(R.id.txtPrecio);
 
 
 

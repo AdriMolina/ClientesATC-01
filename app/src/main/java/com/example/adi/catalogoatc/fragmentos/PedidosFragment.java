@@ -110,7 +110,7 @@ public class PedidosFragment extends Fragment implements Basic, Response.Listene
             int idOrden =  (int)adapter.getItemId(i);
 
             Toast.makeText(getContext(), "preciono......", Toast.LENGTH_SHORT).show();
-            Fragment nuevofragmento = DetallesComprasFragment.newInstance(idOrden, totalContado);
+            Fragment nuevofragmento = DetallesComprasFragment.newInstance(idOrden, totalContado, "Pedidos");
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
             transaction.replace(R.id.content_main, nuevofragmento);
             transaction.addToBackStack(null);

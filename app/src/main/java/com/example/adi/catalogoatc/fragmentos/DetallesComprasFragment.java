@@ -30,17 +30,18 @@ import org.json.JSONArray;
 public class DetallesComprasFragment extends Fragment implements Basic, Response.Listener<JSONArray>, Response.ErrorListener {
     private ListView listView;
     private ProgressDialog progressDialog;
-    String url, totalContado;
-    TextView txtTotalContado;
+    String url, totalContado, titulo;
+    TextView txtTotalContado, txttitulo;
     private OnFragmentInteractionListener mListener;
     int orden_id;
     DetallesComprasAdapter adapter;
 
-    public static DetallesComprasFragment newInstance(int id, String total) {
+    public static DetallesComprasFragment newInstance(int id, String total, String titulo) {
         DetallesComprasFragment fragment = new DetallesComprasFragment();
         Bundle args = new Bundle();
         args.putInt("Articulo_ID", id);
         args.putString("TOTAL", total);
+        args.putString("TITULO", titulo);
         fragment.setArguments(args);
         return fragment;
     }
@@ -55,6 +56,7 @@ public class DetallesComprasFragment extends Fragment implements Basic, Response
         if (getArguments() != null) {
             orden_id = getArguments().getInt("Articulo_ID");
             totalContado = getArguments().getString("TOTAL");
+            titulo = getArguments().getString("TITULO");
         }
     }
 
@@ -66,6 +68,10 @@ public class DetallesComprasFragment extends Fragment implements Basic, Response
         View view = inflater.inflate(R.layout.fragment_detalles_compras, container, false);
         listView = (ListView)view.findViewById(R.id.listaDetalles);
         txtTotalContado = (TextView)view.findViewById(R.id.txtTotalContado);
+        txttitulo = (TextView)view.findViewById(R.id.TiuloDetalles);
+        if(titulo.equals("Pedidos")){
+                txttitulo.setText("Pedidos Pendientes");
+        }
 
         //Coloca el dialogo de carga
         progressDialog = new ProgressDialog(getContext());

@@ -127,7 +127,7 @@ public class HistorialContadoFragment extends Fragment implements SwipeRefreshLa
                 idOrden =  (int)adapter.getItemId(position);
 
                 Toast.makeText(getContext(), "preciono......", Toast.LENGTH_SHORT).show();
-                Fragment nuevofragmento = DetallesComprasFragment.newInstance(idOrden, totalContado);
+                Fragment nuevofragmento = DetallesComprasFragment.newInstance(idOrden, totalContado, "Contado");
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.content_main, nuevofragmento);
                 transaction.addToBackStack(null);

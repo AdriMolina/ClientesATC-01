@@ -87,11 +87,13 @@ public class AbonosFragment extends Fragment implements Basic, Response.Listener
         View view =inflater.inflate(R.layout.fragment_abonos, container, false);
 
         //rEFERENCIA A LOS VIEW
-        edtFecha = (EditText)view.findViewById(R.id.edtFecha);
+       /* edtFecha = (EditText)view.findViewById(R.id.edtFecha);
         edtfechaFinal = (EditText)view.findViewById(R.id.edtFechaFinal);
-        btnBucar = (ImageButton)view.findViewById(R.id.BuscarAbono);
+        btnBucar = (ImageButton)view.findViewById(R.id.BuscarAbono)*/;
         list = (ListView)view.findViewById(R.id.lbDetallesAbonos);
-//cOMIENZA EL PROCESO DEL DATEpICKERdIALOG
+
+
+    /*//cOMIENZA EL PROCESO DEL DATEpICKERdIALOG
 
         //fecha actual
         final Calendar c = Calendar.getInstance();
@@ -145,7 +147,7 @@ public class AbonosFragment extends Fragment implements Basic, Response.Listener
                 datePickerDialog.show();
 
             }
-        });
+        });*/
 //Evento del boton buscar
         btnBucar.setOnClickListener(new View.OnClickListener() {
             @Override

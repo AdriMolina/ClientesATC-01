@@ -15,16 +15,15 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.example.adi.catalogoatc.R;
 import com.example.adi.catalogoatc.Recursos.Basic;
+import com.google.android.gms.location.LocationServices;
 
 import org.json.JSONArray;
 
 
 public class LocalizacionFragment extends Fragment implements Basic, Response.Listener<JSONArray>, Response.ErrorListener {
 
-
-
-
     private OnFragmentInteractionListener mListener;
+
 
     public LocalizacionFragment() {
         // Required empty public constructor
@@ -44,6 +43,13 @@ public class LocalizacionFragment extends Fragment implements Basic, Response.Li
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
 
+            private FusedLocationProviderClient mFusedLocationClient ;
+            @Override
+
+                    Bundle savedInstanceState )
+                mFusedLocationClient = LocationServices. getFusedLocationProviderClient ( this );
+
+
         }
     }
 
@@ -55,6 +61,9 @@ public class LocalizacionFragment extends Fragment implements Basic, Response.Li
 
 
         Button btnActualizar = (Button)view.findViewById(R.id.btnActualizar);
+
+
+
         return view;
 
 

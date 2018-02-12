@@ -10,4 +10,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_geolocalizador">Map</string>
     <string name="title_activity_geolocalizacion">Map</string>
+    <string name="title_activity_localizacion">Map</string>
 </resources>

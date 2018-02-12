@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageButton;
 
+import com.example.adi.catalogoatc.clases.LocalizacionActivity;
 import com.example.adi.catalogoatc.fragmentos.AccesoriosFragment;
 import com.example.adi.catalogoatc.fragmentos.BuzonFragment;
 import com.example.adi.catalogoatc.fragmentos.CarritoFragment;
@@ -139,8 +140,8 @@ public class Inicio extends AppCompatActivity
             fragmentSeleccionado = true;
 
         } else if (id == R.id.nav_localizacion) {
-            //Intent intent = new Intent(this, GeolocalizacionActivity.class);
-            //startActivity(intent);
+            Intent intent = new Intent(this, LocalizacionActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_buzon) {
 

@@ -3,11 +3,8 @@ package com.example.adi.catalogoatc;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -18,14 +15,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageButton;
 
-import com.example.adi.catalogoatc.adapters.HistorialAdapter;
 import com.example.adi.catalogoatc.fragmentos.AccesoriosFragment;
 import com.example.adi.catalogoatc.fragmentos.BuzonFragment;
 import com.example.adi.catalogoatc.fragmentos.CarritoFragment;
 import com.example.adi.catalogoatc.fragmentos.CatalogoFragment;
 import com.example.adi.catalogoatc.fragmentos.ChipFragment;
 import com.example.adi.catalogoatc.fragmentos.DetallesComprasFragment;
-import com.example.adi.catalogoatc.fragmentos.GeolocalizadorActivity;
 import com.example.adi.catalogoatc.fragmentos.HistorialContadoFragment;
 import com.example.adi.catalogoatc.fragmentos.HistorialCreditoFragment;
 import com.example.adi.catalogoatc.fragmentos.HistorialFragment;
@@ -144,8 +139,8 @@ public class Inicio extends AppCompatActivity
             fragmentSeleccionado = true;
 
         } else if (id == R.id.nav_localizacion) {
-            Intent intent = new Intent(this, GeolocalizadorActivity.class);
-            startActivity(intent);
+            //Intent intent = new Intent(this, GeolocalizacionActivity.class);
+            //startActivity(intent);
 
         } else if (id == R.id.nav_buzon) {
 

@@ -17,14 +17,9 @@ import com.example.adi.catalogoatc.adapters.HistorialAdapter;
 import com.example.adi.catalogoatc.adapters.SeccionesAdapter;
 import com.example.adi.catalogoatc.clases.utilidades;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link HistorialFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link HistorialFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
+//Probado
+
 public class HistorialFragment extends Fragment {
     View vista;
     private AppBarLayout appBar;

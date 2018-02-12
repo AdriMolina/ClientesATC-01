@@ -32,6 +32,7 @@ import com.example.adi.catalogoatc.adapters.HistorialCreditoAdapter;
 import com.example.adi.catalogoatc.ModeloLista.modeloHistorialCredito;
 import org.json.JSONArray;
 
+//Probado
 
 public class HistorialCreditoFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener,
         Basic, Response.Listener<JSONArray>, Response.ErrorListener {

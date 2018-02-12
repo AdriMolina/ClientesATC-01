@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import com.example.adi.catalogoatc.R;
 import com.example.adi.catalogoatc.adapters.SeccionesAdapter;
 import com.example.adi.catalogoatc.clases.utilidades;
+//Probado
 
 
 public class CatalogoFragment extends Fragment {

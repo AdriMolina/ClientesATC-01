@@ -37,6 +37,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+//Probado
 
 public class DetallesCatalogoFragment extends Fragment implements Basic, Response.Listener<JSONArray>, Response.ErrorListener {
    int id_cantidad, resultado;

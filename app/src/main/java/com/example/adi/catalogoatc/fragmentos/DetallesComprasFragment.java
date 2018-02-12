@@ -26,6 +26,7 @@ import com.example.adi.catalogoatc.ModeloLista.modeloDetallosCatalogo;
 
 import org.json.JSONArray;
 
+//Probado
 
 public class DetallesComprasFragment extends Fragment implements Basic, Response.Listener<JSONArray>, Response.ErrorListener {
     private ListView listView;

@@ -36,6 +36,7 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 import java.util.List;
 
+//Probado
 
 public class TelefonoFragment extends Fragment implements  Basic, Response.Listener<JSONArray>, Response.ErrorListener, SearchView.OnQueryTextListener, SwipeRefreshLayout.OnRefreshListener {
     private ListView listView;

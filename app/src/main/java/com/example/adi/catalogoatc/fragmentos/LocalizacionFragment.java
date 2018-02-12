@@ -43,11 +43,7 @@ public class LocalizacionFragment extends Fragment implements Basic, Response.Li
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
 
-            private FusedLocationProviderClient mFusedLocationClient ;
-            @Override
 
-                    Bundle savedInstanceState )
-                mFusedLocationClient = LocationServices. getFusedLocationProviderClient ( this );
 
 
         }

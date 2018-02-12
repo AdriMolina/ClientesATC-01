@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.adi.catalogoatc.R;
 
+//Probado
 
 public class CantidadChipsFragment extends DialogFragment {
 

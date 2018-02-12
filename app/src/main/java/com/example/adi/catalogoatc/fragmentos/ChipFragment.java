@@ -36,6 +36,7 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 import java.util.List;
 
+//Probado
 
 public class ChipFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, Basic, Response.Listener<JSONArray>,
         Response.ErrorListener, SearchView.OnQueryTextListener{

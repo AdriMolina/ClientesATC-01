@@ -26,7 +26,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
+//Probado
 public class PerfilFragment extends Fragment implements Basic, Response.Listener<JSONArray>, Response.ErrorListener {
 
 

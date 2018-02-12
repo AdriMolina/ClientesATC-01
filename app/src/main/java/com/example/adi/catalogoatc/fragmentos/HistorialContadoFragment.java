@@ -32,14 +32,8 @@ import com.example.adi.catalogoatc.ModeloLista.modeloHistorial;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link HistorialContadoFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link HistorialContadoFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+///Probado
+
 public class HistorialContadoFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, Basic, Response.Listener<JSONArray>, Response.ErrorListener {
     private ListView listView;
     private ProgressDialog progressDialog;

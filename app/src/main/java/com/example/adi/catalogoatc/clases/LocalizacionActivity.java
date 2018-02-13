@@ -30,7 +30,7 @@ public class LocalizacionActivity extends FragmentActivity implements OnMapReady
     private LocationListener locationListener;
     private double latitud;
     private double longitud;
-    Marker m1=null;
+    Marker m1 = null;
     private double latitudM2;
     private double longitudM2;
     private double distancia;
@@ -61,7 +61,7 @@ public class LocalizacionActivity extends FragmentActivity implements OnMapReady
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch ((requestCode)){
+        switch ((requestCode)) {
             case 10:
                 geolocalizar();
                 break;
@@ -71,10 +71,10 @@ public class LocalizacionActivity extends FragmentActivity implements OnMapReady
     }
 
     //vrifica si tiene permisos
-    public void geolocalizar(){
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
-            if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+    public void geolocalizar() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
                 requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
                         Manifest.permission.ACCESS_FINE_LOCATION,
@@ -83,12 +83,12 @@ public class LocalizacionActivity extends FragmentActivity implements OnMapReady
             return;
         }
 
-        locationManager.requestLocationUpdates("gps",0,0,locationListener);
+        locationManager.requestLocationUpdates("gps", 0, 0, locationListener);
     }
 
-    public void setLatLong(double latitud, double longitud){
-        this.latitud=latitud;
-        this.longitud=longitud;
+    public void setLatLong(double latitud, double longitud) {
+        this.latitud = latitud;
+        this.longitud = longitud;
     }
 
 
@@ -101,6 +101,17 @@ public class LocalizacionActivity extends FragmentActivity implements OnMapReady
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));*/
 
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        mMap.setMyLocationEnabled(true);
         //Poner los con troles de zoom en el mapa
         mMap.getUiSettings().setZoomControlsEnabled(true);
         //herramientas adicionales del mapa

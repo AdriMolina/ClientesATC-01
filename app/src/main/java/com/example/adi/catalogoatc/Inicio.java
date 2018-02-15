@@ -15,7 +15,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageButton;
 
-import com.example.adi.catalogoatc.clases.LocalizacionActivity;
+
+import com.example.adi.catalogoatc.clases.MapsLocalizacionActivity;
 import com.example.adi.catalogoatc.fragmentos.AccesoriosFragment;
 import com.example.adi.catalogoatc.fragmentos.BuzonFragment;
 import com.example.adi.catalogoatc.fragmentos.CarritoFragment;
@@ -25,7 +26,6 @@ import com.example.adi.catalogoatc.fragmentos.DetallesComprasFragment;
 import com.example.adi.catalogoatc.fragmentos.HistorialContadoFragment;
 import com.example.adi.catalogoatc.fragmentos.HistorialCreditoFragment;
 import com.example.adi.catalogoatc.fragmentos.HistorialFragment;
-import com.example.adi.catalogoatc.fragmentos.LocalizacionFragment;
 import com.example.adi.catalogoatc.fragmentos.PedidosFragment;
 import com.example.adi.catalogoatc.fragmentos.PerfilFragment;
 import com.example.adi.catalogoatc.fragmentos.TelefonoFragment;
@@ -42,7 +42,6 @@ public class Inicio extends AppCompatActivity
         HistorialContadoFragment.OnFragmentInteractionListener,
         DetallesComprasFragment.OnFragmentInteractionListener,
         BuzonFragment.OnFragmentInteractionListener,
-        LocalizacionFragment.OnFragmentInteractionListener,
         PedidosFragment.OnFragmentInteractionListener,
         CarritoFragment.OnFragmentInteractionListener
 {
@@ -140,7 +139,7 @@ public class Inicio extends AppCompatActivity
             fragmentSeleccionado = true;
 
         } else if (id == R.id.nav_localizacion) {
-            Intent intent = new Intent(this, LocalizacionActivity.class);
+            Intent intent = new Intent(this, MapsLocalizacionActivity.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_buzon) {

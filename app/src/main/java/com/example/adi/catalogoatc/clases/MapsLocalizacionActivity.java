@@ -76,7 +76,7 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        locationListener = (LocationListener) getSystemService(LOCATION_SERVICE);
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
@@ -87,6 +87,8 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
 
                 LatLng actual = new LatLng(latitud, longitud);
                 mMap.clear();
+                mMap.addMarker(new MarkerOptions().position(actual).title("Actual").snippet("Latitud: "+ latitud+ "Longitud: "+longitud));
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(actual));
             }
 
             @Override
@@ -107,9 +109,11 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
 
         //Poner los con troles de zoom en el mapa
         mMap.getUiSettings().setZoomControlsEnabled(true);
-        // Add a marker in Sydney and move the camera
+       /* // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        */
+       geolocalizar();
     }
 }

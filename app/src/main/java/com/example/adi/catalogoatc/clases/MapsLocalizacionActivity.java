@@ -33,6 +33,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MapsLocalizacionActivity extends FragmentActivity implements OnMapReadyCallback, Basic {
 
@@ -41,7 +43,7 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
     private LocationListener locationListener;
     private double latitud;
     private double longitud;
-    int usuario;
+    String usuario;
     String url;
     private ProgressDialog progressDialog;
 
@@ -55,12 +57,7 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         //Verificar que tipo de usuario es
-        //Coloca el dialogo de carga
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("En Proceso");
-        progressDialog.setMessage("Un momento...");
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.show();
+
 
         //Inicia la peticion
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -76,13 +73,72 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
+               ;
                 //dependiendo del tipo cliente
 
                 if (response.length()>0){
                     //rutas
-                    Toast.makeText(MapsLocalizacionActivity.this, "Es de rutas", Toast.LENGTH_LONG).show();
 
-                }else{
+                    JSONObject jsonObject;
+
+                    try
+                    {
+                        jsonObject = response.getJSONObject(0);
+                        Toast.makeText(MapsLocalizacionActivity.this, usuario, Toast.LENGTH_LONG).show();
+
+                    }
+                    catch (JSONException e)
+                    {
+                        jsonObject = new JSONObject();
+                    }
+
+                    //sacar el id
+                    try
+                    {
+                        usuario = jsonObject.getString("0");
+
+
+
+                    }
+                    catch (JSONException e)
+                    {
+                        usuario = null;
+
+
+                    }
+
+                    Toast.makeText(MapsLocalizacionActivity.this, usuario, Toast.LENGTH_LONG).show();
+
+                    //Consulta de latitud y longitud del todos lo clientes
+
+                    //Inicia la peticion
+                    RequestQueue queue = Volley.newRequestQueue(MapsLocalizacionActivity.this);
+                    String consulta = "Select latitud, longitud" +
+                                        "from localizacion_ruta" +
+                                        "where id =2;";
+                    consulta = consulta.replace(" ", "%20");
+                    String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
+                    url= SERVER + RUTA + "consultaGeneral.php" + cadena;
+                    Log.i("info", url);
+
+                    //Hace la petición String
+
+                            JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                        }
+                    });
+
+                    //Agrega y ejecuta la cola
+                    queue.add(request);
+
+                    }else{
                     //cliente
                     Toast.makeText(MapsLocalizacionActivity.this, "Es cliente", Toast.LENGTH_LONG).show();
                 }

@@ -1,6 +1,7 @@
 package com.example.adi.catalogoatc.clases;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -13,8 +14,17 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.adi.catalogoatc.R;
+import com.example.adi.catalogoatc.Recursos.Basic;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -22,13 +32,19 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsLocalizacionActivity extends FragmentActivity implements OnMapReadyCallback {
+import org.json.JSONArray;
+
+public class MapsLocalizacionActivity extends FragmentActivity implements OnMapReadyCallback, Basic {
 
     private GoogleMap mMap;
     private LocationManager locationManager;
     private LocationListener locationListener;
     private double latitud;
     private double longitud;
+    int usuario;
+    String url;
+    private ProgressDialog progressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +54,59 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        //Verificar que tipo de usuario es
+        //Coloca el dialogo de carga
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("En Proceso");
+        progressDialog.setMessage("Un momento...");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+
+        //Inicia la peticion
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String consulta = "Select id" +
+                            " from punto_venta" +
+                            " where id =2;";
+        consulta = consulta.replace(" ", "%20");
+        String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
+        url= SERVER + RUTA + "consultaGeneral.php" + cadena;
+        Log.i("info", url);
+
+        //Hace la petición String
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                //dependiendo del tipo cliente
+
+                if (response.length()>0){
+                    //rutas
+                    Toast.makeText(MapsLocalizacionActivity.this, "Es de rutas", Toast.LENGTH_LONG).show();
+
+                }else{
+                    //cliente
+                    Toast.makeText(MapsLocalizacionActivity.this, "Es cliente", Toast.LENGTH_LONG).show();
+                }
+
+
+
+
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        //Agrega y ejecuta la cola
+        queue.add(request);
+
+
     }
+
+
 
     //Metodo que verifica si tenemos permiso de gps en el telefono celular
     @Override
@@ -79,6 +147,11 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        //dependiendo del tipo cliente
+
+        //rutas
+
+        //cliente
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         locationListener = new LocationListener() {
             @Override
@@ -122,4 +195,6 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
         */
 
     }
+
+
 }

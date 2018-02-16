@@ -1,11 +1,14 @@
 package com.example.adi.catalogoatc.clases;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.media.audiofx.BassBoost;
 import android.os.Build;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
@@ -88,7 +91,7 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
                 LatLng actual = new LatLng(latitud, longitud);
                 mMap.clear();
                 mMap.addMarker(new MarkerOptions().position(actual).title("Actual").snippet("Latitud: "+ latitud+ "Longitud: "+longitud));
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(actual));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(actual, 15));
             }
 
             @Override
@@ -104,9 +107,12 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
             @Override
             public void onProviderDisabled(String s) {
 
+                // cuando se bloquea el telefono
+                Intent i = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivity(i);
             }
         };
-
+        geolocalizar();
         //Poner los con troles de zoom en el mapa
         mMap.getUiSettings().setZoomControlsEnabled(true);
        /* // Add a marker in Sydney and move the camera
@@ -114,6 +120,6 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         */
-       geolocalizar();
+
     }
 }

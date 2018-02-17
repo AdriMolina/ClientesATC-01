@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.icu.math.BigDecimal;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -41,8 +42,10 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
     private GoogleMap mMap;
     private LocationManager locationManager;
     private LocationListener locationListener;
-    private double latitud;
-    private double longitud;
+    static double latitud;
+    static double longitud;
+    String la;
+    String lo;
     String usuario;
     String url;
     private ProgressDialog progressDialog;
@@ -73,7 +76,7 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-               ;
+
                 //dependiendo del tipo cliente
 
                 if (response.length()>0){
@@ -84,7 +87,7 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
                     try
                     {
                         jsonObject = response.getJSONObject(0);
-                        Toast.makeText(MapsLocalizacionActivity.this, usuario, Toast.LENGTH_LONG).show();
+                     //   Toast.makeText(MapsLocalizacionActivity.this, usuario, Toast.LENGTH_LONG).show();
 
                     }
                     catch (JSONException e)
@@ -107,15 +110,15 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
 
                     }
 
-                    Toast.makeText(MapsLocalizacionActivity.this, usuario, Toast.LENGTH_LONG).show();
+                   // Toast.makeText(MapsLocalizacionActivity.this, "Tipo de usuario:"+usuario, Toast.LENGTH_LONG).show();
 
                     //Consulta de latitud y longitud del todos lo clientes
 
                     //Inicia la peticion
                     RequestQueue queue = Volley.newRequestQueue(MapsLocalizacionActivity.this);
                     String consulta = "Select latitud, longitud" +
-                                        "from localizacion_ruta" +
-                                        "where id =2;";
+                                        " from localizacion_ruta" +
+                                        " where id =2;";
                     consulta = consulta.replace(" ", "%20");
                     String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
                     url= SERVER + RUTA + "consultaGeneral.php" + cadena;
@@ -127,6 +130,33 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
                         @Override
                         public void onResponse(JSONArray response) {
 
+                            JSONObject jsonObject;
+
+                            try
+                            {
+                                jsonObject = response.getJSONObject(0);
+                            }
+                            catch (JSONException e)
+                            {
+                                jsonObject = new JSONObject();
+                            }
+
+                            try
+                            {
+                                latitud = Double.parseDouble(jsonObject.getString("0"));
+                                longitud =Double.parseDouble(jsonObject.getString("1"));
+
+                             //   Toast.makeText(MapsLocalizacionActivity.this, "Tipo de usuario:"+usuario+ "Latitud: "+String.valueOf(latitud), Toast.LENGTH_LONG).show();
+
+                            }
+                            catch (JSONException e)
+                            {
+                               latitud=0.0;
+                               longitud=0.0;
+
+
+                            }
+
                         }
                     }, new Response.ErrorListener() {
                         @Override
@@ -137,17 +167,12 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
 
                     //Agrega y ejecuta la cola
                     queue.add(request);
-
+                    //Toast.makeText(MapsLocalizacionActivity.this, String.valueOf(latitud)+" "+String.valueOf(longitud), Toast.LENGTH_LONG).show();
+                       Toast.makeText(MapsLocalizacionActivity.this, "Tipo de usuario:"+usuario+ "Latitud: "+String.valueOf(latitud), Toast.LENGTH_LONG).show();
                     }else{
                     //cliente
-                    Toast.makeText(MapsLocalizacionActivity.this, "Es cliente", Toast.LENGTH_LONG).show();
+                  //  Toast.makeText(MapsLocalizacionActivity.this, "Es cliente", Toast.LENGTH_LONG).show();
                 }
-
-
-
-
-
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -159,7 +184,9 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
         //Agrega y ejecuta la cola
         queue.add(request);
 
-
+        //Toast.makeText(MapsLocalizacionActivity.this, String.valueOf(latitud)+" "+String.valueOf(longitud), Toast.LENGTH_LONG).show();
+        //longitud = Double.parseDouble(lo);
+        //latitud= Double.parseDouble(la);
     }
 
 
@@ -177,7 +204,7 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
         }
     }
 
-    //vrifica si tiene permisos
+    //Metodo que verifica si la aplicacion tiene permisos
     public void geolocalizar() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -195,20 +222,30 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
 
 
     public void setLatLong (double dlatitud, double dlongitud){
-        this.latitud = dlatitud;
-        this.longitud = dlongitud;
+        //this.latitud = dlatitud;
+        //this.longitud = dlongitud;
     }
 
+    //Metodo que permite realizar la funcionalidad del mapa
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        //dependiendo del tipo cliente
 
-        //rutas
+        //Poner los con troles de zoom en el mapa
+        mMap.getUiSettings().setZoomControlsEnabled(true);
 
-        //cliente
-        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        //Ubicacion guardada
+      //  Toast.makeText(MapsLocalizacionActivity.this, String.valueOf(latitud)+" "+String.valueOf(longitud), Toast.LENGTH_LONG).show();
+
+
+        // Add a marker in Sydney and move the camera
+        LatLng sydney = new LatLng(latitud, longitud);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+       mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+        //ubicacion actual
+       /* locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
@@ -242,13 +279,7 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
             }
         };
         geolocalizar();
-        //Poner los con troles de zoom en el mapa
-        mMap.getUiSettings().setZoomControlsEnabled(true);
-       /* // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-        */
+       */
 
     }
 

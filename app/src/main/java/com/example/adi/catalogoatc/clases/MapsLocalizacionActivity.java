@@ -37,6 +37,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 public class MapsLocalizacionActivity extends FragmentActivity implements OnMapReadyCallback, Basic {
 
     private GoogleMap mMap;
@@ -44,7 +46,7 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
     private LocationListener locationListener;
     static double latitud;
     static double longitud;
-    JSONObject jsonObject;
+    JSONObject jsonObject = null;
     static String usuario, id, numero, direccion;
     String url;
     private ProgressDialog progressDialog;
@@ -58,120 +60,12 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        //Proceso de peticion de ubicaiones
 
-
-        //Inicia la peticion para saber que tipo de usuario es
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String consulta = "Select id" +
-                            " from punto_venta" +
-                            " where id =2;";
-        consulta = consulta.replace(" ", "%20");
-        String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
-        url= SERVER + RUTA + "consultaGeneral.php" + cadena;
-        Log.i("info", url);
-
-        //Hace la petición String
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-
-                //dependiendo del tipo cliente
-
-                if (response.length()>0){
-                    //rutas
-
-
-
-                    try{
-                        jsonObject = response.getJSONObject(0);
-                    }catch (JSONException e){
-                        jsonObject = new JSONObject();
-                    }
-
-                    //sacar el id
-                    try{
-                        usuario = jsonObject.getString("0");
-                    }catch (JSONException e){
-                        usuario = null;
-                    }
-
-
-                    //Consulta de latitud y longitud del todos lo clientes
-
-                    //Inicia la peticion
-                    RequestQueue queue = Volley.newRequestQueue(MapsLocalizacionActivity.this);
-                    String consulta = "Select lc.id, concat(pv.tipo,'-',cc.numero), cl.direccion, lc.latitud, lc.longitud" +
-                                        " from localizacion_cliente lc, clave_cliente cc, punto_venta pv, cliente cl" +
-                                        " where lc.claveCliente_id = cc.id" +
-                                        " and cc.puntoVenta_id = pv.id" +
-                                        " and cc.cliente_id = cl.id" +
-                                        " and pv.id =2;";
-                    consulta = consulta.replace(" ", "%20");
-                    String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
-                    url= SERVER + RUTA + "consultaGeneral.php" + cadena;
-                    Log.i("info", url);
-
-                    //Hace la petición String
-
-                            JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-                        @Override
-                        public void onResponse(JSONArray response) {
-
-                            try{
-                                jsonObject = response.getJSONObject(0);
-                            }catch (JSONException e){
-                                jsonObject = new JSONObject();
-                            }
-
-                            try{
-                                id = jsonObject.getString("0");
-                                numero = jsonObject.getString("1");
-                                direccion = jsonObject.getString("2");
-                                latitud = Double.parseDouble(jsonObject.getString("3"));
-                                longitud =Double.parseDouble(jsonObject.getString("4"));
-
-                            }catch (JSONException e){
-                               latitud=0.0;
-                               longitud=0.0;
-
-                                Toast.makeText(MapsLocalizacionActivity.this, "Nulos todos", Toast.LENGTH_LONG).show();
-
-
-
-                            }
-
-                        }
-                    }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-
-                        }
-                    });
-
-                    //Agrega y ejecuta la cola
-                    queue.add(request);
-
-
-                    }else{
-                    //cliente
-
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-
-        //Agrega y ejecuta la cola
-        queue.add(request);
-
-        //Toast.makeText(MapsLocalizacionActivity.this, String.valueOf(latitud)+" "+String.valueOf(longitud), Toast.LENGTH_LONG).show();
-        //longitud = Double.parseDouble(lo);
-        //latitud= Double.parseDouble(la);
     }
+
+
+
+
 
 
 
@@ -215,6 +109,121 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        //Proceso de peticion de ubicaiones
+        //Inicia la peticion para saber que tipo de usuario es
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String consulta = "Select id" +
+                " from punto_venta" +
+                " where id =2;";
+        consulta = consulta.replace(" ", "%20");
+        String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
+        url= SERVER + RUTA + "consultaGeneral.php" + cadena;
+        Log.i("info", url);
+
+        //Hace la petición String
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+
+                //dependiendo del tipo cliente
+
+                if (response.length()>0){
+                    //rutas
+
+
+
+                    try{
+                        jsonObject = response.getJSONObject(0);
+                    }catch (JSONException e){
+                        jsonObject = new JSONObject();
+                    }
+
+                    //sacar el id
+                    try{
+                        usuario = jsonObject.getString("0");
+                    }catch (JSONException e){
+                        usuario = null;
+                    }
+
+
+                    //Consulta de latitud y longitud del todos lo clientes
+
+                    //Inicia la peticion
+                    RequestQueue queue = Volley.newRequestQueue(MapsLocalizacionActivity.this);
+                    String consulta = "Select lc.id, concat(pv.tipo,'-',cc.numero), cl.direccion, lc.latitud, lc.longitud" +
+                            " from localizacion_cliente lc, clave_cliente cc, punto_venta pv, cliente cl" +
+                            " where lc.claveCliente_id = cc.id" +
+                            " and cc.puntoVenta_id = pv.id" +
+                            " and cc.cliente_id = cl.id" +
+                            " and pv.id =2;";
+                    consulta = consulta.replace(" ", "%20");
+                    String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
+                    url= SERVER + RUTA + "consultaGeneral.php" + cadena;
+                    Log.i("info", url);
+
+                    //Hace la petición String
+
+                    JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            for (int i=0; i<response.length(); i++) {
+                                try {
+                                    jsonObject = response.getJSONObject(i);
+                                } catch (JSONException e) {
+                                    jsonObject = new JSONObject();
+                                }
+
+                                try {
+                                    id = jsonObject.getString("0");
+                                    numero = jsonObject.getString("1");
+                                    direccion = jsonObject.getString("2");
+                                    latitud = Double.parseDouble(jsonObject.getString("3"));
+                                    longitud = Double.parseDouble(jsonObject.getString("4"));
+
+                                } catch (JSONException e) {
+                                    latitud = 0.0;
+                                    longitud = 0.0;
+
+                                    Toast.makeText(MapsLocalizacionActivity.this, "Nulos todos", Toast.LENGTH_LONG).show();
+
+
+                                }
+
+                                //Agregar marca y mover la camara
+                                LatLng sydney = new LatLng(latitud, longitud);
+                                mMap.addMarker(new MarkerOptions().position(sydney).title(numero).snippet(direccion));
+                                mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+                            }
+
+
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                        }
+                    });
+
+                    //Agrega y ejecuta la cola
+                    queue.add(request);
+
+
+                }else{
+                    //cliente
+
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        //Agrega y ejecuta la cola
+        queue.add(request);
+
 
         //Poner los con troles de zoom en el mapa
         mMap.getUiSettings().setZoomControlsEnabled(true);
@@ -222,11 +231,6 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
         //Ubicacion guardada
         Toast.makeText(MapsLocalizacionActivity.this, String.valueOf(latitud)+" "+String.valueOf(longitud), Toast.LENGTH_LONG).show();
 
-
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(latitud, longitud);
-        mMap.addMarker(new MarkerOptions().position(sydney).title(numero).snippet(direccion));
-       mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
         //ubicacion actual
        /* locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);

@@ -83,10 +83,12 @@ public class HistorialCreditoFragment extends Fragment implements SwipeRefreshLa
         //Inicia la peticion
         RequestQueue queue = Volley.newRequestQueue(getContext());
         String consulta = "SELECT o.id, c.id, o.folio,DATE(o.fecha),c.total, c.estado" +
-                " from credito c, orden o" +
-                " where c.orden_id = o.id" +
-                " and o.cliente_id="+IDUsusario+"" +
-                " order by o.fecha desc;";
+                "                 from credito c, orden o, cliente cl, clave_cliente cc" +
+                "                 where c.orden_id = o.id" +
+                "                 and cc.cliente_id = cl.id" +
+                "                 and o.cliente_id = cl.id" +
+                "                 and cc.id=" +IDClaveCliente+
+                "                 order by o.fecha desc;";
 
         consulta = consulta.replace(" ", "%20");
         String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
@@ -112,7 +114,7 @@ public class HistorialCreditoFragment extends Fragment implements SwipeRefreshLa
                 idCredito = (int)adapter.getOtroId(position);
                 total = txtTotal.getText().toString();
 
-                int idUsusario = Integer.parseInt(IDUsusario);
+                int idUsusario = Integer.parseInt(IDClaveCliente);
 
 
 
@@ -180,10 +182,12 @@ public class HistorialCreditoFragment extends Fragment implements SwipeRefreshLa
         //Inicia la peticion
         RequestQueue queue = Volley.newRequestQueue(getContext());
         String consulta = "SELECT o.id, c.id, o.folio,DATE(o.fecha),c.total, c.estado" +
-                " from credito c, orden o" +
-                " where c.orden_id = o.id" +
-                " and o.cliente_id="+IDUsusario+"" +
-                " order by o.fecha desc;";
+                "                 from credito c, orden o, cliente cl, clave_cliente cc" +
+                "                 where c.orden_id = o.id" +
+                "                 and cc.cliente_id = cl.id" +
+                "                 and o.cliente_id = cl.id" +
+                "                 and cc.id=" +IDClaveCliente+
+                "                 order by o.fecha desc;";
 
         consulta = consulta.replace(" ", "%20");
         String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;

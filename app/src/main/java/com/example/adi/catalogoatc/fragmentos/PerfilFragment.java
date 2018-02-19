@@ -75,9 +75,10 @@ public class PerfilFragment extends Fragment implements Basic, Response.Listener
 
         //Inicia la peticion
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String consulta = "select id, nombre, direccion, telefono, email" +
-                            " from cliente" +
-                            " where id="+IDUsusario+";";
+        String consulta = "select cc.id, c.nombre, c.direccion, c.telefono, c.email" +
+                            " from cliente c, clave_cliente cc" +
+                            " where cc.cliente_id = c.id" +
+                            " and cc.id ="+IDClaveCliente;
         consulta = consulta.replace(" ", "%20");
         String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
         url= SERVER + RUTA + "consultaGeneral.php" + cadena;

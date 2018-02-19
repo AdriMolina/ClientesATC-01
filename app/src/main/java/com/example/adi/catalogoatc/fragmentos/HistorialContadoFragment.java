@@ -88,17 +88,19 @@ public class HistorialContadoFragment extends Fragment implements SwipeRefreshLa
         //Inicia la peticion
         RequestQueue queue = Volley.newRequestQueue(getContext());
         String consulta = "SELECT Distinct o.id, o.id, o.folio,  DATE(o.fecha), oc.total" +
-                " from orden_completa oc, orden o, cantidad ca, articulo ar, orden_descripcion od, tipo_articulo ta" +
-                " where o.id not in(Select orden_id from credito)" +
-                " and oc.orden_id = o.id" +
-                " and o.id = od.orden_id" +
-                " and ar.tipoArticulo_id = ta.id" +
-                " and ca.articulo_id = ar.id" +
-                " and od.tipoVentaId = ca.id" +
-                " and oc.total >0"+
-                " and o.cliente_id ="+IDUsusario+
-                " and ta.nombre != 'Chip'" +
-                " order by o.fecha desc;";
+                "                 from orden_completa oc, orden o, cantidad ca, articulo ar, orden_descripcion od, tipo_articulo ta, cliente cl, clave_cliente cc" +
+                "                 where o.id not in(Select orden_id from credito)" +
+                "                 and oc.orden_id = o.id" +
+                "                 and o.id = od.orden_id" +
+                "                 and ar.tipoArticulo_id = ta.id" +
+                "                 and ca.articulo_id = ar.id" +
+                "                 and od.tipoVentaId = ca.id" +
+                "                 and cc.cliente_id = cl.id" +
+                "                 and o.cliente_id = cl.id" +
+                "                 and oc.total >0" +
+                "                 and cc.id ="+IDClaveCliente+
+                "                 and ta.nombre != 'Chip'" +
+                "                order by o.fecha desc;";
 
         consulta = consulta.replace(" ", "%20");
         String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
@@ -188,17 +190,19 @@ public class HistorialContadoFragment extends Fragment implements SwipeRefreshLa
         //Inicia la peticion
         RequestQueue queue = Volley.newRequestQueue(getContext());
         String consulta = "SELECT Distinct o.id, o.id, o.folio,  DATE(o.fecha), oc.total" +
-                " from orden_completa oc, orden o, cantidad ca, articulo ar, orden_descripcion od, tipo_articulo ta" +
-                " where o.id not in(Select orden_id from credito)" +
-                " and oc.orden_id = o.id" +
-                " and o.id = od.orden_id" +
-                " and ar.tipoArticulo_id = ta.id" +
-                " and ca.articulo_id = ar.id" +
-                " and od.tipoVentaId = ca.id" +
-                " and oc.total >0"+
-                " and o.cliente_id ="+IDUsusario+
-                " and ta.nombre != 'Chip'" +
-                " order by o.fecha desc;";
+                "                 from orden_completa oc, orden o, cantidad ca, articulo ar, orden_descripcion od, tipo_articulo ta, cliente cl, clave_cliente cc" +
+                "                 where o.id not in(Select orden_id from credito)" +
+                "                 and oc.orden_id = o.id" +
+                "                 and o.id = od.orden_id" +
+                "                 and ar.tipoArticulo_id = ta.id" +
+                "                 and ca.articulo_id = ar.id" +
+                "                 and od.tipoVentaId = ca.id" +
+                "                 and cc.cliente_id = cl.id" +
+                "                 and o.cliente_id = cl.id" +
+                "                 and oc.total >0" +
+                "                 and cc.id ="+IDClaveCliente+
+                "                 and ta.nombre != 'Chip'" +
+                "                order by o.fecha desc;";
 
         consulta = consulta.replace(" ", "%20");
         String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;

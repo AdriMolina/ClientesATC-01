@@ -83,14 +83,16 @@ public class PedidosFragment extends Fragment implements Basic, Response.Listene
         //Inicia la peticion
         RequestQueue queue = Volley.newRequestQueue(getContext());
         String consulta = "SELECT o.id, o.id, o.folio,  DATE(o.fecha)," +
-                            " (SELECT SUM( od.precio_final * od.cantidad)" +
-                            " FROM orden_descripcion od, orden ord" +
-                            " where od.orden_id = ord.id" +
-                            " AND ord.id = o.id) AS total" +
-                            " from orden o" +
-                            " where o.id not in(Select orden_id from orden_completa)" +
-                            " and o.cliente_id =" +IDUsusario+
-                            " order by o.fecha desc;";
+                "                             (SELECT SUM( od.precio_final * od.cantidad)" +
+                "                             FROM orden_descripcion od, orden ord" +
+                "                             where od.orden_id = ord.id" +
+                "                             AND ord.id = o.id) AS total" +
+                "                             from orden o, cliente cl, clave_cliente cc" +
+                "                             where o.id not in(Select orden_id from orden_completa)" +
+                "                             and cc.cliente_id = cl.id" +
+                "                             and o.cliente_id = cl.id" +
+                "                             and cc.id =" +IDClaveCliente+
+                "                             order by o.fecha desc;";
 
         consulta = consulta.replace(" ", "%20");
         String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;

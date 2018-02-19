@@ -11,7 +11,7 @@ public interface Basic {
     String USER = "root";
     String PASS = "";
     String DB = "marquesada";
-    String IDUsusario = "20";
+    String IDClaveCliente = "20";
 
 
 }

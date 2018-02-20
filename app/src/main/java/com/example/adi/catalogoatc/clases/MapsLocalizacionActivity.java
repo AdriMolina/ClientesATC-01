@@ -10,12 +10,14 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.audiofx.BassBoost;
 import android.os.Build;
+import android.os.CountDownTimer;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -47,6 +49,9 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
     static double latitud;
     static double longitud;
     JSONObject jsonObject = null;
+    TextView contgador;
+    // Cronómetro de la aplicación.
+    private CountDownTimer timer;
     static String usuario, id, numero, direccion;
     String url;
     private ProgressDialog progressDialog;
@@ -123,22 +128,17 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
 
                 if (response.length()>0){
                     //rutas
-
-
-
                     try{
                         jsonObject = response.getJSONObject(0);
                     }catch (JSONException e){
                         jsonObject = new JSONObject();
                     }
-
                     //sacar el id
                     try{
                         usuario = jsonObject.getString("0");
                     }catch (JSONException e){
                         usuario = null;
                     }
-
 
                     //Consulta de latitud y longitud del todos lo clientes
 
@@ -203,6 +203,9 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
                     queue.add(request);
 
 
+                    //Actualizacion de la ubicacion cada detrminado momento
+
+
                 }else{
                     //cliente
 
@@ -264,6 +267,37 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
        */
 
     }
+//Metodo para realizar el cambio de ubicacion
+    public void cambio(){
+        // Iniciamos el timer, como parámetros pasaremos el número de
+        // minutos que hemos establecido en la aplicación, multiplicado
+        // por 60 y por 1000 para obtener el valor en milisegundos, el
+        // segúndo parámetro es el que nos dirá cada cuánto se produce el
+        // "tick".
+        timer = new CountDownTimer(100000, 1000) {
+            @Override
+            public void onTick(long l) {
+                // Este método se lanza por cada lapso de tiempo
+                // transcurrido,
+                contgador.setText(String
+                        .valueOf(l / 1000) + "s");
+            }
+
+            @Override
+            public void onFinish() {
+
+               // locationStart();
+
+                // Mostramos el aviso de que ha finalizado el tiempo.
+                Toast.makeText(MapsLocalizacionActivity.this,
+                        "El tiempo ha terminado",
+                        Toast.LENGTH_SHORT).show();
+            }
+        };
+        timer.start();
+    }
+
+    //Tomar latitud y longitud actual
 
 
 }

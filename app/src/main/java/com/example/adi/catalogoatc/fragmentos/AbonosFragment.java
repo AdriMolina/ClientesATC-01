@@ -149,7 +149,7 @@ public class AbonosFragment extends Fragment implements Basic, Response.Listener
             }
         });*/
 //Evento del boton buscar
-        btnBucar.setOnClickListener(new View.OnClickListener() {
+      /*  btnBucar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getContext(), "preciono......", Toast.LENGTH_SHORT).show();
@@ -159,7 +159,7 @@ public class AbonosFragment extends Fragment implements Basic, Response.Listener
                 transaction.addToBackStack(null);
                 transaction.commit();
             }
-        });
+        });*/
 
         //COMIENZA EL PROCESO DE LA CONSULTA
 

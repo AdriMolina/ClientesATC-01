@@ -63,12 +63,6 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
 
     }
 
-
-
-
-
-
-
     //Metodo que verifica si tenemos permiso de gps en el telefono celular
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

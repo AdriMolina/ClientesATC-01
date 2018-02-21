@@ -22,32 +22,31 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+import static android.content.Context.LOCATION_SERVICE;
+
 /**
  * Created by Adi on 20/02/2018.
  */
 
-public class LocalizacionCoordenadas extends Activity {
+public class LocalizacionCoordenadas {
 
-    Context activity;
+    Context context;
 
-    public LocalizacionCoordenadas(Context activity) {
-        this.activity = activity;
+    public LocalizacionCoordenadas(Context context) {
+        this.context = context;
     }
 
     // Cronómetro de la aplicación.
     private CountDownTimer timer;
     static String latitud, longitud, direccion;
+
     private void locationStart() {
-        LocationManager mlocManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
+        LocationManager mlocManager = (LocationManager) context.getSystemService(LOCATION_SERVICE);
         Localizacion Local = new Localizacion();
         Local.setMainActivity(this);
-        final boolean gpsEnabled = mlocManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        if (!gpsEnabled) {
-            Intent settingsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            startActivity(settingsIntent);
-        }
-        if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions((Activity) activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,}, 1000);
+
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
             return;
         }
         mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, (LocationListener) Local);
@@ -71,23 +70,9 @@ public class LocalizacionCoordenadas extends Activity {
            latitud= String.valueOf(loc.getLatitude());
             longitud = String.valueOf(loc.getLongitude());
 
-            String Text = "Mi ubicacion actual es: " + "\n Lat = "
-                    + loc.getLatitude() + "\n Long = " + loc.getLongitude();
 
-            //mensaje1.setText(Text);
-            //this.mainActivity.setLocation(loc);
-        }
-        @Override
-        public void onProviderDisabled(String provider) {
-// Este metodo se ejecuta cuando el GPS es desactivado
-            Toast.makeText(LocalizacionCoordenadas.this,"GPS Desactivado",Toast.LENGTH_LONG);
-        }
-        @Override
-        public void onProviderEnabled(String provider) {
-// Este metodo se ejecuta cuando el GPS es activado
-            Toast.makeText(LocalizacionCoordenadas.this,"GPS Activado",Toast.LENGTH_LONG);
 
-        }
+         }
         @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {
             switch (status) {
@@ -103,15 +88,24 @@ public class LocalizacionCoordenadas extends Activity {
             }
         }
 
+        @Override
+        public void onProviderEnabled(String s) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String s) {
+
+        }
 
 
     }
     public void setLocation(Location loc) {
-//Obtener la direccion de la calle a partir de la latitud y la longitud
+/*Obtener la direccion de la calle a partir de la latitud y la longitud
         if (loc.getLatitude() != 0.0 && loc.getLongitude() != 0.0) {
             try {
-                Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-                List<Address> list = geocoder.getFromLocation(
+            //    Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+              //  List<Address> list = geocoder.getFromLocation(
                         loc.getLatitude(), loc.getLongitude(), 1);
                 if (!list.isEmpty()) {
                     Address DirCalle = list.get(0);
@@ -122,7 +116,7 @@ public class LocalizacionCoordenadas extends Activity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
     }
     public void cambio() {
         // Iniciamos el timer, como parámetros pasaremos el número de
@@ -141,13 +135,10 @@ public class LocalizacionCoordenadas extends Activity {
 
             @Override
             public void onFinish() {
-
-                locationStart();
+                new Localizacion();
 
                 // Mostramos el aviso de que ha finalizado el tiempo.
-                Toast.makeText(LocalizacionCoordenadas.this,
-                        "El tiempo ha terminado",
-                        Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "yaaaa", Toast.LENGTH_LONG).show();
             }
         };
         timer.start();

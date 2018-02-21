@@ -205,7 +205,8 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
 
 
                     //Actualizacion de la ubicacion cada detrminado momento
-                    LocalizacionCoordenadas lc = new LocalizacionCoordenadas(getApplicationContext());
+
+                    LocalizacionCoordenadas lc = new LocalizacionCoordenadas(MapsLocalizacionActivity.this);
                     lc.cambio();
 
                 }else{

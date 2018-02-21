@@ -53,9 +53,10 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
     TextView contgador;
     // Cronómetro de la aplicación.
     private CountDownTimer timer;
-    static String usuario, id, numero, direccion;
+    static String usuario, id, numero, direccion, lati, longi;
     String url;
     private ProgressDialog progressDialog;
+    private Configuracion configuracion;
 
 
     @Override
@@ -208,6 +209,20 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
 
                     LocalizacionCoordenadas lc = new LocalizacionCoordenadas(MapsLocalizacionActivity.this);
                     lc.cambio();
+                    configuracion = new Configuracion(MapsLocalizacionActivity.this);
+                    //Checa si hay datos guardados por default
+                    if (configuracion.getLatitud() != null && configuracion.getLongitud() != null)
+                    {
+                        lati = configuracion.getLatitud();
+                        longi = configuracion.getLongitud();
+                        Toast.makeText(MapsLocalizacionActivity.this, lati+ " "+ longi, Toast.LENGTH_LONG);
+
+
+                    }else{
+                        Toast.makeText(MapsLocalizacionActivity.this, "otro", Toast.LENGTH_LONG);
+
+
+                    }
 
                 }else{
                     //cliente

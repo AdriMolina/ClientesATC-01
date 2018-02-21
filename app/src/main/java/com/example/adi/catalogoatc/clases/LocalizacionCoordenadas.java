@@ -31,6 +31,7 @@ import static android.content.Context.LOCATION_SERVICE;
 public class LocalizacionCoordenadas {
 
     Context context;
+    private Configuracion configuracion;
 
     public LocalizacionCoordenadas(Context context) {
         this.context = context;
@@ -136,11 +137,18 @@ public class LocalizacionCoordenadas {
             @Override
             public void onFinish() {
                 new Localizacion();
-
+                //Guarda datos
+                guardarDatos(latitud,longitud);
                 // Mostramos el aviso de que ha finalizado el tiempo.
                 Toast.makeText(context, "yaaaa", Toast.LENGTH_LONG).show();
             }
         };
         timer.start();
+    }
+    //Método que guarda los datos de usuario y password para recordarlos
+    private void guardarDatos(String user, String pass)
+    {
+        configuracion = new Configuracion(context);
+        configuracion.setValues(user, pass);
     }
 }

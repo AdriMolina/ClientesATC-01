@@ -1,6 +1,7 @@
 package com.example.adi.catalogoatc.clases;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -204,7 +205,8 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
 
 
                     //Actualizacion de la ubicacion cada detrminado momento
-
+                    LocalizacionCoordenadas lc = new LocalizacionCoordenadas(getApplicationContext());
+                    lc.cambio();
 
                 }else{
                     //cliente
@@ -266,35 +268,6 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
         geolocalizar();
        */
 
-    }
-//Metodo para realizar el cambio de ubicacion
-    public void cambio(){
-        // Iniciamos el timer, como parámetros pasaremos el número de
-        // minutos que hemos establecido en la aplicación, multiplicado
-        // por 60 y por 1000 para obtener el valor en milisegundos, el
-        // segúndo parámetro es el que nos dirá cada cuánto se produce el
-        // "tick".
-        timer = new CountDownTimer(100000, 1000) {
-            @Override
-            public void onTick(long l) {
-                // Este método se lanza por cada lapso de tiempo
-                // transcurrido,
-                contgador.setText(String
-                        .valueOf(l / 1000) + "s");
-            }
-
-            @Override
-            public void onFinish() {
-
-               // locationStart();
-
-                // Mostramos el aviso de que ha finalizado el tiempo.
-                Toast.makeText(MapsLocalizacionActivity.this,
-                        "El tiempo ha terminado",
-                        Toast.LENGTH_SHORT).show();
-            }
-        };
-        timer.start();
     }
 
     //Tomar latitud y longitud actual

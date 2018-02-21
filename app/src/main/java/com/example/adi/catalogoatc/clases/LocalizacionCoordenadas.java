@@ -28,11 +28,17 @@ import java.util.Locale;
 
 public class LocalizacionCoordenadas extends Activity {
 
+    Context activity;
+
+    public LocalizacionCoordenadas(Context activity) {
+        this.activity = activity;
+    }
+
     // Cronómetro de la aplicación.
     private CountDownTimer timer;
     static String latitud, longitud, direccion;
     private void locationStart() {
-        LocationManager mlocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        LocationManager mlocManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
         Localizacion Local = new Localizacion();
         Local.setMainActivity(this);
         final boolean gpsEnabled = mlocManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -40,8 +46,8 @@ public class LocalizacionCoordenadas extends Activity {
             Intent settingsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
             startActivity(settingsIntent);
         }
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,}, 1000);
+        if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions((Activity) activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,}, 1000);
             return;
         }
         mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, (LocationListener) Local);
@@ -124,7 +130,7 @@ public class LocalizacionCoordenadas extends Activity {
         // por 60 y por 1000 para obtener el valor en milisegundos, el
         // segúndo parámetro es el que nos dirá cada cuánto se produce el
         // "tick".
-        timer = new CountDownTimer(100000, 1000) {
+        timer = new CountDownTimer(4000, 1000) {
             @Override
             public void onTick(long l) {
                 // Este método se lanza por cada lapso de tiempo

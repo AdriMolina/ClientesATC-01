@@ -5,4 +5,22 @@
     <dimen name="nav_header_vertical_spacing">16dp</dimen>
     <dimen name="nav_header_height">160dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+
+    <!--Unidades de Medida Texto-->
+    <dimen name="titulos_H1">25sp</dimen>
+    <dimen name="texto_generico">18sp</dimen>
+
+
+    <!--Separacion de Contenedores-->
+    <dimen name="margen_derecha">16dp</dimen>
+    <dimen name="margen_izquierda">16dp</dimen>
+    <dimen name="margen_padding">10dp</dimen>
+    <dimen name="margen_margin">16dp</dimen>
+
+    <!--Dimenciones fragment_cantidad_chips-->
+    <dimen name="tamano_imagen_cantidad_chip">60dp</dimen>
+
+
+
+
 </resources>

@@ -6,10 +6,33 @@
 
     <string name="action_settings">Settings</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="sin_conexion">Sin conexión</string>
+
+    <!-- Revisar si estas lieneas de texto estan siendo usadas-->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_geolocalizador">Map</string>
     <string name="title_activity_geolocalizacion">Map</string>
     <string name="title_activity_localizacion">Map</string>
     <string name="title_activity_maps_localizacion">Map</string>
+
+
+    <!-- Texto usado dentro del XML fragment_buzon-->
+    <string name="titulo_caja_comentarios">Comentarios</string>
+    <string name="texto_caja_comentarios">Para nosotros tu opinión es muy importante, por favor déjanos tus comentarios.</string>
+
+    <!--Texto fragment_detalles_catalogo-->
+    <string name="texto_marca">Marca:</string>
+    <string name="texto_modelo">Modelo:</string>
+    <string name="texto_precio">Precio:</string>
+    <string name="texto_existencia">Existencia:</string>
+    <string name="boton_agregar">Agregar</string>
+
+
+    <string name="texto_compras_contado">Compras al Contado</string>
+
+    <string name="texto_total_a_pagar">Total a pagar:</string>
+    <string name="texto_total">Total</string>
+
+
+
 </resources>

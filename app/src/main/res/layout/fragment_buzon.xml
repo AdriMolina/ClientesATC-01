@@ -1,67 +1,49 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginEnd="@dimen/margen_derecha"
+    android:layout_marginStart="@dimen/margen_izquierda"
     android:background="@color/colorWhite"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.adi.catalogoatc.fragmentos.BuzonFragment">
-
-
 
     <TextView
         android:id="@+id/tituloBuzon"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Deja tus comentarios"
+        android:text="@string/titulo_caja_comentarios"
         android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:textSize="25dp"/>
+        android:textSize="@dimen/titulos_H1"
+        android:padding="@dimen/margen_padding"
+        android:gravity="center"
+        />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="10dp"
+        android:padding="@dimen/margen_padding"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-        android:layout_below="@+id/tituloBuzon"
-        android:text="Para nosotros tu opinion es muy importante agradecemos dejar tus comentarios."
-
+        android:text="@string/texto_caja_comentarios"
         />
 
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/Disenio"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="150dp"
-        app:cardBackgroundColor="@android:color/background_light">
-
     <EditText
-        android:layout_below="@id/tituloBuzon"
         android:inputType="textMultiLine"
         android:lines="8"
         android:minLines="6"
-        android:gravity="top|left"
         android:maxLines="10"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
         android:scrollbars="vertical"
-        android:background="@android:color/transparent"
+        android:padding="@dimen/margen_padding"
         />
-    </android.support.v7.widget.CardView>
-
 
     <ImageButton
         android:id="@+id/btnAceptar"
-        android:layout_width="80dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:src="@drawable/aceptar"
-        android:scaleType="fitCenter"
-        android:layout_below="@+id/Disenio"
-        android:layout_centerHorizontal="true" />
+        android:layout_gravity="bottom|center"
         />
-
-
-</RelativeLayout>
+</LinearLayout>

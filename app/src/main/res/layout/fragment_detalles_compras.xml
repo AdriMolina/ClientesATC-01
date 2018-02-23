@@ -1,67 +1,59 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:background="@color/colorWhite"
     android:id="@+id/detallesFragment"
     tools:context="com.example.adi.catalogoatc.fragmentos.DetallesComprasFragment">
 
-
     <TextView
         android:id="@+id/TiuloDetalles"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Compras al Contado"
-        android:textSize="25dp"
+        android:text="@string/texto_compras_contado"
+        android:textSize="@dimen/titulos_H1"
         android:textStyle="bold"
-        android:layout_marginLeft="30dp"
-        android:layout_centerHorizontal="true"/>
+        android:gravity="center"
+        android:layout_margin="@dimen/margen_margin"/>
 
-    <ListView
-        android:id="@+id/listaDetalles"
-        android:layout_width="wrap_content"
-        android:layout_height="400dp"
-        android:layout_marginTop="35dp">
-
-    </ListView>
-    <android.support.v7.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/listaDetalles"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        app:cardBackgroundColor="@android:color/background_light">
+        android:gravity="center">
 
-        <RelativeLayout
+        <ListView
+            android:id="@+id/listaDetalles"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+        </ListView>
 
-            <TextView
-                android:id="@+id/TotalPagarContado"
-                android:layout_marginTop="8dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Total a pagar:"
-                android:layout_marginLeft="10dp"
-                android:textSize="15dp"
-                android:layout_marginBottom="8dp"
-                android:textStyle="bold"
-                />
-            <TextView
-                android:id="@+id/txtTotalContado"
-                android:layout_width="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_height="wrap_content"
-                android:text="Total"
-                android:textSize="15dp"
-                android:layout_toEndOf="@+id/TotalPagarContado"
-                android:layout_marginRight="10dp"
-                />
-        </RelativeLayout>
-    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
 
+    <TextView
+        android:id="@+id/TotalPagarContado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/texto_total_a_pagar"
+        android:textSize="@dimen/texto_generico"
+        android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/txtTotalContado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@+id/TotalPagarContado"
+        android:text="@string/texto_total"
+        android:textSize="@dimen/texto_generico"
+        />
 
-</RelativeLayout>
+</android.support.v7.widget.CardView>
+    </RelativeLayout>
+</LinearLayout>

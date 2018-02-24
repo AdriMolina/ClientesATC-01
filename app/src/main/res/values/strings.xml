@@ -20,7 +20,23 @@
     <string name="titulo_caja_comentarios">Comentarios</string>
     <string name="texto_caja_comentarios">Para nosotros tu opinión es muy importante, por favor déjanos tus comentarios.</string>
 
-    <!--Texto fragment_detalles_catalogo-->
+
+
+
+    <string name="texto_compras_contado">Compras al Contado</string>
+
+    <string name="texto_total_a_pagar">Total a pagar:</string>
+    <string name="texto_total">Total</string>
+  
+
+    <!-- Texto Generico-->
+    <string name="texto_nombre">Nombre:</string>
+    <string name="texto_direccion">Dirección:</string>
+    <string name="texto_telefono">Teléfono:</string>
+    <string name="texto_fecha">Fecha</string>
+    <string name="texto_folio">Folio</string>
+    <string name="texto_estado">Estado</string>
+    <string name="texto_articulo">Articulo</string>
     <string name="texto_marca">Marca:</string>
     <string name="texto_modelo">Modelo:</string>
     <string name="texto_precio">Precio:</string>
@@ -28,10 +44,7 @@
     <string name="boton_agregar">Agregar</string>
 
 
-    <string name="texto_compras_contado">Compras al Contado</string>
 
-    <string name="texto_total_a_pagar">Total a pagar:</string>
-    <string name="texto_total">Total</string>
 
 
 

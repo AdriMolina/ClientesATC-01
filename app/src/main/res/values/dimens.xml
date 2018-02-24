@@ -8,7 +8,11 @@
 
     <!--Unidades de Medida Texto-->
     <dimen name="titulos_H1">25sp</dimen>
+    <dimen name="texto_mediano">20sp</dimen>
     <dimen name="texto_generico">18sp</dimen>
+
+    <dimen name="margen_entre_texto">8dp</dimen>
+
 
 
     <!--Separacion de Contenedores-->
@@ -18,7 +22,7 @@
     <dimen name="margen_margin">16dp</dimen>
 
     <!--Dimenciones fragment_cantidad_chips-->
-    <dimen name="tamano_imagen_cantidad_chip">60dp</dimen>
+    <dimen name="tamano_imagen">60dp</dimen>
 
 
 

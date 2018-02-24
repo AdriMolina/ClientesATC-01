@@ -15,53 +15,70 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/usuario"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/margen_margin"
         />
     <TextView
         android:id="@+id/txtedtNombreTitulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/imgUsuarioEdit"
-        android:text="Nombre:"
+        android:textSize="@dimen/texto_generico"
+        android:text="@string/texto_nombre"
+        android:layout_margin="@dimen/margen_margin"
         android:textStyle="bold"/>
+
     <EditText
         android:id="@+id/editNombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/txtedtNombreTitulo"
-         />
+        android:textSize="@dimen/texto_generico"
+        android:layout_marginEnd="@dimen/margen_derecha"
+        android:layout_marginStart="@dimen/margen_izquierda"
+        android:inputType="textAutoCorrect"
+        />
     <TextView
         android:id="@+id/txtDireccion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:layout_below="@id/editNombre"
-        android:text="Dirección:"/>
+        android:text="@string/texto_direccion"
+        android:textSize="@dimen/texto_generico"
+        android:layout_margin="@dimen/margen_margin"
+
+        />
+
     <EditText
         android:id="@+id/editDireccion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/txtDireccion"
-        />
+        android:layout_marginEnd="@dimen/margen_derecha"
+        android:layout_marginStart="@dimen/margen_izquierda"
+        android:inputType="textAutoCorrect"
+        android:textSize="@dimen/texto_generico" />
+
     <TextView
         android:id="@+id/txtTelefono"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:layout_below="@id/editDireccion"
-        android:text="Telefono:"/>
+        android:textSize="@dimen/texto_generico"
+        android:layout_margin="@dimen/margen_margin"
+        android:text="@string/texto_telefono"/>
     <EditText
         android:id="@+id/editTelefono"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/txtTelefono"
+        android:inputType="phone"
+        android:layout_marginEnd="@dimen/margen_derecha"
+        android:layout_marginStart="@dimen/margen_izquierda"
         />
     <ImageButton
         android:id="@+id/btnAceptar"
-        android:layout_width="80dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:src="@drawable/aceptar"
-        android:scaleType="fitCenter"
-        android:layout_below="@+id/editTelefono"
-        android:layout_centerHorizontal="true" />
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/margen_margin"
+        />
 
 </LinearLayout>

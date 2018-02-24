@@ -1,48 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+    android:id="@+id/txtFolio"
+    android:layout_marginTop="@dimen/margen_margin"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/margen_izquierda"
+    android:text="@string/texto_folio"
+    android:textSize="@dimen/titulos_H1"
+    android:textStyle="bold"/>
 
+    <TextView
+    android:id="@+id/txtFecha"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/margen_izquierda"
+    android:text="@string/texto_fecha"
+    android:layout_marginTop="@dimen/margen_entre_texto"
+    android:textSize="@dimen/texto_mediano"
+    android:layout_marginRight="@dimen/margen_izquierda"/>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginLeft="10dp"
-                >
-
-                <TextView
-                    android:id="@+id/txtFolio"
-                    android:layout_marginTop="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:text="Folio"
-                    android:textSize="25dp"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:id="@+id/txtFecha"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:text="Fecha"
-                    android:textSize="15dp"
-                    android:layout_marginRight="10dp"/>
-                <TextView
-                    android:id="@+id/txtTotal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Total"
-                    android:layout_marginLeft="15dp"
-                    android:textSize="15dp"
-                    android:layout_marginRight="10dp"/>
-
-
-
-        </LinearLayout>
-
+    <TextView
+     android:id="@+id/txtTotal"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:text="@string/texto_total"
+     android:layout_marginStart="@dimen/margen_izquierda"
+     android:layout_marginTop="@dimen/margen_entre_texto"
+     android:textSize="@dimen/texto_mediano"/>
 
 </LinearLayout>

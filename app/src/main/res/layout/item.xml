@@ -9,21 +9,19 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
         app:cardBackgroundColor="@android:color/background_light">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_margin="@dimen/margen_margin">
 
             <ImageView
                 android:id="@+id/idImagen"
-                android:layout_width="100dp"
-                android:layout_height="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="15dp" />
+                android:layout_width="@dimen/tamano_imagen"
+                android:layout_height="@dimen/tamano_imagen"
+                android:layout_margin="@dimen/margen_margin" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -35,25 +33,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Nombre"
-                    android:textSize="20dp"
+                    android:text="@string/sin_conexion"
+                    android:textSize="@dimen/texto_mediano"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txtDesc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:text="Descripcion"
-                    android:textSize="18dp" />
+                    android:text="@string/sin_conexion"
+                    android:layout_marginTop="@dimen/margen_entre_texto"
+                    android:textSize="@dimen/texto_generico" />
 
                 <TextView
                     android:id="@+id/txtPrecio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:text="Precio"
-                    android:textSize="15dp" />
+                    android:text="@string/sin_conexion"
+                    android:layout_marginTop="@dimen/margen_entre_texto"
+                    android:textSize="@dimen/texto_generico" />
 
             </LinearLayout>
 
@@ -63,16 +61,14 @@
 
                 <Button
                     android:id="@+id/addCarrito"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_alignParentRight="true"
+                    android:layout_width="@dimen/tamano_imagen"
+                    android:layout_height="@dimen/tamano_imagen"
+                    android:layout_alignParentEnd="true"
                     android:layout_alignParentTop="true"
                     android:background="@drawable/agregar"
-                    android:focusable="false"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/margen_margin"
+                    android:layout_marginEnd="@dimen/margen_derecha"
                     android:focusableInTouchMode="false"
-                    android:scaleType="fitCenter"
-
                      />
             </RelativeLayout>
 

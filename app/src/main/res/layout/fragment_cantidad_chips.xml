@@ -14,8 +14,8 @@
 
         <ImageView
             android:id="@+id/imgAlerta"
-            android:layout_width="@dimen/tamano_imagen_cantidad_chip"
-            android:layout_height="@dimen/tamano_imagen_cantidad_chip"/>
+            android:layout_width="@dimen/tamano_imagen"
+            android:layout_height="@dimen/tamano_imagen"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,6 +27,9 @@
                 android:id="@+id/txtMensaje"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="@dimen/texto_generico"
+                android:text="@string/sin_conexion"
                 android:gravity="center"
                 />
         </LinearLayout>

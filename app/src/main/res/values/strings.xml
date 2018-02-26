@@ -26,7 +26,7 @@
     <string name="texto_compras_contado">Compras al Contado</string>
 
     <string name="texto_total_a_pagar">Total a pagar:</string>
-    <string name="texto_total">Total</string>
+    <string name="texto_total">Total:</string>
   
 
     <!-- Texto Generico-->
@@ -42,6 +42,11 @@
     <string name="texto_precio">Precio:</string>
     <string name="texto_existencia">Existencia:</string>
     <string name="boton_agregar">Agregar</string>
+    <string name="boton_articulo">Articulo</string>
+    <string name="texto_cantidad">Cantidad:</string>
+    <string name="texto_tipo">Tipo</string>
+    <string name="texto_eliminar">Eliminar</string>
+
 
 
 

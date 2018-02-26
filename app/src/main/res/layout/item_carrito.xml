@@ -7,11 +7,12 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.CardView
+        android:id="@+id/cv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
-        app:cardMaxElevation="15dp"
-        android:id="@+id/cv">
+        android:layout_margin="@dimen/margen_margin"
+        android:elevation="@dimen/elevacion_card"
+        android:padding="5dp">
 
 
         <RelativeLayout
@@ -19,136 +20,134 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:id="@+id/ivImage"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                app:srcCompat="@drawable/catalogo"
-                android:id="@+id/ivImage"
-                android:padding="5dp"/>
+                android:padding="5dp"
+                app:srcCompat="@drawable/catalogo" />
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="5dp"
                 android:layout_marginLeft="11dp"
                 android:layout_marginStart="11dp"
-                android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/ivImage"
                 android:layout_toEndOf="@+id/ivImage"
-                android:padding="5dp"
-                android:layout_marginBottom="5dp">
+                android:layout_toRightOf="@+id/ivImage"
+                android:orientation="vertical"
+                android:padding="5dp">
 
                 <TextView
-                    android:text="Tipo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/txtTipo"
-                    android:textStyle="normal|bold"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:text="Marca"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/txtMarca"
-                    android:textStyle="normal|bold"
-                    android:textSize="18sp" />
+                    android:text="@string/texto_tipo"
+                    android:textColor="@color/primaryText"
+                    android:textSize="@dimen/texto_generico"
+                    android:textStyle="normal|bold" />
 
                 <TextView
-                    android:text="Modelo"
+                    android:id="@+id/txtMarca"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/texto_marca"
+                    android:textSize="@dimen/texto_generico"
+                    android:textStyle="normal|bold"
+                    android:textColor="@color/primaryText"/>
+
+                <TextView
                     android:id="@+id/txtModelo"
-                    android:layout_height="36dp" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:textColor="@color/primaryText"
+                    android:text="@string/texto_modelo"
+
+                    />
 
             </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/ivImage"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true">
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/ivImage">
 
                 <TextView
-                    android:text="Precio"
+                    android:id="@+id/txtPrecio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/txtPrecio"
                     android:layout_alignBaseline="@+id/btnRemove"
                     android:layout_alignBottom="@+id/btnRemove"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginRight="22dp"
+                    android:layout_alignParentRight="true"
                     android:layout_marginEnd="22dp"
+                    android:layout_marginRight="22dp"
+                    android:text="@string/texto_precio"
+                    android:textColor="@color/primaryText"
                     android:textSize="16dp" />
 
                 <Button
-                    android:text="Eliminar"
-                    android:layout_width="wrap_content"
                     android:id="@+id/btnRemove"
-                    android:textAllCaps="false"
-                    android:fontFamily="sans-serif"
-                    android:textColor="@color/colorWhite"
-                    android:elevation="4dp"
-                    android:backgroundTint="@color/colorPrimary"
+                    android:layout_width="wrap_content"
                     android:layout_height="40dp"
-                    android:padding="5dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
                     android:layout_marginLeft="12dp"
                     android:layout_marginStart="12dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
+                    android:backgroundTint="@color/colorPrimary"
+                    android:elevation="4dp"
+                    android:fontFamily="sans-serif"
+                    android:padding="5dp"
+                    android:text="@string/texto_eliminar"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorWhite" />
 
                 <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
                     android:layout_marginLeft="17dp"
                     android:layout_marginStart="17dp"
-                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/btnRemove"
                     android:layout_toRightOf="@+id/btnRemove"
-                    android:layout_toEndOf="@+id/btnRemove">
+                    android:orientation="horizontal">
 
                     <ImageButton
-                        app:srcCompat="@drawable/restar"
                         android:id="@+id/qty_decrease"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
                         android:layout_weight="1"
                         android:elevation="4dp"
-                        android:layout_height="36dp"
-                        android:layout_width="36dp"
-                        android:scaleType="fitCenter"/>
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/restar" />
 
                     <TextView
-                        android:inputType="number"
-                        android:ems="10"
                         android:id="@+id/edQty"
+                        android:layout_width="50dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="0"
+                        android:ems="10"
+                        android:inputType="number"
                         android:text="1"
                         android:textAlignment="center"
-                        android:textSize="12sp"
-                        android:layout_weight="0"
-                        android:layout_width="50dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_height="20dp" />
+                        android:textColor="@color/primaryText"
+                        android:textSize="12sp" />
 
                     <ImageButton
-                        app:srcCompat="@drawable/sumar"
                         android:id="@+id/qty_increase"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
                         android:layout_weight="1"
                         android:elevation="4dp"
-                        android:layout_height="36dp"
-                        android:layout_width="36dp"
-                        android:scaleType="fitCenter"/>
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/sumar" />
 
                 </LinearLayout>
 
-                <TextView
-                    android:text="$"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16dp"
-                    android:layout_alignBaseline="@+id/tvPrice"
-                    android:layout_alignBottom="@+id/tvPrice"
-                    android:layout_toLeftOf="@+id/tvPrice"
-                    android:layout_toStartOf="@+id/tvPrice" />
 
             </RelativeLayout>
 

@@ -13,6 +13,7 @@
     android:layout_marginStart="@dimen/margen_izquierda"
     android:text="@string/texto_folio"
     android:textSize="@dimen/titulos_H1"
+    android:textColor="@color/primaryText"
     android:textStyle="bold"/>
 
     <TextView
@@ -22,6 +23,7 @@
     android:layout_marginLeft="@dimen/margen_izquierda"
     android:text="@string/texto_fecha"
     android:layout_marginTop="@dimen/margen_entre_texto"
+    android:textColor="@color/secondarText"
     android:textSize="@dimen/texto_mediano"
     android:layout_marginRight="@dimen/margen_izquierda"/>
 
@@ -32,6 +34,7 @@
      android:text="@string/texto_total"
      android:layout_marginStart="@dimen/margen_izquierda"
      android:layout_marginTop="@dimen/margen_entre_texto"
+     android:textColor="@color/primaryText"
      android:textSize="@dimen/texto_mediano"/>
 
 </LinearLayout>

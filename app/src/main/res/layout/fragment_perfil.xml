@@ -11,46 +11,47 @@
 
 
 
-
-    <ImageView
-        android:id="@+id/idImagen"
-        android:layout_width="38dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="@dimen/margen_margin"
-        android:src="@drawable/usuario" />
-
-    <TextView
-        android:id="@+id/txtNombre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/idImagen"
-        android:layout_margin="@dimen/margen_margin"
-        android:hint="@string/texto_nombre"
-        android:textColor="@color/primaryText"
-        android:textSize="@dimen/titulos_H1"
-        android:gravity="center"
-
-        android:textStyle="bold" />
     <android.support.v7.widget.CardView
         android:id="@+id/car"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/margen_derecha"
-        android:layout_marginStart="@dimen/margen_izquierda"
+        android:layout_margin="@dimen/margen_margin"
+        android:elevation="@dimen/elevacion_card"
         app:cardBackgroundColor="@android:color/background_light">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:padding="@dimen/margen_padding">
 
 
+
+            <ImageView
+                android:id="@+id/idImagen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="@dimen/margen_margin"
+                android:src="@drawable/usuario" />
+
+            <TextView
+                android:id="@+id/txtNombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idImagen"
+                android:layout_margin="@dimen/margen_margin"
+                android:hint="@string/texto_nombre"
+                android:textColor="@color/primaryText"
+                android:textSize="@dimen/titulos_H1"
+                android:gravity="center"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtTituloDireccion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/texto_direccion"
+                android:layout_below="@id/txtNombre"
                 android:textSize="@dimen/texto_generico"
                 android:textStyle="bold"
                 android:textColor="@color/primaryText"

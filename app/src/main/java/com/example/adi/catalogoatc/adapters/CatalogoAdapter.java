@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -62,7 +63,7 @@ public class CatalogoAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent)
+    public View getView(final int position, View convertView, ViewGroup parent)
     {
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
@@ -75,6 +76,16 @@ public class CatalogoAdapter extends BaseAdapter {
         TextView txtPrecio = (TextView)view.findViewById(R.id.txtPrecio);
         TextView txtDesc = (TextView)view.findViewById(R.id.txtDesc);
         Button carrito = (Button)view.findViewById(R.id.addCarrito);
+        LinearLayout item = (LinearLayout)view.findViewById(R.id.itemElemento);
+
+        item.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Toast.makeText(context, "Funciona " + position, Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         carrito.setOnClickListener(new View.OnClickListener() {

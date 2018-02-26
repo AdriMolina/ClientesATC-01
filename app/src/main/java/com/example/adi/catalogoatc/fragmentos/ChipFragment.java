@@ -116,12 +116,19 @@ public class ChipFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         //Agrega y ejecuta la cola
         queue.add(request);
 
+        /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+            {
+                Toast.makeText(getContext(), "Hola", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+       listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Object listItem = listView.getItemAtPosition(position);
-
                 //SACA EL ID DEL ARTICULO
                 int idArticulo =  (int)adapter.getItemId(position);
                 Fragment nuevofragmento = DetallesCatalogoFragment.newInstance(idArticulo, "Chip");
@@ -133,7 +140,8 @@ public class ChipFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 Toast.makeText(getContext(), "preciono......", Toast.LENGTH_SHORT).show();
 
             }
-        });
+        });*/
+
         //Parte que recarga el listview solamente si llega al tope
         listView.setOnScrollListener(new AbsListView.OnScrollListener()
         {

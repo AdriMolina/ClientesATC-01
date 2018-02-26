@@ -117,8 +117,21 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //SACA EL ID DEL ARTICULO
+                int idArticulo =  (int)adapter.getItemId(i);
+                Toast.makeText(getContext(), String.valueOf(idArticulo), Toast.LENGTH_SHORT).show();
+                Fragment nuevofragmento = DetallesCatalogoFragment.newInstance(idArticulo, "Accesorios");
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.content_main, nuevofragmento);
+                transaction.addToBackStack(null);
+                transaction.commit();
 
+            }
+        });
 
+        /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 //SACA EL ID DEL ARTICULO
                 int idArticulo =  (int)adapter.getItemId(i);
@@ -129,7 +142,7 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
                 transaction.addToBackStack(null);
                 transaction.commit();
             }
-        });
+        });*/
 
         //Parte que recarga el listview solamente si llega al tope
         listView.setOnScrollListener(new AbsListView.OnScrollListener()

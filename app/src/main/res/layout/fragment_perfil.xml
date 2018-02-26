@@ -10,12 +10,25 @@
     tools:context="com.example.adi.catalogoatc.fragmentos.PerfilFragment">
 
 
+    <android.support.v7.widget.CardView
+        android:id="@+id/car"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margen_margin"
+        android:elevation="@dimen/elevacion_card"
+        app:cardBackgroundColor="@android:color/background_light">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/margen_padding">
+
             <ImageView
                 android:id="@+id/idImagen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
                 android:layout_margin="@dimen/margen_margin"
-                android:layout_gravity="center"
                 android:src="@drawable/usuario" />
 
 
@@ -23,53 +36,44 @@
                 android:id="@+id/txtNombre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/idImagen"
                 android:layout_margin="@dimen/margen_margin"
                 android:hint="@string/texto_nombre"
+                android:textColor="@color/primaryText"
                 android:textSize="@dimen/titulos_H1"
                 android:textStyle="bold" />
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/car"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/margen_derecha"
-        android:layout_marginStart="@dimen/margen_izquierda"
-        app:cardBackgroundColor="@android:color/background_light">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-
             <TextView
+                android:id="@+id/txtTituloDireccion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/texto_direccion"
-                android:id="@+id/txtTituloDireccion"
                 android:textSize="@dimen/texto_generico"
-                android:layout_marginStart="@dimen/margen_izquierda"
                 android:textStyle="bold"
-            />
+                android:layout_below="@+id/txtNombre"
+                android:textColor="@color/primaryText"
+                android:layout_alignStart="@+id/txtDireccion" />
 
-             <TextView
+            <TextView
                 android:id="@+id/txtDireccion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txtTituloDireccion"
                 android:layout_marginStart="@dimen/margen_izquierda"
                 android:text="@string/sin_conexion"
+                android:textColor="@color/secondarText"
                 android:textSize="@dimen/texto_generico" />
 
             <TextView
+                android:id="@+id/txtTelefonoTitulo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/texto_telefono"
-                android:id="@+id/txtTelefonoTitulo"
-                android:textSize="@dimen/texto_generico"
-                android:textStyle="bold"
-                android:layout_marginStart="@dimen/margen_izquierda"
                 android:layout_below="@+id/txtDireccion"
-                />
+                android:layout_marginStart="@dimen/margen_izquierda"
+                android:text="@string/texto_telefono"
+                android:textColor="@color/primaryText"
+                android:textSize="@dimen/texto_generico"
+                android:textStyle="bold" />
 
 
             <TextView
@@ -77,20 +81,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txtTelefonoTitulo"
-                android:text="@string/sin_conexion"
                 android:layout_marginStart="@dimen/margen_izquierda"
-                android:textSize="@dimen/texto_generico" />
+                android:text="@string/sin_conexion"
+                android:textSize="@dimen/texto_generico"
+                android:textColor="@color/secondarText"/>
 
 
             <ImageButton
                 android:id="@+id/btnEditar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/editar"
+                android:layout_above="@id/txtTelefono"
                 android:layout_alignParentRight="true"
-                android:background="@android:color/transparent"
-                />
-
+                android:src="@drawable/ic_editar"
+                android:textColor="@color/colorWhite"
+                android:elevation="@dimen/elevacion_raised_buttom"
+                android:theme="@style/StyleButton"/>
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 

@@ -5,20 +5,10 @@
     android:id="@+id/contenedorChip"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context="com.example.adi.catalogoatc.fragmentos.ChipFragment">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
         <ListView
             android:id="@+id/ListaChip"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
-
-
-
-    </RelativeLayout>
-
-
 </android.support.v4.widget.SwipeRefreshLayout>

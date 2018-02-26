@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
@@ -11,98 +11,107 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margen_margin"
         app:cardBackgroundColor="@android:color/background_light">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/txtArticulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/texto_articulo"
+                android:textSize="@dimen/titulos_H1"
+                android:textStyle="bold"
+                android:textColor="@color/primaryText"/>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="1">
+                <TableRow>
+                    <TextView
+                        android:id="@+id/txtMarca"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margen_margin"
+                        android:text="@string/texto_marca"
+                        android:textSize="@dimen/texto_pequeno"
+                        android:textColor="@color/primaryText"
+                        />
 
 
-        </TableLayout>
-        </android.support.v7.widget.CardView>
+                    <TextView
+                        android:id="@+id/Cantidad"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margen_margin"
+                        android:gravity="right"
+                        android:text="@string/texto_cantidad"
+                        android:textColor="@color/primaryText"
+                        android:textSize="@dimen/texto_pequeno" />
 
-    <TextView
-        android:id="@+id/txtArticulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:text="@string/texto_articulo"
-        android:textSize="@dimen/titulos_H1"
-        android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/txtMarca"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtArticulo"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="10dp"
-        android:text="@string/texto_marca"
-        android:textSize="@dimen/texto_generico"/>
+                    <TextView
+                        android:id="@+id/txtCantidad"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margen_margin"
+                        android:layout_marginTop="@dimen/margen_margin"
+                        android:gravity="center"
+                        android:textSize="@dimen/texto_pequeno" />
+                </TableRow>
 
-    <TextView
-        android:id="@+id/txtModelo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtMarca"
-        android:layout_marginLeft="15dp"
-        android:text="@string/texto_modelo"
-        android:textSize="@dimen/texto_generico" />
+                <TableRow>
+                    <TextView
+                        android:id="@+id/txtModelo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margen_izquierda"
+                        android:text="@string/texto_nombre"
+                        android:textColor="@color/primaryText"
+                        android:textSize="@dimen/texto_pequeno" />
 
-    <TextView
-        android:id="@+id/Cantidad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtArticulo"
-        android:layout_marginLeft="225dp"
-        android:layout_marginRight="10dp"
-        android:text="Cantidad:"
-        android:textSize="15dp" />
 
-    <TextView
-        android:id="@+id/txtCantidad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/txtArticulo"
-        android:layout_marginRight="15dp"
-        android:text="Cantidad"
-        android:textSize="15dp" />
+                    <TextView
+                        android:id="@+id/Precio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:textColor="@color/primaryText"
+                        android:text="@string/texto_precio" />
 
-    <TextView
-        android:id="@+id/Precio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txtCantidad"
-        android:layout_marginLeft="245dp"
-        android:layout_marginRight="15dp"
-        android:text="Precio:"
-        android:textSize="15dp" />
 
-    <TextView
-        android:id="@+id/txtPrecio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/txtCantidad"
-        android:layout_below="@+id/txtCantidad"
-        android:text="Precio" />
+                    <TextView
+                        android:id="@+id/txtPrecio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center" />
 
-    <TextView
-        android:id="@+id/PrecioTotal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txtPrecio"
-        android:layout_marginLeft="255dp"
-        android:layout_marginRight="15dp"
-        android:text="@string/texto_total"
-        android:textSize="@dimen/texto_generico" />
+                </TableRow>
 
-    <TextView
-        android:id="@+id/txtPrecioTotal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/txtPrecio"
-        android:layout_below="@+id/txtPrecio"
-        android:text="Total"
-        android:textSize="@dimen/texto_generico"/>
-</RelativeLayout>
+                <TableRow>
+
+                    <TextView/>
+
+                    <TextView
+                        android:id="@+id/PrecioTotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/texto_total"
+                        android:gravity="right"
+                        android:textColor="@color/primaryText"
+                        android:textSize="@dimen/texto_pequeno" />
+
+                    <TextView
+                        android:id="@+id/txtPrecioTotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textSize="@dimen/texto_pequeno" />
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

@@ -93,6 +93,9 @@
        android:layout_gravity="bottom|end"
        android:textAllCaps="false"
        android:text="@string/boton_agregar"
+       android:textColor="@color/colorWhite"
+       android:elevation="@dimen/elevacion_raised_buttom"
+       android:theme="@style/StyleButton"
        />
 
 </LinearLayout>

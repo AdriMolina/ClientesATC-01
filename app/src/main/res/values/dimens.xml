@@ -10,6 +10,8 @@
     <dimen name="titulos_H1">25sp</dimen>
     <dimen name="texto_mediano">20sp</dimen>
     <dimen name="texto_generico">18sp</dimen>
+    <dimen name="texto_pequeno">15sp</dimen>
+
 
     <dimen name="margen_entre_texto">8dp</dimen>
 
@@ -24,6 +26,13 @@
     <!--Dimenciones fragment_cantidad_chips-->
     <dimen name="tamano_imagen">60dp</dimen>
 
+
+
+    <!--Elevaciones-->
+    <dimen name="elevacion_raised_buttom">2dp</dimen>
+    <dimen name="elevacion_card">2dp</dimen>
+    <dimen name="elevacion_floating_buttom">6dp</dimen>
+    <dimen name="elevacion_picker">24dp</dimen>
 
 
 

@@ -1,8 +1,8 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/colorWhite"
     android:id="@+id/detallesFragment"
@@ -16,44 +16,53 @@
         android:textSize="@dimen/titulos_H1"
         android:textStyle="bold"
         android:gravity="center"
+        android:textColor="@color/primaryText"
         android:layout_margin="@dimen/margen_margin"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center">
 
-        <ListView
-            android:id="@+id/listaDetalles"
+        <android.support.v7.widget.CardView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </ListView>
+            android:layout_height="wrap_content"
+            android:elevation="@dimen/elevacion_card"
+            android:layout_gravity="center"
+            app:cardBackgroundColor="@android:color/background_light"
+            android:layout_below="@+id/listaDetalles"
+            android:layout_centerHorizontal="true"
+            >
 
-    <android.support.v7.widget.CardView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/TotalPagarContado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/texto_total_a_pagar"
-        android:textSize="@dimen/texto_generico"
-        android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/txtTotalContado"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_height="wrap_content"
+                    android:text="Total"
+                    android:textSize="15dp"
+                    android:textColor="@color/primaryText"
+                    android:layout_toEndOf="@+id/TotalPagarContado"
+                    android:layout_marginRight="10dp"
+                    />
 
-    <TextView
-        android:id="@+id/txtTotalContado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_toEndOf="@+id/TotalPagarContado"
-        android:text="@string/texto_total"
-        android:textSize="@dimen/texto_generico"
-        />
+                <TextView
+                    android:id="@+id/TotalPagarContado"
+                    android:layout_marginTop="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/texto_total_a_pagar"
+                    android:textSize="15dp"
+                    android:textColor="@color/primaryText"
+                    android:layout_marginBottom="8dp"
+                    android:textStyle="bold"
+                    />
 
-</android.support.v7.widget.CardView>
-    </RelativeLayout>
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+    <ListView
+    android:id="@+id/listaDetalles"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent">
+    </ListView>
 </LinearLayout>

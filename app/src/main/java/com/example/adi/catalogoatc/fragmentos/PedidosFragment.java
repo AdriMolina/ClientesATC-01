@@ -8,6 +8,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -66,6 +69,7 @@ public class PedidosFragment extends Fragment implements Basic, Response.Listene
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
          view = inflater.inflate(R.layout.fragment_pedidos, container, false);
 
 
@@ -150,5 +154,14 @@ public class PedidosFragment extends Fragment implements Basic, Response.Listene
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        MenuItem menuItem =menu.findItem(R.id.itembucar);
+        MenuItem menuItem1 =menu.findItem(R.id.itemCarrito);
+        menuItem.setVisible(true);
+        menuItem1.setVisible(false);
     }
 }

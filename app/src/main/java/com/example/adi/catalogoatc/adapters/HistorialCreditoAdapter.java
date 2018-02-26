@@ -8,10 +8,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.adi.catalogoatc.ModeloLista.modeloCatalogo;
 import com.example.adi.catalogoatc.ModeloLista.modeloHistorial;
 import com.example.adi.catalogoatc.ModeloLista.modeloHistorialCredito;
 import com.example.adi.catalogoatc.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -87,6 +89,10 @@ public class HistorialCreditoAdapter extends BaseAdapter {
 
         return view;
     }
-
+    public void setFilter(List<modeloCatalogo>lista){
+        this.list = new ArrayList<>();
+        this.list.addAll(list);
+        notifyDataSetChanged();
+    }
 
 }

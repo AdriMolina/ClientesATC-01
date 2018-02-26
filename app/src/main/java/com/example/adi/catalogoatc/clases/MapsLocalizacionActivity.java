@@ -209,20 +209,7 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
 
                     LocalizacionCoordenadas lc = new LocalizacionCoordenadas(MapsLocalizacionActivity.this);
                     lc.cambio();
-                    configuracion = new Configuracion(MapsLocalizacionActivity.this);
-                    //Checa si hay datos guardados por default
-                    if (configuracion.getLatitud() != null && configuracion.getLongitud() != null)
-                    {
-                        lati = configuracion.getLatitud();
-                        longi = configuracion.getLongitud();
-                        Toast.makeText(MapsLocalizacionActivity.this, lati+ " "+ longi, Toast.LENGTH_LONG);
 
-
-                    }else{
-                        Toast.makeText(MapsLocalizacionActivity.this, "otro", Toast.LENGTH_LONG);
-
-
-                    }
 
                 }else{
                     //cliente
@@ -244,7 +231,7 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
         //Ubicacion guardada
-        Toast.makeText(MapsLocalizacionActivity.this, String.valueOf(latitud)+" "+String.valueOf(longitud), Toast.LENGTH_LONG).show();
+        //Toast.makeText(MapsLocalizacionActivity.this, String.valueOf(latitud)+" "+String.valueOf(longitud), Toast.LENGTH_LONG).show();
 
 
         //ubicacion actual

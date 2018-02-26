@@ -29,11 +29,11 @@ public class Configuracion {
         return getSettings().getString(LONGITUD, null);
     }
 
-    public void setValues(String user, String pass)
+    public void setValues(String latitud, String longitud)
     {
         SharedPreferences.Editor editor = getSettings().edit();
-        editor.putString(LATITUD, user);
-        editor.putString(LONGITUD, pass);
+        editor.putString(LATITUD, latitud);
+        editor.putString(LONGITUD, longitud);
         editor.commit();
     }
 

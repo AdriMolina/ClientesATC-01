@@ -32,6 +32,7 @@ public class LocalizacionCoordenadas {
 
     Context context;
     private Configuracion configuracion;
+    String lati, longi;
 
     public LocalizacionCoordenadas(Context context) {
         this.context = context;
@@ -71,7 +72,7 @@ public class LocalizacionCoordenadas {
            latitud= String.valueOf(loc.getLatitude());
             longitud = String.valueOf(loc.getLongitude());
 
-
+          //  Toast.makeText(context,"Aqui si"+ latitud+" "+ longitud,Toast.LENGTH_LONG);
 
          }
         @Override
@@ -139,8 +140,24 @@ public class LocalizacionCoordenadas {
                 new Localizacion();
                 //Guarda datos
                 guardarDatos(latitud,longitud);
+
+                configuracion = new Configuracion(context);
+                //Checa si hay datos guardados por default
+                if (configuracion.getLatitud() != null && configuracion.getLongitud() != null)
+                {
+                    lati = configuracion.getLatitud();
+                    longi = configuracion.getLongitud();
+
+                    Toast.makeText(context, lati+ " "+ longi, Toast.LENGTH_LONG);
+
+
+                }else{
+                    Toast.makeText(context, "otro", Toast.LENGTH_LONG);
+
+
+                }
                 // Mostramos el aviso de que ha finalizado el tiempo.
-                Toast.makeText(context, "yaaaa", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "yaaaa"+ latitud+" "+longitud, Toast.LENGTH_LONG).show();
             }
         };
         timer.start();

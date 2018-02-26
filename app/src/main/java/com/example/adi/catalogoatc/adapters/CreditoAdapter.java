@@ -8,11 +8,16 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.adi.catalogoatc.ModeloLista.modeloCatalogo;
+import com.example.adi.catalogoatc.ModeloLista.modeloHistorialCredito;
 import com.example.adi.catalogoatc.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Adi on 05/01/2018.
@@ -114,4 +119,5 @@ public class CreditoAdapter extends BaseAdapter {
 
         return view;
     }
+
 }

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ import com.example.adi.catalogoatc.ModeloLista.modeloCatalogo;
 import com.example.adi.catalogoatc.ModeloLista.modeloDetallosCatalogo;
 import com.example.adi.catalogoatc.R;
 import com.example.adi.catalogoatc.fragmentos.DetallesCatalogoFragment;
+import com.example.adi.catalogoatc.fragmentos.DetallesComprasFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +41,7 @@ public class CatalogoAdapter extends BaseAdapter {
     int resultado;
     int idArticulo;
     private String nombre;
+    Fragment fragment;
 
     private FragmentManager fragmentManager;
 
@@ -96,8 +99,27 @@ this.fragmentManager = fragmentManager;
             public void onClick(View view)
             {
 
-                DetallesCatalogoFragment fragment = new DetallesCatalogoFragment();
-                fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
+                switch (nombre)
+                {
+                    case "Chip":
+                        fragment = DetallesCatalogoFragment.newInstance(idArticulo, "Chip");
+                        fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
+                        break;
+                    case "Telefono":
+                        fragment = DetallesCatalogoFragment.newInstance(idArticulo, "Telefono");
+                        fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
+                        break;
+                    case "Accesorios":
+                        fragment = DetallesCatalogoFragment.newInstance(idArticulo, "Accesorios");
+                        fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
+                        break;
+
+                }
+
+
+
+
+
             }
         });
 

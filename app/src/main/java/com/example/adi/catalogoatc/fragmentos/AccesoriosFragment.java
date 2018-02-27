@@ -281,7 +281,6 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
             @Override
             public void onResponse(JSONArray response) {
                 listaAdapter= modeloCatalogo.sacarListaClientes(response);
-
                 adapter = new CatalogoAdapter(getContext(), listaAdapter, "Accesorios", getActivity().getSupportFragmentManager());
 
                 listView.setAdapter(adapter);

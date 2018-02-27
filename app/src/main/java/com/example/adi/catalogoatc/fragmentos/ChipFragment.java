@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -46,6 +47,7 @@ public class ChipFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     private SwipeRefreshLayout contenedor;
     List<modeloCatalogo> listaAdapter;
     CatalogoAdapter adapter;
+    FragmentManager fm;
     private TelefonoFragment.OnFragmentInteractionListener mListener;
 
 
@@ -213,7 +215,7 @@ public class ChipFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         progressDialog.hide();
 
         listaAdapter= modeloCatalogo.sacarListaClientes(response);
-        adapter = new CatalogoAdapter(getContext(), listaAdapter, "Chip");
+        adapter = new CatalogoAdapter(getContext(), listaAdapter, "Chip", fm);
         listView.setAdapter(adapter);
     }
 
@@ -280,7 +282,7 @@ public class ChipFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             @Override
             public void onResponse(JSONArray response) {
                 listaAdapter= modeloCatalogo.sacarListaClientes(response);
-                adapter = new CatalogoAdapter(getContext(), listaAdapter, "Chip");
+                adapter = new CatalogoAdapter(getContext(), listaAdapter, "Chip", fm);
                 listView.setAdapter(adapter);
                 contenedor.setRefreshing(false);
             }

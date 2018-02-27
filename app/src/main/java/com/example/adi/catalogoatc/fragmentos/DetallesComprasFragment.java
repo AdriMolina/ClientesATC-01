@@ -4,11 +4,16 @@ import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -139,5 +144,18 @@ public class DetallesComprasFragment extends Fragment implements Basic, Response
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+
+        super.onCreateOptionsMenu(menu, inflater);
+
+        MenuItem menuItem =menu.findItem(R.id.itembucar);
+        MenuItem menuItem1 =menu.findItem(R.id.itemCarrito);
+        menuItem.setVisible(false);
+        menuItem1.setVisible(false);
+
+
+
     }
 }

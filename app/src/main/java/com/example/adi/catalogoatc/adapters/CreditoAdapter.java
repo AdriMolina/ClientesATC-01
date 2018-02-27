@@ -114,7 +114,6 @@ public class CreditoAdapter extends BaseAdapter {
             txtCantidad.setText(cantidad);
             txtPrecio.setText(preciof);
             txtPrecioPagar.setText(totalPagar);
-
         }
 
         return view;

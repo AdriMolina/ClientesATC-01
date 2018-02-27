@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -46,6 +47,7 @@ public class TelefonoFragment extends Fragment implements  Basic, Response.Liste
     private SwipeRefreshLayout contenedor;
     List<modeloCatalogo> listaAdapter;
     CatalogoAdapter adapter;
+    FragmentManager fm;
     private OnFragmentInteractionListener mListener;
 
     public TelefonoFragment() {
@@ -206,7 +208,7 @@ public class TelefonoFragment extends Fragment implements  Basic, Response.Liste
     public void onResponse(JSONArray response) {
         progressDialog.hide();
         listaAdapter= modeloCatalogo.sacarListaClientes(response);
-         adapter = new CatalogoAdapter(getContext(), listaAdapter, "Telefono");
+         adapter = new CatalogoAdapter(getContext(), listaAdapter, "Telefono", fm);
         listView.setAdapter(adapter);
 
     }
@@ -271,7 +273,7 @@ public class TelefonoFragment extends Fragment implements  Basic, Response.Liste
             @Override
             public void onResponse(JSONArray response) {
                 listaAdapter= modeloCatalogo.sacarListaClientes(response);
-                adapter = new CatalogoAdapter(getContext(), listaAdapter, "Telefono");
+                adapter = new CatalogoAdapter(getContext(), listaAdapter, "Telefono", fm);
                 listView.setAdapter(adapter);
                 contenedor.setRefreshing(false);
             }

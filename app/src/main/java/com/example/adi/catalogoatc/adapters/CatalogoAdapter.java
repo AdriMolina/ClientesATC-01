@@ -4,6 +4,9 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,9 +22,12 @@ import android.widget.Toast;
 import com.example.adi.catalogoatc.ModeloLista.modeloCatalogo;
 import com.example.adi.catalogoatc.ModeloLista.modeloDetallosCatalogo;
 import com.example.adi.catalogoatc.R;
+import com.example.adi.catalogoatc.fragmentos.DetallesCatalogoFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.security.AccessController.getContext;
 
 /**
  * Created by Adi on 29/12/2017.
@@ -31,13 +37,16 @@ public class CatalogoAdapter extends BaseAdapter {
     private Context context;
     private List<modeloCatalogo> list;
     int resultado;
+    int idArticulo;
     private String nombre;
+    FragmentManager fragmentManager;
 
-    public CatalogoAdapter(Context context, List<modeloCatalogo> list, String nombre )
+    public CatalogoAdapter(Context context, List<modeloCatalogo> list, String nombre, FragmentManager fm)
     {
         this.context = context;
         this.nombre= nombre;
         this.list = list;
+        this.fragmentManager =fm;
     }
 
 
@@ -83,7 +92,14 @@ public class CatalogoAdapter extends BaseAdapter {
             @Override
             public void onClick(View view)
             {
-                Toast.makeText(context, "Funciona " + position, Toast.LENGTH_SHORT).show();
+
+
+                Fragment nuevofragmento = DetallesCatalogoFragment.newInstance(idArticulo, "Accesorios");
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.content_main, nuevofragmento);
+                transaction.addToBackStack(null);
+                transaction.commit();
+                Toast.makeText(context, "Funciona " + position+ String.valueOf(idArticulo), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -144,10 +160,7 @@ public class CatalogoAdapter extends BaseAdapter {
                     });
                     dialogo1.show();
 
-
                 }
-
-
 
             }
         });
@@ -155,6 +168,7 @@ public class CatalogoAdapter extends BaseAdapter {
 
 
         //Asigna los valores
+            idArticulo = (int) getItemId(position);
             txtTitulo.setText(getItem(position).getMarca());
             txtPrecio.setText("$"+getItem(position).getPrecio());
             txtDesc.setText(getItem(position).getModelo());

@@ -1,12 +1,12 @@
 package com.example.adi.catalogoatc.adapters;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v4.app.Fragment;
+
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,14 +39,17 @@ public class CatalogoAdapter extends BaseAdapter {
     int resultado;
     int idArticulo;
     private String nombre;
-    FragmentManager fragmentManager;
 
-    public CatalogoAdapter(Context context, List<modeloCatalogo> list, String nombre, FragmentManager fm)
+    private FragmentManager fragmentManager;
+
+    public CatalogoAdapter(Context context, List<modeloCatalogo> list, String nombre, FragmentManager fragmentManager)
+
     {
         this.context = context;
         this.nombre= nombre;
         this.list = list;
-        this.fragmentManager =fm;
+this.fragmentManager = fragmentManager;
+
     }
 
 
@@ -93,13 +96,8 @@ public class CatalogoAdapter extends BaseAdapter {
             public void onClick(View view)
             {
 
-
-                Fragment nuevofragmento = DetallesCatalogoFragment.newInstance(idArticulo, "Accesorios");
-                FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.content_main, nuevofragmento);
-                transaction.addToBackStack(null);
-                transaction.commit();
-                Toast.makeText(context, "Funciona " + position+ String.valueOf(idArticulo), Toast.LENGTH_SHORT).show();
+                DetallesCatalogoFragment fragment = new DetallesCatalogoFragment();
+                fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
             }
         });
 

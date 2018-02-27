@@ -215,7 +215,9 @@ public class ChipFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         progressDialog.hide();
 
         listaAdapter= modeloCatalogo.sacarListaClientes(response);
-        adapter = new CatalogoAdapter(getContext(), listaAdapter, "Chip", fm);
+
+        adapter = new CatalogoAdapter(getContext(), listaAdapter, "Chip", getActivity().getSupportFragmentManager());
+
         listView.setAdapter(adapter);
     }
 
@@ -282,7 +284,9 @@ public class ChipFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             @Override
             public void onResponse(JSONArray response) {
                 listaAdapter= modeloCatalogo.sacarListaClientes(response);
-                adapter = new CatalogoAdapter(getContext(), listaAdapter, "Chip", fm);
+
+                adapter = new CatalogoAdapter(getContext(), listaAdapter, "Chip", getActivity().getSupportFragmentManager());
+
                 listView.setAdapter(adapter);
                 contenedor.setRefreshing(false);
             }

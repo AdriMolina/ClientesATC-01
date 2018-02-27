@@ -36,5 +36,4 @@
      android:layout_marginTop="@dimen/margen_entre_texto"
      android:textColor="@color/primaryText"
      android:textSize="@dimen/texto_mediano"/>
-
 </LinearLayout>

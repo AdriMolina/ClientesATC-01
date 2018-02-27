@@ -54,5 +54,4 @@
      android:textSize="@dimen/texto_generico"
         android:textColor="@color/primaryText"
      />
-
     </LinearLayout>

@@ -5,16 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <android.support.v7.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margen_margin"
         app:cardBackgroundColor="@android:color/background_light">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/margen_margin">
+            android:padding="@dimen/margen_padding">
 
             <TextView
                 android:id="@+id/txtFechaAbono"
@@ -54,8 +54,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="@dimen/margen_derecha"
                 android:layout_marginTop="@dimen/margen_entre_texto"
+                android:textColor="@color/primaryText"
                 android:textStyle="bold"/>
         </RelativeLayout>
     </android.support.v7.widget.CardView>
-
 </RelativeLayout>

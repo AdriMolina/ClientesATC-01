@@ -28,6 +28,7 @@
           android:layout_height="wrap_content"
           android:text="@string/texto_marca"
           android:textSize="@dimen/texto_generico"
+          android:textColor="@color/primaryText"
           android:textStyle="bold"/>
 
       <TextView
@@ -35,6 +36,7 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:text="@string/sin_conexion"
+          android:textColor="@color/secondarText"
           android:textSize="@dimen/texto_generico" />
 
       <TextView
@@ -44,7 +46,7 @@
           android:text="@string/texto_modelo"
           android:textSize="@dimen/texto_generico"
           android:textStyle="bold"
-
+          android:textColor="@color/primaryText"
           />
 
       <TextView
@@ -52,6 +54,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="@string/sin_conexion"
+          android:textColor="@color/secondarText"
           android:textSize="@dimen/texto_generico"
           />
 
@@ -61,6 +64,7 @@
           android:layout_height="wrap_content"
           android:text="@string/texto_precio"
           android:textSize="@dimen/texto_generico"
+          android:textColor="@color/primaryText"
           android:textStyle="bold" />
 
       <TextView
@@ -68,6 +72,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="@string/sin_conexion"
+          android:textColor="@color/secondarText"
           android:textSize="@dimen/texto_generico" />
 
       <TextView
@@ -76,6 +81,7 @@
           android:layout_height="wrap_content"
           android:text="@string/texto_existencia"
           android:textSize="@dimen/texto_generico"
+          android:textColor="@color/primaryText"
           android:textStyle="bold" />
 
       <TextView
@@ -83,6 +89,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="@string/sin_conexion"
+          android:textColor="@color/secondarText"
           android:textSize="@dimen/texto_generico" />
    </LinearLayout>
 
@@ -99,3 +106,4 @@
        />
 
 </LinearLayout>
+

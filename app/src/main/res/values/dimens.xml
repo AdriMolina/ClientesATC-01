@@ -21,7 +21,7 @@
     <dimen name="margen_derecha">16dp</dimen>
     <dimen name="margen_izquierda">16dp</dimen>
     <dimen name="margen_padding">10dp</dimen>
-    <dimen name="margen_margin">16dp</dimen>
+    <dimen name="margen_margin">8dp</dimen>
 
     <!--Dimenciones fragment_cantidad_chips-->
     <dimen name="tamano_imagen">60dp</dimen>
@@ -29,11 +29,9 @@
 
 
     <!--Elevaciones-->
-    <dimen name="elevacion_raised_buttom">2dp</dimen>
-    <dimen name="elevacion_card">2dp</dimen>
+    <dimen name="elevacion_raised_buttom">4dp</dimen>
+    <dimen name="elevacion_card">4dp</dimen>
     <dimen name="elevacion_floating_buttom">6dp</dimen>
     <dimen name="elevacion_picker">24dp</dimen>
-
-
 
 </resources>

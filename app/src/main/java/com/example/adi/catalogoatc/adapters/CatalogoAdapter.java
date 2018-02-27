@@ -1,9 +1,11 @@
 package com.example.adi.catalogoatc.adapters;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.app.FragmentManager;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,7 @@ import android.widget.Toast;
 import com.example.adi.catalogoatc.ModeloLista.modeloCatalogo;
 import com.example.adi.catalogoatc.ModeloLista.modeloDetallosCatalogo;
 import com.example.adi.catalogoatc.R;
+import com.example.adi.catalogoatc.fragmentos.DetallesCatalogoFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,12 +35,14 @@ public class CatalogoAdapter extends BaseAdapter {
     private List<modeloCatalogo> list;
     int resultado;
     private String nombre;
+    private FragmentManager fragmentManager;
 
-    public CatalogoAdapter(Context context, List<modeloCatalogo> list, String nombre )
+    public CatalogoAdapter(Context context, List<modeloCatalogo> list, String nombre, FragmentManager fragmentManager)
     {
         this.context = context;
         this.nombre= nombre;
         this.list = list;
+        this.fragmentManager = fragmentManager;
     }
 
 
@@ -83,7 +88,8 @@ public class CatalogoAdapter extends BaseAdapter {
             @Override
             public void onClick(View view)
             {
-                Toast.makeText(context, "Funciona " + position, Toast.LENGTH_SHORT).show();
+                DetallesCatalogoFragment fragment = new DetallesCatalogoFragment();
+                fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
             }
         });
 

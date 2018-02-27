@@ -206,7 +206,7 @@ public class TelefonoFragment extends Fragment implements  Basic, Response.Liste
     public void onResponse(JSONArray response) {
         progressDialog.hide();
         listaAdapter= modeloCatalogo.sacarListaClientes(response);
-         adapter = new CatalogoAdapter(getContext(), listaAdapter, "Telefono");
+         adapter = new CatalogoAdapter(getContext(), listaAdapter, "Telefono", getActivity().getSupportFragmentManager());
         listView.setAdapter(adapter);
 
     }
@@ -271,7 +271,7 @@ public class TelefonoFragment extends Fragment implements  Basic, Response.Liste
             @Override
             public void onResponse(JSONArray response) {
                 listaAdapter= modeloCatalogo.sacarListaClientes(response);
-                adapter = new CatalogoAdapter(getContext(), listaAdapter, "Telefono");
+                adapter = new CatalogoAdapter(getContext(), listaAdapter, "Telefono", getActivity().getSupportFragmentManager());
                 listView.setAdapter(adapter);
                 contenedor.setRefreshing(false);
             }

@@ -215,7 +215,7 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
     public void onResponse(JSONArray response) {
         progressDialog.hide();
         listaAdapter= modeloCatalogo.sacarListaClientes(response);
-        adapter = new CatalogoAdapter(getContext(), listaAdapter, "Accesorios");
+        adapter = new CatalogoAdapter(getContext(), listaAdapter, "Accesorios", getActivity().getSupportFragmentManager());
         listView.setAdapter(adapter);
     }
 
@@ -277,7 +277,7 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
             @Override
             public void onResponse(JSONArray response) {
                 listaAdapter= modeloCatalogo.sacarListaClientes(response);
-                adapter = new CatalogoAdapter(getContext(), listaAdapter, "Accesorios");
+                adapter = new CatalogoAdapter(getContext(), listaAdapter, "Accesorios", getActivity().getSupportFragmentManager());
                 listView.setAdapter(adapter);
                 contenedor.setRefreshing(false);
             }

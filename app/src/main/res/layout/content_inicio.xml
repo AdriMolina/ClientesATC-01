@@ -11,4 +11,3 @@
     tools:context="com.example.adi.catalogoatc.Inicio"
     tools:showIn="@layout/app_bar_inicio">
 </android.support.constraint.ConstraintLayout>
-

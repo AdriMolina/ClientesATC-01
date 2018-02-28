@@ -22,4 +22,10 @@
         <item name="colorControlHighlight">@color/colorPrimary</item>
         <item name="colorButtonNormal">@color/colorAccent</item>
     </style>
+
+    <style name="StyleButtonMenu" parent="Theme.AppCompat.Light">
+        <item name="colorControlHighlight">@color/colorAccent</item>
+        <item name="colorButtonNormal">@color/transparent</item>
+    </style>
+
 </resources>

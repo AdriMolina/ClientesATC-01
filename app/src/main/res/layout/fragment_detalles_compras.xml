@@ -25,10 +25,7 @@
             android:layout_height="wrap_content"
             android:elevation="@dimen/elevacion_card"
             android:layout_gravity="center"
-            app:cardBackgroundColor="@android:color/background_light"
-            android:layout_below="@+id/listaDetalles"
-            android:layout_centerHorizontal="true"
-            >
+            app:cardBackgroundColor="@android:color/background_light">
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -39,11 +36,11 @@
                     android:layout_width="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_height="wrap_content"
-                    android:text="Total"
-                    android:textSize="15dp"
+                    android:text="@string/texto_total"
+                    android:textSize="@dimen/texto_pequeno"
                     android:textColor="@color/primaryText"
                     android:layout_toEndOf="@+id/TotalPagarContado"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="@dimen/margen_margin"
                     />
 
                 <TextView
@@ -52,9 +49,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/texto_total_a_pagar"
-                    android:textSize="15dp"
+                    android:textSize="@dimen/texto_pequeno"
                     android:textColor="@color/primaryText"
-                    android:layout_marginBottom="8dp"
+                    android:layout_margin="@dimen/margen_margin"
                     android:textStyle="bold"
                     />
 

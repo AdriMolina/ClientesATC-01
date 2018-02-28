@@ -18,6 +18,7 @@
 
     <!-- Texto usado dentro del XML fragment_buzon-->
     <string name="titulo_caja_comentarios">Comentarios</string>
+    <string name="titulo_carrito">Carrito</string>
     <string name="texto_caja_comentarios">Para nosotros tu opinión es muy importante, por favor déjanos tus comentarios.</string>
 
 
@@ -46,6 +47,9 @@
     <string name="texto_cantidad">Cantidad:</string>
     <string name="texto_tipo">Tipo</string>
     <string name="texto_eliminar">Eliminar</string>
+    <string name="texto_detalles">Detalles</string>
+    <string name="texto_creditos">Creditos</string>
+
 
 
 

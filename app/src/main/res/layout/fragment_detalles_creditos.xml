@@ -1,49 +1,42 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="@dimen/margen_padding"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/detallesFragment"
     android:background="@color/colorWhite"
     tools:context="com.example.adi.catalogoatc.fragmentos.DetallesComprasFragment">
 
-
     <TextView
         android:id="@+id/TiuloDetallesCreditos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:text="Creditos"
+        android:layout_gravity="center"
+        android:text="@string/texto_creditos"
         android:textColor="@color/primaryText"
-        android:layout_centerHorizontal="true"
         android:textStyle="bold"
-        android:textSize="25dp"/>
-    <Button
-        android:id="@+id/btnMasDetalles"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="16dp"
-        android:textSize="10dp"
-        android:text="Detalles"
-        android:textColor="@color/colorWhite"
-        android:elevation="@dimen/elevacion_raised_buttom"
-        android:theme="@style/StyleButton"/>
-
+        android:textSize="@dimen/titulos_H1"/>
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:padding="@dimen/margen_padding"
+    android:orientation="horizontal"
+    >
 
     <android.support.v7.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_margin="@dimen/margen_margin"
         android:elevation="@dimen/elevacion_card"
         app:cardBackgroundColor="@android:color/background_light"
-        android:layout_below="@+id/TiuloDetallesCreditos"
-        android:layout_centerHorizontal="true">
+        >
+
 
         <RelativeLayout
+            android:padding="@dimen/margen_margin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -52,9 +45,8 @@
                 android:layout_marginTop="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total a pagar:"
-                android:layout_marginLeft="10dp"
-                android:textSize="15dp"
+                android:text="@string/texto_total_a_pagar"
+                android:textSize="@dimen/texto_pequeno"
                 android:layout_marginBottom="8dp"
                 android:textColor="@color/primaryText"
                 android:textStyle="bold"
@@ -64,21 +56,29 @@
                 android:layout_width="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_height="wrap_content"
-                android:text="Total"
-                android:textSize="15dp"
+                android:text="@string/texto_total"
+                android:textSize="@dimen/texto_pequeno"
                 android:layout_toEndOf="@+id/TotalPagar"
-                android:layout_marginRight="10dp"
                 android:textColor="@color/primaryText"
                 />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
+    <Button
+        android:id="@+id/btnMasDetalles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:textAllCaps="false"
+        android:textSize="@dimen/texto_pequeno"
+        android:text="@string/texto_detalles"
+        android:textColor="@color/colorWhite"
+        android:elevation="@dimen/elevacion_raised_buttom"
+        android:theme="@style/StyleButton"/>
+    </LinearLayout>
 
     <ListView
         android:id="@+id/listaDetallesCreditos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/TiuloDetallesCreditos"
-        android:layout_marginTop="45dp">
-    </ListView>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
-</RelativeLayout>
+</LinearLayout>

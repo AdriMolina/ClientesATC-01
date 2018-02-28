@@ -95,24 +95,15 @@ public class PerfilFragment extends Fragment implements Basic, Response.Listener
         queue.add(request);
 
         //ejecuta la accion de boton editar
-
-
         btnEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
 
                 Fragment nuevofragmento = EditarPerfilFragment.newInstance(id);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.content_main, nuevofragmento);
                 transaction.addToBackStack(null);
                 transaction.commit();
-
-
-
-
-
-
             }
         });
 
@@ -128,13 +119,12 @@ public class PerfilFragment extends Fragment implements Basic, Response.Listener
         }
     }
 
-
+    //Método que se ejecuta al encontrar error al conectarse al web service
     @Override
     public void onErrorResponse(VolleyError error) {
         progressDialog.hide();
         Log.i("mensaje", error.toString());
         Toast.makeText(getContext(), "Error en el WebService", Toast.LENGTH_SHORT).show();
-        Toast.makeText(getContext(), url, Toast.LENGTH_SHORT).show();
 
     }
 
@@ -161,6 +151,7 @@ public class PerfilFragment extends Fragment implements Basic, Response.Listener
 
         try
         {
+            //Guarda los valores de la consulta en sus respectivas variables
             id = jsonObject.getString("0");
             nombre = jsonObject.getString("1");
             correo = jsonObject.getString("2");
@@ -177,6 +168,7 @@ public class PerfilFragment extends Fragment implements Basic, Response.Listener
 
         if (nombre != null)
         {
+            //Asigna los valores a su txt
             txtNombre.setText(nombre);
             txtTelefono.setText(telefono);
             txtdireccion.setText(correo);
@@ -192,6 +184,7 @@ public class PerfilFragment extends Fragment implements Basic, Response.Listener
     }
 
 
+    //Infla el menu que contiene los iconos de carrito y busqueda y los oculta
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);

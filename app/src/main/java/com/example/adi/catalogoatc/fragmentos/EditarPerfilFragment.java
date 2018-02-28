@@ -42,10 +42,7 @@ public class EditarPerfilFragment extends Fragment implements Basic, Response.Li
     String nombre, direccion, telefono;
     String nombreFinal, direccionFinal, telefonoFinal;
 
-    public EditarPerfilFragment() {
-
-    }
-
+    //Recibe los valores desde el Fragmento "Perfil Perfil Fragment"
     public static EditarPerfilFragment newInstance(String id){
         EditarPerfilFragment fragment = new EditarPerfilFragment();
         Bundle bundle = new Bundle();
@@ -54,15 +51,12 @@ public class EditarPerfilFragment extends Fragment implements Basic, Response.Li
         return fragment;
     }
 
-    //Cuando se crea el fragmento
+    //Cuando se crea el fragmento y asigna el valor recibido a una variable local
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-
             cliente_id = getArguments().getString("CLIENTE_ID");
-
-
         }
     }
 
@@ -163,6 +157,7 @@ public class EditarPerfilFragment extends Fragment implements Basic, Response.Li
         }
     }
 
+    //Método que se ejecuta al encontrar un error en el webservice
     @Override
     public void onErrorResponse(VolleyError error) {
         progressDialog.hide();
@@ -171,9 +166,11 @@ public class EditarPerfilFragment extends Fragment implements Basic, Response.Li
         Toast.makeText(getContext(), url, Toast.LENGTH_SHORT).show();
     }
 
+    //Método que se ejecuta al tener una respuesta del web service
     @Override
     public void onResponse(JSONArray response) {
         progressDialog.hide();
+
 
         edtnombre = (EditText)view.findViewById(R.id.editNombre);
         edtdireccion = (EditText)view.findViewById(R.id.editDireccion);
@@ -183,6 +180,7 @@ public class EditarPerfilFragment extends Fragment implements Basic, Response.Li
 
         try
         {
+
             jsonObject = response.getJSONObject(0);
         }
         catch (JSONException e)
@@ -194,6 +192,7 @@ public class EditarPerfilFragment extends Fragment implements Basic, Response.Li
         try
         {
 
+            //Asigna los datos recaudados de la consulta a sus variables locales
             nombre = jsonObject.getString("0");
             direccion = jsonObject.getString("1");
             telefono = jsonObject.getString("2");
@@ -209,6 +208,7 @@ public class EditarPerfilFragment extends Fragment implements Basic, Response.Li
 
         if (nombre != null)
         {
+            //Asigna los valores a su txt en el xml
             edtnombre.setText(nombre);
             edttelefono.setText(telefono);
             edtdireccion.setText(direccion);
@@ -217,34 +217,6 @@ public class EditarPerfilFragment extends Fragment implements Basic, Response.Li
         }
     }
 
-
-    /* @Override
-     public void onAttach(Context context) {
-         super.onAttach(context);
-         if (context instanceof OnFragmentInteractionListener) {
-             mListener = (OnFragmentInteractionListener) context;
-         } else {
-             throw new RuntimeException(context.toString()
-                     + " must implement OnFragmentInteractionListener");
-         }
-     }
-
-     @Override
-     public void onDetach() {
-         super.onDetach();
-         mListener = null;
-     }
-
-     /**
-      * This interface must be implemented by activities that contain this
-      * fragment to allow an interaction in this fragment to be communicated
-      * to the activity and potentially other fragments contained in that
-      * activity.
-      * <p>
-      * See the Android Training lesson <a href=
-      * "http://developer.android.com/training/basics/fragments/communicating.html"
-      * >Communicating with Other Fragments</a> for more information.
-      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

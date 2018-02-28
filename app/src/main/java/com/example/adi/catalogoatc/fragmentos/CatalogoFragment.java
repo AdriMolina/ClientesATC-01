@@ -88,6 +88,7 @@ public class CatalogoFragment extends Fragment {
         return vista;
     }
 
+    //Agrega las pestañas para sus respectivos fragmentos
     private void llenarViewPager(ViewPager viewPager){
         SeccionesAdapter adapter = new SeccionesAdapter(getFragmentManager());
         adapter.addFragment(new ChipFragment(), "Chips" );

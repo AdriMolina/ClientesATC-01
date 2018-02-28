@@ -58,7 +58,9 @@ public class LocalizacionCoordenadas {
 
     /* Aqui empieza la Clase Localizacion */
     public class Localizacion implements LocationListener {
+
        LocalizacionCoordenadas mainActivity;
+
         public LocalizacionCoordenadas getMainActivity() {
             return mainActivity;
         }
@@ -67,12 +69,13 @@ public class LocalizacionCoordenadas {
         }
         @Override
         public void onLocationChanged(Location loc) {
-// Este metodo se ejecuta cada vez que el GPS recibe nuevas coordenadas
-// debido a la deteccion de un cambio de ubicacion
+        // Este metodo se ejecuta cada vez que el GPS recibe nuevas coordenadas
+        // debido a la deteccion de un cambio de ubicacion
            latitud= String.valueOf(loc.getLatitude());
-            longitud = String.valueOf(loc.getLongitude());
+           longitud = String.valueOf(loc.getLongitude());
 
-          //  Toast.makeText(context,"Aqui si"+ latitud+" "+ longitud,Toast.LENGTH_LONG);
+            //Guarda datos
+            guardarDatos(latitud,longitud);
 
          }
         @Override
@@ -138,8 +141,6 @@ public class LocalizacionCoordenadas {
             @Override
             public void onFinish() {
                 new Localizacion();
-                //Guarda datos
-                guardarDatos(latitud,longitud);
 
                 configuracion = new Configuracion(context);
                 //Checa si hay datos guardados por default
@@ -148,7 +149,7 @@ public class LocalizacionCoordenadas {
                     lati = configuracion.getLatitud();
                     longi = configuracion.getLongitud();
 
-                    Toast.makeText(context, lati+ " "+ longi, Toast.LENGTH_LONG);
+
 
 
                 }else{
@@ -157,15 +158,16 @@ public class LocalizacionCoordenadas {
 
                 }
                 // Mostramos el aviso de que ha finalizado el tiempo.
-                Toast.makeText(context, "yaaaa"+ latitud+" "+longitud, Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "yaaaa"+ lati+" "+longi, Toast.LENGTH_LONG).show();
             }
         };
         timer.start();
     }
-    //Método que guarda los datos de usuario y password para recordarlos
-    private void guardarDatos(String user, String pass)
+    //Método que guarda los datos de latitud y longitud para recordarlos
+    private void guardarDatos(String latitudGuardar, String longintudGuardar)
     {
         configuracion = new Configuracion(context);
-        configuracion.setValues(user, pass);
+        configuracion.setValues(latitudGuardar, longintudGuardar);
+
     }
 }

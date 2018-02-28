@@ -16,19 +16,22 @@ public class Configuracion {
     public Configuracion(Context context) {
         this.context = context;
     }
+    //Devuelve un objeto tipo SharedPreferences que solo sera accesible por nuestra aplicacion
     private SharedPreferences getSettings(){
         return context.getSharedPreferences(SHARED_FILE, 0);
     }
+    //Método para sacar la latitud
     public String getLatitud()
     {
         return getSettings().getString(LATITUD, null);
     }
-
+    //Método para sacar la longitud
     public String getLongitud()
     {
         return getSettings().getString(LONGITUD, null);
     }
 
+    //Metodo para guardar las variables
     public void setValues(String latitud, String longitud)
     {
         SharedPreferences.Editor editor = getSettings().edit();

@@ -50,10 +50,6 @@ public class TelefonoFragment extends Fragment implements  Basic, Response.Liste
     FragmentManager fm;
     private OnFragmentInteractionListener mListener;
 
-    public TelefonoFragment() {
-
-    }
-
 
     // TODO: Rename and change types and number of parameters
     public static TelefonoFragment newInstance(String param1, String param2) {
@@ -69,7 +65,6 @@ public class TelefonoFragment extends Fragment implements  Basic, Response.Liste
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
         //compara si hay algun elemento guardado
         if (getArguments() != null) {
 
@@ -87,9 +82,7 @@ public class TelefonoFragment extends Fragment implements  Basic, Response.Liste
         contenedor = (SwipeRefreshLayout)view.findViewById(R.id.contenedorTelefono);
         contenedor.setOnRefreshListener(this);
 
-
         //Coloca el dialogo de carga
-
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setTitle("En Proceso");
         progressDialog.setMessage("Un momento...");
@@ -121,28 +114,12 @@ public class TelefonoFragment extends Fragment implements  Basic, Response.Liste
         queue.add(request);
 
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //SACA EL ID DEL ARTICULO
-                idArticulo =  (int)adapter.getItemId(i);
-                Fragment nuevofragmento = DetallesCatalogoFragment.newInstance(idArticulo, "Telefono");
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.content_main, nuevofragmento);
-                transaction.addToBackStack(null);
-                transaction.commit();
-                Toast.makeText(getContext(), "Error en el WebService", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
         //Parte que recarga el listview solamente si llega al tope
         listView.setOnScrollListener(new AbsListView.OnScrollListener()
         {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState)
             {
-
             }
 
             @Override
@@ -157,7 +134,7 @@ public class TelefonoFragment extends Fragment implements  Basic, Response.Liste
     }
 
 
-
+  // Infla el menu que contiene los items de carrito y busqueda
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 
@@ -165,9 +142,11 @@ public class TelefonoFragment extends Fragment implements  Basic, Response.Liste
 
         MenuItem menuItem =menu.findItem(R.id.itembucar);
         MenuItem menuItem1 =menu.findItem(R.id.itemCarrito);
+        //Crea los iconos visibles en el fragmento
         menuItem.setVisible(true);
         menuItem1.setVisible(true);
 
+        //Crea un objeto tipo searchView para la aacion del nitem de la busqueda
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
         searchView.setOnQueryTextListener(this);
 
@@ -187,14 +166,13 @@ public class TelefonoFragment extends Fragment implements  Basic, Response.Liste
 
     }
 
-
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
     }
 
-
+    // Método que se ejecuta al encontrar error de conexión al webservice
     @Override
     public void onErrorResponse(VolleyError error) {
         progressDialog.hide();
@@ -204,11 +182,12 @@ public class TelefonoFragment extends Fragment implements  Basic, Response.Liste
 
     }
 
+    //Metodo que se ejecuta al tener conexión con el webservice
     @Override
     public void onResponse(JSONArray response) {
         progressDialog.hide();
         listaAdapter= modeloCatalogo.sacarListaClientes(response);
-
+        //Agrega el adapter a la LV del fragmento
          adapter = new CatalogoAdapter(getContext(), listaAdapter, "Telefono", getActivity().getSupportFragmentManager());
         listView.setAdapter(adapter);
 
@@ -219,9 +198,11 @@ public class TelefonoFragment extends Fragment implements  Basic, Response.Liste
         return false;
     }
 
+    //Método que se ejecuta al escribir en el item de buscar
     @Override
     public boolean onQueryTextChange(String s) {
         try {
+            //Asigna el resultado de la busqueda a la lista que se muestra al usuario
             List<modeloCatalogo> listafiltrada = filter(listaAdapter,s);
             adapter.setFilter(listafiltrada);
         }catch (Exception e){
@@ -248,6 +229,7 @@ public class TelefonoFragment extends Fragment implements  Basic, Response.Liste
         return listaFiltrada;
     }
 
+    //Método que se ejecuta al arrastrar la lV hacia abajo(Vuelve a realizar la consulta)
     @Override
     public void onRefresh() {
 

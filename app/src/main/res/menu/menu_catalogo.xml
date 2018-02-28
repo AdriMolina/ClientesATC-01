@@ -7,10 +7,10 @@
         android:id="@+id/itemCarrito"
         android:icon="@drawable/carrito_blanco"
         app:showAsAction="always"
-        android:title="Carrito"
+        android:title="@string/titulo_carrito"
         android:visible="false"
 
-       ></item>
+       />
     <item
         android:id="@+id/itembucar"
         android:icon="@drawable/buscar"

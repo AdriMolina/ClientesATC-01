@@ -9,4 +9,6 @@
 <color name="secondarText">#757575</color>
 <color name="icons">#FFFFFF</color>
 <color name="divider">#BDBDBD</color>
+<color name="transparent">#82ffffff</color>
+<color name="fonfo">#826e6e6e</color>
 </resources>

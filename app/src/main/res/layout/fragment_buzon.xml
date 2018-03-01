@@ -21,24 +21,26 @@
         />
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/margen_padding"
-        android:textColor="@color/secondarText"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
         android:text="@string/texto_caja_comentarios"
-        />
+        android:textStyle="bold"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:textColor="@color/secondarText" />
 
     <EditText
+        android:id="@+id/editText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:lines="8"
-        android:minLines="6"
         android:maxLines="10"
-        android:layout_height="wrap_content"
-        android:layout_width="fill_parent"
-        android:scrollbars="vertical"
+        android:minLines="6"
         android:padding="@dimen/margen_padding"
-        />
+        android:scrollbars="vertical"
+        android:textStyle="bold" />
 
     <ImageButton
         android:id="@+id/btnAceptar"

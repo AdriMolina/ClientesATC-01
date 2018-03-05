@@ -41,4 +41,11 @@ public class Configuracion {
     }
 
     //https://www.nosinmiubuntu.com/como-guardar-datos-en-android/
+    //Método que guarda los datos de latitud y longitud para recordarlos
+    public void guardarDatos(String latitudGuardar, String longintudGuardar)
+    {
+
+        setValues(latitudGuardar, longintudGuardar);
+
+    }
 }

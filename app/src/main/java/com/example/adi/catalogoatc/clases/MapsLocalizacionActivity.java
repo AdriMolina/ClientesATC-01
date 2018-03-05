@@ -208,8 +208,11 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
                     //Actualizacion de la ubicacion cada detrminado momento
 
                     LocalizacionCoordenadas lc = new LocalizacionCoordenadas(MapsLocalizacionActivity.this);
-                    lc.cambio();
+                    
 
+                   Configuracion configuracion = new Configuracion(MapsLocalizacionActivity.this);
+                    String la = lc.latitud;
+                    Toast.makeText(MapsLocalizacionActivity.this, "latitud"+ la+" ", Toast.LENGTH_LONG).show();
 
                 }else{
                     //cliente
@@ -275,5 +278,12 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
 
     //Tomar latitud y longitud actual
 
+    //Método que guarda los datos de latitud y longitud para recordarlos
+    private void guardarDatos(String latitudGuardar, String longintudGuardar)
+    {
+
+        configuracion.setValues(latitudGuardar, longintudGuardar);
+
+    }
 
 }

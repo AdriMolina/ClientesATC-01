@@ -30,17 +30,16 @@ import static android.content.Context.LOCATION_SERVICE;
 
 public class LocalizacionCoordenadas {
 
-    Context context;
-    private Configuracion configuracion;
-    String lati, longi;
+    static  Context context;
+    static private Configuracion configuracion = new Configuracion(context);
+    static String latitud, longitud;
 
     public LocalizacionCoordenadas(Context context) {
         this.context = context;
     }
 
-    // Cronómetro de la aplicación.
-    private CountDownTimer timer;
-    static String latitud, longitud, direccion;
+
+    static public String  direccion;
 
     private void locationStart() {
         LocationManager mlocManager = (LocationManager) context.getSystemService(LOCATION_SERVICE);
@@ -75,7 +74,7 @@ public class LocalizacionCoordenadas {
            longitud = String.valueOf(loc.getLongitude());
 
             //Guarda datos
-            guardarDatos(latitud,longitud);
+            configuracion.guardarDatos(latitud,longitud);
 
          }
         @Override
@@ -123,51 +122,6 @@ public class LocalizacionCoordenadas {
             }
         }*/
     }
-    public void cambio() {
-        // Iniciamos el timer, como parámetros pasaremos el número de
-        // minutos que hemos establecido en la aplicación, multiplicado
-        // por 60 y por 1000 para obtener el valor en milisegundos, el
-        // segúndo parámetro es el que nos dirá cada cuánto se produce el
-        // "tick".
-        timer = new CountDownTimer(4000, 1000) {
-            @Override
-            public void onTick(long l) {
-                // Este método se lanza por cada lapso de tiempo
-                // transcurrido,
-               //contgador.setText(String
-                 //       .valueOf(l / 1000) + "s");
-            }
-
-            @Override
-            public void onFinish() {
-                new Localizacion();
-
-                configuracion = new Configuracion(context);
-                //Checa si hay datos guardados por default
-                if (configuracion.getLatitud() != null && configuracion.getLongitud() != null)
-                {
-                    lati = configuracion.getLatitud();
-                    longi = configuracion.getLongitud();
 
 
-
-
-                }else{
-                    Toast.makeText(context, "otro", Toast.LENGTH_LONG);
-
-
-                }
-                // Mostramos el aviso de que ha finalizado el tiempo.
-                Toast.makeText(context, "yaaaa"+ lati+" "+longi, Toast.LENGTH_LONG).show();
-            }
-        };
-        timer.start();
-    }
-    //Método que guarda los datos de latitud y longitud para recordarlos
-    private void guardarDatos(String latitudGuardar, String longintudGuardar)
-    {
-        configuracion = new Configuracion(context);
-        configuracion.setValues(latitudGuardar, longintudGuardar);
-
-    }
 }

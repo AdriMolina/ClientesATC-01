@@ -18,6 +18,16 @@ import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.adi.catalogoatc.Recursos.Basic;
+
+import org.json.JSONArray;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
@@ -28,11 +38,11 @@ import static android.content.Context.LOCATION_SERVICE;
  * Created by Adi on 20/02/2018.
  */
 
-public class LocalizacionCoordenadas {
+public class LocalizacionCoordenadas implements Basic{
 
     static  Context context;
     static private Configuracion configuracion = new Configuracion(context);
-    static String latitud, longitud;
+    static String latitud, longitud, url;
 
     public LocalizacionCoordenadas(Context context) {
         this.context = context;
@@ -41,7 +51,7 @@ public class LocalizacionCoordenadas {
 
     static public String  direccion;
 
-    private void locationStart() {
+   public void locationStart() {
         LocationManager mlocManager = (LocationManager) context.getSystemService(LOCATION_SERVICE);
         Localizacion Local = new Localizacion();
         Local.setMainActivity(this);
@@ -123,5 +133,72 @@ public class LocalizacionCoordenadas {
         }*/
     }
 
+    //Verifica si el cliente ya tiene registrada la latitud y longitud
+    public void vericarLocalizacion(){
+
+        //Inicia la peticion
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String consulta = "Select id" +
+                "from localizacion_cliente" +
+                "where claveCliente_id ="+IDClaveCliente;
+        consulta = consulta.replace(" ", "%20");
+        String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
+        url= SERVER + RUTA + "consultaGeneral.php" + cadena;
+        Log.i("info", url);
+
+        //Hace la petición String
+        final JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+
+
+                //Si ya la tiene agregada no realiza ningun método
+                if(response.length()>0){
+
+                }else {
+                    //ejecuta el cambio de la localización
+                    locationStart();
+                    //Si no tiene agregados los valores los inserta
+                    //Inicia la peticion
+                    RequestQueue queue = Volley.newRequestQueue(context);
+                    String consulta = "Insert into localizacion_cliente("+
+                                        " latitud, longitud, claveCliente_id)"+
+                                        " values('"+latitud+"','"+longitud+"','"+IDClaveCliente+"')";
+
+                    consulta = consulta.replace(" ", "%20");
+                    String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
+                    url= SERVER + RUTA + "consultaGeneral.php" + cadena;
+                    Log.i("info", url);
+
+                    //Hace la petición String
+                    JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                        }
+                    });
+
+                    //Agrega y ejecuta la cola
+                    queue.add(request);
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        //Agrega y ejecuta la cola
+        queue.add(request);
+
+
+    }
 
 }

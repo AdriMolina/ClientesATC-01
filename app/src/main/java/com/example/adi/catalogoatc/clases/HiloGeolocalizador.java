@@ -44,6 +44,7 @@ public class HiloGeolocalizador {
         @Override
         protected void onPostExecute(Boolean aBoolean) {
             ejecutar();
+           lc.locationStart();
 
             Toast.makeText(context," cada dos segundos", Toast.LENGTH_SHORT).show();
         }

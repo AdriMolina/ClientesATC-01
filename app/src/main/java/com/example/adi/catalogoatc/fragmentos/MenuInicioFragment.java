@@ -70,10 +70,11 @@ public class MenuInicioFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_menu_inicio, container, false);
+
         final Animation animScale = AnimationUtils.loadAnimation(getContext(),R.anim.scaele_animacion);
-        Button btnCatalogo = (Button)view.findViewById(R.id.idBtnCatalogo);
-        Button btnHistorial = (Button)view.findViewById(R.id.idBtnHistorial);
-        Button btnClientes= (Button)view.findViewById(R.id.idBtnClientes);
+        Button btnCatalogo = view.findViewById(R.id.idBtnCatalogo);
+        Button btnHistorial = view.findViewById(R.id.idBtnHistorial);
+        Button btnClientes= view.findViewById(R.id.idBtnClientes);
 
         btnCatalogo.setOnClickListener(new Button.OnClickListener(){
             @Override
@@ -122,33 +123,6 @@ public class MenuInicioFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

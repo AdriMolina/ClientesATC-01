@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -26,6 +27,7 @@ import com.example.adi.catalogoatc.fragmentos.DetallesComprasFragment;
 import com.example.adi.catalogoatc.fragmentos.HistorialContadoFragment;
 import com.example.adi.catalogoatc.fragmentos.HistorialCreditoFragment;
 import com.example.adi.catalogoatc.fragmentos.HistorialFragment;
+import com.example.adi.catalogoatc.fragmentos.MenuInicioFragment;
 import com.example.adi.catalogoatc.fragmentos.PedidosFragment;
 import com.example.adi.catalogoatc.fragmentos.PerfilFragment;
 import com.example.adi.catalogoatc.fragmentos.TelefonoFragment;
@@ -51,6 +53,10 @@ public class Inicio extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //ADI te falto documentar esta parte XD att: Oscar
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -66,7 +72,13 @@ public class Inicio extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
+
+
+        Fragment miFragment = new MenuInicioFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_main,miFragment).addToBackStack(null).commit();
     }
+
+
 
     @Override
     public void onBackPressed() {
@@ -119,6 +131,8 @@ public class Inicio extends AppCompatActivity
         boolean fragmentSeleccionado=false;
 
         if (id == R.id.nav_inicio) {
+            miFragment = new MenuInicioFragment();
+            fragmentSeleccionado = true;
 
         } else if (id == R.id.nav_pefil) {
             miFragment = new PerfilFragment();
@@ -150,7 +164,6 @@ public class Inicio extends AppCompatActivity
 
             miFragment = new CarritoFragment();
             fragmentSeleccionado = true;
-
 
         }
 

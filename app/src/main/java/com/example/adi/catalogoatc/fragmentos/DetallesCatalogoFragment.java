@@ -41,7 +41,6 @@ import org.json.JSONObject;
 
 public class DetallesCatalogoFragment extends Fragment implements Basic, Response.Listener<JSONArray>, Response.ErrorListener {
    int id_cantidad, resultado;
-    private OnFragmentInteractionListener mListener;
     private ProgressDialog progressDialog;
     String url, Titulo;
     View view;
@@ -179,12 +178,6 @@ public class DetallesCatalogoFragment extends Fragment implements Basic, Respons
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
     @Override
     public void onErrorResponse(VolleyError error) {
@@ -241,9 +234,4 @@ public class DetallesCatalogoFragment extends Fragment implements Basic, Respons
         }
     }
 
-
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }

@@ -25,7 +25,6 @@ public class CarritoFragment extends Fragment implements Basic, Response.Listene
         SwipeRefreshLayout.OnRefreshListener {
 ListView listView;
 
-    private OnFragmentInteractionListener mListener;
 
     public CarritoFragment() {
         // Required empty public constructor
@@ -60,13 +59,6 @@ ListView listView;
 
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
     @Override
     public void onRefresh() {
 
@@ -93,8 +85,4 @@ ListView listView;
     }
 
 
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }

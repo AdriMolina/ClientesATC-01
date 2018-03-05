@@ -26,12 +26,6 @@ public class HistorialFragment extends Fragment {
     private TabLayout pestanas;
     private ViewPager viewPager;
 
-    private OnFragmentInteractionListener mListener;
-
-    public HistorialFragment() {
-
-    }
-
 
     public static HistorialFragment newInstance(String param1, String param2) {
         HistorialFragment fragment = new HistorialFragment();
@@ -83,12 +77,6 @@ public class HistorialFragment extends Fragment {
         return vista;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
     @Override
     public void onDestroyView() {
@@ -109,8 +97,5 @@ public class HistorialFragment extends Fragment {
 
     }
 
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
+
 }

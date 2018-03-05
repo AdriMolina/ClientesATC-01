@@ -32,19 +32,8 @@ import com.example.adi.catalogoatc.fragmentos.PerfilFragment;
 import com.example.adi.catalogoatc.fragmentos.TelefonoFragment;
 
 public class Inicio extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,
-        CatalogoFragment.OnFragmentInteractionListener,
-        ChipFragment.OnFragmentInteractionListener,
-        TelefonoFragment.OnFragmentInteractionListener,
-        AccesoriosFragment.OnFragmentInteractionListener,
-        PerfilFragment.OnFragmentInteractionListener,
-        HistorialFragment.OnFragmentInteractionListener,
-        HistorialCreditoFragment.OnFragmentInteractionListener,
-        HistorialContadoFragment.OnFragmentInteractionListener,
-        DetallesComprasFragment.OnFragmentInteractionListener,
-        BuzonFragment.OnFragmentInteractionListener,
-        PedidosFragment.OnFragmentInteractionListener,
-        CarritoFragment.OnFragmentInteractionListener
+        implements NavigationView.OnNavigationItemSelectedListener
+
 {
 
     ImageButton floatButton;
@@ -164,13 +153,5 @@ public class Inicio extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-        
-    }
-
-
 
 }

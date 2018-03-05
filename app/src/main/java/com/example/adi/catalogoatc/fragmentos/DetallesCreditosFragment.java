@@ -34,7 +34,6 @@ public class DetallesCreditosFragment extends Fragment implements Basic, Respons
     private ListView listView;
     private ProgressDialog progressDialog;
     String url;
-    private OnFragmentInteractionListener mListener;
     Button mas;
     int orden_id, cliente_id, credito_id;
     String total;
@@ -124,15 +123,6 @@ public class DetallesCreditosFragment extends Fragment implements Basic, Respons
 
     }
 
-
-
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-
     @Override
     public void onErrorResponse(VolleyError error) {
         progressDialog.hide();
@@ -150,8 +140,4 @@ public class DetallesCreditosFragment extends Fragment implements Basic, Respons
         listView.setAdapter(adapter);
     }
 
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }

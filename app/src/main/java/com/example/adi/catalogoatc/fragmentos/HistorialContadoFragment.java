@@ -45,8 +45,6 @@ public class HistorialContadoFragment extends Fragment implements SwipeRefreshLa
     int idOrden;
     HistorialAdapter adapter;
     ImageButton imageButton;
-    private HistorialFragment.OnFragmentInteractionListener mListener;
-
 
     public static HistorialContadoFragment newInstance(String param1, String param2) {
        HistorialContadoFragment fragment = new HistorialContadoFragment();
@@ -151,23 +149,9 @@ public class HistorialContadoFragment extends Fragment implements SwipeRefreshLa
             }
         });
 
-
-
-
         return view;
 
-
-
     }
-
-
-
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
 
     @Override
     public void onErrorResponse(VolleyError error) {
@@ -240,11 +224,6 @@ public class HistorialContadoFragment extends Fragment implements SwipeRefreshLa
         queue.add(request);
 
 
-    }
-
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 
     @Override

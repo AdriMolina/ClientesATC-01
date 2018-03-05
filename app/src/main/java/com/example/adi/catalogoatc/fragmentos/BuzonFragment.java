@@ -29,14 +29,8 @@ import org.json.JSONArray;
 
 public class BuzonFragment extends Fragment implements Basic {
     private ProgressDialog progressDialog;
-    private OnFragmentInteractionListener mListener;
     String url;
     ImageButton aceptar;
-
-    public BuzonFragment() {
-        // Required empty public constructor
-    }
-
 
     public static BuzonFragment newInstance(String param1, String param2) {
         BuzonFragment fragment = new BuzonFragment();
@@ -79,18 +73,6 @@ public class BuzonFragment extends Fragment implements Basic {
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);

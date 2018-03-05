@@ -43,7 +43,6 @@ public class HistorialCreditoFragment extends Fragment implements SwipeRefreshLa
     private ProgressDialog progressDialog;
     String url, total;
     private SwipeRefreshLayout contenedor;
-    private HistorialFragment.OnFragmentInteractionListener mListener;
     int idOrden, idCredito;
     HistorialCreditoAdapter adapter;
 
@@ -154,14 +153,6 @@ public class HistorialCreditoFragment extends Fragment implements SwipeRefreshLa
     }
 
 
-
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-
     @Override
     public void onErrorResponse(VolleyError error) {
         progressDialog.hide();
@@ -217,11 +208,6 @@ public class HistorialCreditoFragment extends Fragment implements SwipeRefreshLa
 
         //Agrega y ejecuta la cola
         queue.add(request);
-    }
-
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 
     @Override

@@ -48,11 +48,7 @@ public class ChipFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     List<modeloCatalogo> listaAdapter;
     CatalogoAdapter adapter;
     FragmentManager fm;
-    private TelefonoFragment.OnFragmentInteractionListener mListener;
 
-
-
-    // TODO: Rename and change types and number of parameters
     public static ChipFragment newInstance(String param1, String param2) {
         ChipFragment fragment = new ChipFragment();
         Bundle args = new Bundle();
@@ -194,13 +190,6 @@ public class ChipFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         });
 
     }
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-
     @Override
     public void onErrorResponse(VolleyError error) {
         progressDialog.hide();
@@ -302,8 +291,4 @@ public class ChipFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         queue.add(request);
     }
 
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }

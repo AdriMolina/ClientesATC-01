@@ -37,11 +37,7 @@ public class PerfilFragment extends Fragment implements Basic, Response.Listener
     private ProgressDialog progressDialog;
     View view;
     String url;
-    private TelefonoFragment.OnFragmentInteractionListener mListener;
 
-
-
-    // TODO: Rename and change types and number of parameters
     public static PerfilFragment newInstance(String param1, String param2) {
         PerfilFragment fragment = new PerfilFragment();
         Bundle args = new Bundle();
@@ -112,13 +108,6 @@ public class PerfilFragment extends Fragment implements Basic, Response.Listener
     }
 
 
-
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
     //Método que se ejecuta al encontrar error al conectarse al web service
     @Override
     public void onErrorResponse(VolleyError error) {
@@ -177,12 +166,6 @@ public class PerfilFragment extends Fragment implements Basic, Response.Listener
 
         }
     }
-
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
-
 
     //Infla el menu que contiene los iconos de carrito y busqueda y los oculta
     @Override

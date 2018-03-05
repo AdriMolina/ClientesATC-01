@@ -48,8 +48,6 @@ public class TelefonoFragment extends Fragment implements  Basic, Response.Liste
     List<modeloCatalogo> listaAdapter;
     CatalogoAdapter adapter;
     FragmentManager fm;
-    private OnFragmentInteractionListener mListener;
-
 
     // TODO: Rename and change types and number of parameters
     public static TelefonoFragment newInstance(String param1, String param2) {
@@ -166,12 +164,6 @@ public class TelefonoFragment extends Fragment implements  Basic, Response.Liste
 
     }
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
     // Método que se ejecuta al encontrar error de conexión al webservice
     @Override
     public void onErrorResponse(VolleyError error) {
@@ -190,7 +182,6 @@ public class TelefonoFragment extends Fragment implements  Basic, Response.Liste
         //Agrega el adapter a la LV del fragmento
          adapter = new CatalogoAdapter(getContext(), listaAdapter, "Telefono", getActivity().getSupportFragmentManager());
         listView.setAdapter(adapter);
-
     }
 
     @Override
@@ -273,8 +264,4 @@ public class TelefonoFragment extends Fragment implements  Basic, Response.Liste
         queue.add(request);
     }
 
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }

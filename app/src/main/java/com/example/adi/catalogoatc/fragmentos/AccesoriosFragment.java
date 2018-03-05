@@ -50,7 +50,7 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
     List<modeloCatalogo> listaAdapter;
     String url;
     FragmentManager fm;
-    private TelefonoFragment.OnFragmentInteractionListener mListener;
+
 
 
 
@@ -197,12 +197,6 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
 
     }
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
 
     @Override
     public void onErrorResponse(VolleyError error) {
@@ -298,8 +292,5 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
         queue.add(request);
     }
 
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
+
 }

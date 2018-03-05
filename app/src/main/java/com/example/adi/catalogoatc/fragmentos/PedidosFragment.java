@@ -44,13 +44,6 @@ public class PedidosFragment extends Fragment implements Basic, Response.Listene
     View view;
     HistorialAdapter adapter;
 
-    private OnFragmentInteractionListener mListener;
-
-    public PedidosFragment() {
-        // Required empty public constructor
-    }
-
-
     public static PedidosFragment newInstance(String param1, String param2) {
         PedidosFragment fragment = new PedidosFragment();
         Bundle args = new Bundle();
@@ -128,13 +121,6 @@ public class PedidosFragment extends Fragment implements Basic, Response.Listene
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
     @Override
     public void onErrorResponse(VolleyError error) {
         progressDialog.hide();
@@ -148,12 +134,6 @@ public class PedidosFragment extends Fragment implements Basic, Response.Listene
         progressDialog.hide();
         adapter = new HistorialAdapter(getContext(), modeloHistorial.sacarListaClientes(response));
         listView.setAdapter(adapter);
-    }
-
-
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 
     @Override

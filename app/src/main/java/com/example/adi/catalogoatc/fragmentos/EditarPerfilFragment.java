@@ -37,7 +37,6 @@ public class EditarPerfilFragment extends Fragment implements Basic, Response.Li
     View view;
     String url;
     String cliente_id;
-    private OnFragmentInteractionListener mListener;
     EditText edtnombre, edtdireccion, edttelefono;
     String nombre, direccion, telefono;
     String nombreFinal, direccionFinal, telefonoFinal;
@@ -151,11 +150,6 @@ public class EditarPerfilFragment extends Fragment implements Basic, Response.Li
 
 
     }
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
     //Método que se ejecuta al encontrar un error en el webservice
     @Override
@@ -217,8 +211,4 @@ public class EditarPerfilFragment extends Fragment implements Basic, Response.Li
         }
     }
 
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }

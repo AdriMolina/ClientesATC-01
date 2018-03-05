@@ -24,8 +24,6 @@ import com.example.adi.catalogoatc.clases.utilidades;
 
 public class CatalogoFragment extends Fragment {
 
-
-    private OnFragmentInteractionListener mListener;
     View vista;
     private AppBarLayout appBar;
     private TabLayout pestanas;
@@ -100,14 +98,6 @@ public class CatalogoFragment extends Fragment {
     }
 
 
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -116,13 +106,7 @@ public class CatalogoFragment extends Fragment {
         }
     }
 
-
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
-
-    @Override
+        @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
     }

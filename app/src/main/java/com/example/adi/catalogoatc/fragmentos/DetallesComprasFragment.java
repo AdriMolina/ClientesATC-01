@@ -38,7 +38,6 @@ public class DetallesComprasFragment extends Fragment implements Basic, Response
     private ProgressDialog progressDialog;
     String url, totalContado, titulo;
     TextView txtTotalContado, txttitulo;
-    private OnFragmentInteractionListener mListener;
     int orden_id;
     DetallesComprasAdapter adapter;
 
@@ -117,13 +116,6 @@ public class DetallesComprasFragment extends Fragment implements Basic, Response
 
 
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-
     @Override
     public void onErrorResponse(VolleyError error) {
         progressDialog.hide();
@@ -141,10 +133,6 @@ public class DetallesComprasFragment extends Fragment implements Basic, Response
         listView.setAdapter(adapter);
     }
 
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 
@@ -154,8 +142,6 @@ public class DetallesComprasFragment extends Fragment implements Basic, Response
         MenuItem menuItem1 =menu.findItem(R.id.itemCarrito);
         menuItem.setVisible(false);
         menuItem1.setVisible(false);
-
-
 
     }
 }

@@ -4,9 +4,13 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 
 import com.example.adi.catalogoatc.R;
 
@@ -65,7 +69,50 @@ public class MenuInicioFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu_inicio, container, false);
+        View view= inflater.inflate(R.layout.fragment_menu_inicio, container, false);
+        final Animation animScale = AnimationUtils.loadAnimation(getContext(),R.anim.scaele_animacion);
+        Button btnCatalogo = (Button)view.findViewById(R.id.idBtnCatalogo);
+        Button btnHistorial = (Button)view.findViewById(R.id.idBtnHistorial);
+        Button btnClientes= (Button)view.findViewById(R.id.idBtnClientes);
+
+        btnCatalogo.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View arg0) {
+                arg0.startAnimation(animScale);
+
+                Fragment fragment = CatalogoFragment.newInstance("","");
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.content_main,fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
+            }});
+        btnHistorial.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View arg0) {
+                arg0.startAnimation(animScale);
+
+                Fragment fragment = HistorialFragment.newInstance("","");
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.content_main,fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
+            }});
+
+        btnClientes.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View arg0) {
+                arg0.startAnimation(animScale);
+
+                Fragment fragment = PedidosFragment.newInstance("","");
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.content_main,fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
+            }});
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

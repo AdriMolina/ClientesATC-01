@@ -1,0 +1,40 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@drawable/fondo"
+    tools:context="com.example.adi.catalogoatc.fragmentos.MenuInicioFragment">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true">
+
+        <Button
+            android:id="@+id/idCatalogo"
+            android:text="@string/texto_catalogo"
+            style="@style/BotonesMenu"
+            android:background="@drawable/catalogo_style"
+            />
+
+        <Button
+            android:id="@+id/idClientes"
+            android:text="@string/texto_clientes"
+            android:background="@drawable/clientes_style"
+            style="@style/BotonesMenu"/>
+
+
+        <Button
+            android:id="@+id/idHistorial"
+            android:text="@string/texto_historial"
+            android:background="@drawable/historial_style"
+            style="@style/BotonesMenu"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>

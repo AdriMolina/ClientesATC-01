@@ -22,13 +22,11 @@
     <string name="texto_caja_comentarios">Para nosotros tu opinión es muy importante, por favor déjanos tus comentarios.</string>
 
 
-
-
     <string name="texto_compras_contado">Compras al Contado</string>
 
     <string name="texto_total_a_pagar">Total a pagar:</string>
     <string name="texto_total">Total:</string>
-  
+
 
     <!-- Texto Generico-->
     <string name="texto_nombre">Nombre:</string>
@@ -51,10 +49,10 @@
     <string name="texto_creditos">Creditos</string>
 
 
-
-
-
-
+    <!-- Texto Generico-->
+    <string name="texto_catalogo">Catalogo</string>
+    <string name="texto_clientes">Clientes</string>
+    <string name="texto_historial">Historial</string>
 
 
 </resources>

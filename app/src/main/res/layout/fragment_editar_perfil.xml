@@ -1,4 +1,4 @@
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,88 +8,96 @@
     android:background="@color/colorWhite"
     tools:context="com.example.adi.catalogoatc.fragmentos.EditarPerfilFragment">
 
-    <!-- TODO: Update blank fragment layout -->
 
-
-    <ImageView
-        android:id="@+id/imgUsuarioEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/usuario"
-        android:layout_gravity="center"
-        android:layout_margin="@dimen/margen_margin"
-        />
-    <TextView
-        android:id="@+id/txtedtNombreTitulo"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/texto_generico"
-        android:text="@string/texto_nombre"
-        android:layout_margin="@dimen/margen_margin"
-        android:textStyle="bold"
-        android:textColor="@color/primaryText"/>
+        android:layout_height="match_parent"
+        android:padding="@dimen/margen_padding"
+        android:orientation="vertical"
+        android:background="@color/colorWhite"
+        >
 
-    <EditText
-        android:id="@+id/editNombre"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/margen_derecha"
-        android:layout_marginStart="@dimen/margen_izquierda"
-        android:inputType="textAutoCorrect"
-        android:textColor="@color/secondarText"
-        android:textSize="@dimen/texto_generico" />
+        <ImageView
+            android:id="@+id/imgUsuarioEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/usuario"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/margen_margin"
+            />
+        <TextView
+            android:id="@+id/txtedtNombreTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/texto_generico"
+            android:text="@string/texto_nombre"
+            android:layout_margin="@dimen/margen_margin"
+            android:textStyle="bold"
+            android:textColor="@color/primaryText"/>
 
-    <TextView
-        android:id="@+id/txtDireccion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="@string/texto_direccion"
-        android:textSize="@dimen/texto_generico"
-        android:layout_margin="@dimen/margen_margin"
-        android:textColor="@color/primaryText"
-        />
+        <EditText
+            android:id="@+id/editNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margen_derecha"
+            android:layout_marginStart="@dimen/margen_izquierda"
+            android:inputType="textAutoCorrect"
+            android:textColor="@color/secondarText"
+            android:textSize="@dimen/texto_generico" />
 
-    <EditText
-        android:id="@+id/editDireccion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/margen_derecha"
-        android:layout_marginStart="@dimen/margen_izquierda"
-        android:inputType="textAutoCorrect"
-        android:textSize="@dimen/texto_generico"
-        android:textColor="@color/secondarText"/>
+        <TextView
+            android:id="@+id/txtDireccion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@string/texto_direccion"
+            android:textSize="@dimen/texto_generico"
+            android:layout_margin="@dimen/margen_margin"
+            android:textColor="@color/primaryText"
+            />
 
-    <TextView
-        android:id="@+id/txtTelefono"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margen_margin"
-        android:text="@string/texto_telefono"
-        android:textSize="@dimen/texto_generico"
-        android:textStyle="bold"
-        android:textColor="@color/primaryText"/>
+        <EditText
+            android:id="@+id/editDireccion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margen_derecha"
+            android:layout_marginStart="@dimen/margen_izquierda"
+            android:inputType="textAutoCorrect"
+            android:textSize="@dimen/texto_generico"
+            android:textColor="@color/secondarText"/>
 
-    <EditText
-        android:id="@+id/editTelefono"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="phone"
-        android:layout_marginEnd="@dimen/margen_derecha"
-        android:layout_marginStart="@dimen/margen_izquierda"
-        android:textColor="@color/secondarText"
-        />
-    <ImageButton
-        android:id="@+id/btnAceptar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_chec"
-        android:layout_gravity="center"
-        android:layout_margin="@dimen/margen_margin"
-        android:textColor="@color/colorWhite"
-        android:elevation="@dimen/elevacion_raised_buttom"
-        android:theme="@style/StyleButton"
-        />
+        <TextView
+            android:id="@+id/txtTelefono"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margen_margin"
+            android:text="@string/texto_telefono"
+            android:textSize="@dimen/texto_generico"
+            android:textStyle="bold"
+            android:textColor="@color/primaryText"/>
 
-</LinearLayout>
+        <EditText
+            android:id="@+id/editTelefono"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:layout_marginEnd="@dimen/margen_derecha"
+            android:layout_marginStart="@dimen/margen_izquierda"
+            android:textColor="@color/secondarText"
+            />
 
+        <ImageButton
+            android:id="@+id/btnAceptar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_chec"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/margen_margin"
+            android:textColor="@color/colorWhite"
+            android:elevation="@dimen/elevacion_raised_buttom"
+            android:theme="@style/StyleButton"
+            />
+    </LinearLayout>
+
+
+</ScrollView>

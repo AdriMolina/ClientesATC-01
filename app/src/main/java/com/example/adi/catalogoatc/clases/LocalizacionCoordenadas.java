@@ -41,6 +41,7 @@ import static android.content.Context.LOCATION_SERVICE;
 public class LocalizacionCoordenadas implements Basic{
 
     static  Context context;
+    Location loc;
     static private Configuracion configuracion = new Configuracion(context);
     static String latitud, longitud, url;
 
@@ -54,6 +55,11 @@ public class LocalizacionCoordenadas implements Basic{
    public void locationStart() {
         LocationManager mlocManager = (LocationManager) context.getSystemService(LOCATION_SERVICE);
         Localizacion Local = new Localizacion();
+       latitud= String.valueOf(loc.getLatitude());
+       longitud = String.valueOf(loc.getLongitude());
+
+       //Guarda datos
+       configuracion.guardarDatos(latitud,longitud);
         Local.setMainActivity(this);
        Toast.makeText(context," ejecuta localicacion" +
                "", Toast.LENGTH_SHORT).show();

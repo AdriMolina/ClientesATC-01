@@ -185,7 +185,6 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
 
                                     Toast.makeText(MapsLocalizacionActivity.this, "Nulos todos", Toast.LENGTH_LONG).show();
 
-
                                 }
 
                                 //Agregar marca y mover la camara

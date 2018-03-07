@@ -61,10 +61,7 @@ public class CatalogoFragment extends Fragment {
 
                 pestanas.setTabTextColors(Color.parseColor("#FFFFFF"), Color.parseColor("#FFFFFF"));
                 appBar.addView(pestanas);
-
-
-
-                viewPager = (ViewPager) vista.findViewById(R.id.idViewPagerInformacion);
+                viewPager = vista.findViewById(R.id.idViewPagerInformacion);
                 llenarViewPager(viewPager);
                 viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
 

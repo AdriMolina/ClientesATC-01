@@ -8,7 +8,6 @@
     android:background="@color/colorWhite"
     tools:context="com.example.adi.catalogoatc.fragmentos.EditarPerfilFragment">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -85,7 +84,6 @@
             android:layout_marginStart="@dimen/margen_izquierda"
             android:textColor="@color/secondarText"
             />
-
         <ImageButton
             android:id="@+id/btnAceptar"
             android:layout_width="wrap_content"
@@ -98,6 +96,5 @@
             android:theme="@style/StyleButton"
             />
     </LinearLayout>
-
 
 </ScrollView>

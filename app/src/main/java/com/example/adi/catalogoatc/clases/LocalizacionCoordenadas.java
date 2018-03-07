@@ -55,6 +55,8 @@ public class LocalizacionCoordenadas implements Basic{
         LocationManager mlocManager = (LocationManager) context.getSystemService(LOCATION_SERVICE);
         Localizacion Local = new Localizacion();
         Local.setMainActivity(this);
+       Toast.makeText(context," ejecuta localicacion" +
+               "", Toast.LENGTH_SHORT).show();
 
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
@@ -139,8 +141,8 @@ public class LocalizacionCoordenadas implements Basic{
         //Inicia la peticion
         RequestQueue queue = Volley.newRequestQueue(context);
         String consulta = "Select id" +
-                "from localizacion_cliente" +
-                "where claveCliente_id ="+IDClaveCliente;
+                " from localizacion_cliente" +
+                " where claveCliente_id ="+IDClaveCliente;
         consulta = consulta.replace(" ", "%20");
         String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
         url= SERVER + RUTA + "consultaGeneral.php" + cadena;
@@ -155,19 +157,26 @@ public class LocalizacionCoordenadas implements Basic{
                 //Si ya la tiene agregada no realiza ningun método
                 if(response.length()>0){
 
+                    Toast.makeText(context," ya tiene datos", Toast.LENGTH_SHORT).show();
                 }else {
                     //ejecuta el cambio de la localización
                     locationStart();
+                    Toast.makeText(context, " No tiene datos", Toast.LENGTH_SHORT).show();
+
+                    //verifica si las variables son diferentes de nulas
+                    if (latitud == "null" && longitud == "null") {
+
+                    }else{
                     //Si no tiene agregados los valores los inserta
                     //Inicia la peticion
                     RequestQueue queue = Volley.newRequestQueue(context);
-                    String consulta = "Insert into localizacion_cliente("+
-                                        " latitud, longitud, claveCliente_id)"+
-                                        " values('"+latitud+"','"+longitud+"','"+IDClaveCliente+"')";
+                    String consulta = "Insert into localizacion_cliente(" +
+                            " latitud, longitud, claveCliente_id)" +
+                            " values('" + latitud + "','" + longitud + "','" + IDClaveCliente + "')";
 
                     consulta = consulta.replace(" ", "%20");
                     String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
-                    url= SERVER + RUTA + "consultaGeneral.php" + cadena;
+                    url = SERVER + RUTA + "consultaGeneral.php" + cadena;
                     Log.i("info", url);
 
                     //Hace la petición String
@@ -186,19 +195,19 @@ public class LocalizacionCoordenadas implements Basic{
                     //Agrega y ejecuta la cola
                     queue.add(request);
                 }
+                }
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Toast.makeText(context," error", Toast.LENGTH_SHORT).show();
             }
+
         });
 
         //Agrega y ejecuta la cola
         queue.add(request);
-
-
     }
 
 }

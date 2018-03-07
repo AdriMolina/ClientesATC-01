@@ -57,6 +57,7 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
     String url;
     private ProgressDialog progressDialog;
     private Configuracion configuracion;
+    LocalizacionCoordenadas lc = new LocalizacionCoordenadas(MapsLocalizacionActivity.this);
 
 
     @Override
@@ -67,6 +68,8 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+       // lc.locationStart();
+        //lc.vericarLocalizacion();
 
     }
 

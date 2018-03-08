@@ -58,6 +58,7 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
     private ProgressDialog progressDialog;
     private Configuracion configuracion;
     LocalizacionCoordenadas lc = new LocalizacionCoordenadas(MapsLocalizacionActivity.this);
+    HiloGeolocalizador ch = new HiloGeolocalizador(MapsLocalizacionActivity.this);
 
 
 
@@ -69,6 +70,10 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
+
+
 
 
 
@@ -213,8 +218,9 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
                     LocalizacionCoordenadas lc = new LocalizacionCoordenadas(MapsLocalizacionActivity.this);
 
 
-                   Configuracion configuracion = new Configuracion(MapsLocalizacionActivity.this);
+                   Configuracion configuracion = new Configuracion(getApplicationContext());
                     String la = lc.latitud;
+                    ch.ejecutar();
                     Toast.makeText(MapsLocalizacionActivity.this, "latitud"+ la+" ", Toast.LENGTH_LONG).show();
 
                 }else{

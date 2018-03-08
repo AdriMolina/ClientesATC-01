@@ -2,7 +2,6 @@ package com.example.adi.catalogoatc.clases;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 /**
  * Created by Adi on 05/03/2018.
@@ -10,9 +9,14 @@ import android.widget.Toast;
 
 public class HiloGeolocalizador {
 
+
     Context context;
-    LocalizacionCoordenadas lc = new LocalizacionCoordenadas(context);
-    com.example.adi.catalogoatc.clases.AsyncTask hilo =new com.example.adi.catalogoatc.clases.AsyncTask();
+
+    public HiloGeolocalizador(Context context)
+    {
+        this.context = context;
+    }
+
     //Funcion que hara que se el hilo se duerma cada segundo
     public void hilo() {
 
@@ -20,11 +24,13 @@ public class HiloGeolocalizador {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
+
         }
 
     }
     public void ejecutar(){
-        hilo.execute();
+        CreacionHilo creacionHilo =new CreacionHilo(context);
+        creacionHilo.execute();
 
     }
 

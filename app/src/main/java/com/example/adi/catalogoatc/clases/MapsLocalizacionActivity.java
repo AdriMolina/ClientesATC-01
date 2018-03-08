@@ -60,6 +60,7 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
     LocalizacionCoordenadas lc = new LocalizacionCoordenadas(MapsLocalizacionActivity.this);
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,8 +69,8 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-       // lc.locationStart();
-        //lc.vericarLocalizacion();
+
+
 
     }
 

@@ -50,7 +50,6 @@ public class LocalizacionCoordenadas implements Basic{
     }
 
 
-    static public String  direccion;
 
    public void locationStart() {
         LocationManager mlocManager = (LocationManager) context.getSystemService(LOCATION_SERVICE);

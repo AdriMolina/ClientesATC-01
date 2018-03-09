@@ -76,7 +76,6 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
 
 
 
-
     }
 
     //Metodo que verifica si tenemos permiso de gps en el telefono celular
@@ -218,10 +217,8 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
                     LocalizacionCoordenadas lc = new LocalizacionCoordenadas(MapsLocalizacionActivity.this);
 
 
-                   Configuracion configuracion = new Configuracion(getApplicationContext());
-                    String la = lc.latitud;
-                    ch.ejecutar();
-                    Toast.makeText(MapsLocalizacionActivity.this, "latitud"+ la+" ", Toast.LENGTH_LONG).show();
+
+                   // Toast.makeText(MapsLocalizacionActivity.this, "latitud"+ la+" ", Toast.LENGTH_LONG).show();
 
                 }else{
                     //cliente

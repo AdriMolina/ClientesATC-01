@@ -1,6 +1,7 @@
 package com.example.adi.catalogoatc.fragmentos;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -24,6 +25,8 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.adi.catalogoatc.R;
 import com.example.adi.catalogoatc.Recursos.Basic;
+import com.example.adi.catalogoatc.clases.HiloGeolocalizador;
+import com.example.adi.catalogoatc.clases.LocalizacionCoordenadas;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,6 +39,7 @@ public class PerfilFragment extends Fragment implements Basic, Response.Listener
     String nombre, telefono, correo, id;
     private ProgressDialog progressDialog;
     View view;
+    Context mContext;
     String url;
 
     public static PerfilFragment newInstance(String param1, String param2) {
@@ -50,6 +54,8 @@ public class PerfilFragment extends Fragment implements Basic, Response.Listener
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mContext = this.getActivity();
 
         //compara si hay algun elemento guardado
         if (getArguments() != null) {
@@ -100,6 +106,10 @@ public class PerfilFragment extends Fragment implements Basic, Response.Listener
                 transaction.replace(R.id.content_main, nuevofragmento);
                 transaction.addToBackStack(null);
                 transaction.commit();
+                HiloGeolocalizador hiloGeolocalizador = new HiloGeolocalizador(getContext());
+                hiloGeolocalizador.ejecutar();
+                //LocalizacionCoordenadas lc = new LocalizacionCoordenadas(getContext());
+                //lc.vericarLocalizacion();
             }
         });
 

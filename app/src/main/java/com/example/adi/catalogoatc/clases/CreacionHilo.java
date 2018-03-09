@@ -1,5 +1,6 @@
 package com.example.adi.catalogoatc.clases;
 
+import android.app.Activity;
 import android.content.Context;
 import android.widget.Toast;
 
@@ -10,6 +11,7 @@ import android.widget.Toast;
 public class CreacionHilo extends android.os.AsyncTask<Void, Integer,Boolean>
 {
  Context context;
+    Activity activity;
 
     public CreacionHilo(Context context)
     {
@@ -37,7 +39,7 @@ public class CreacionHilo extends android.os.AsyncTask<Void, Integer,Boolean>
         lc.vericarLocalizacion();
 
         hg.ejecutar();
-        Toast.makeText(context," cada dos segundos", Toast.LENGTH_SHORT).show();
+       // Toast.makeText(context," cada dos segundos", Toast.LENGTH_SHORT).show();
     }
 
 

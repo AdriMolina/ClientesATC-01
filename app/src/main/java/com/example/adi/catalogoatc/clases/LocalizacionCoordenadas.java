@@ -162,11 +162,11 @@ public class LocalizacionCoordenadas implements Basic{
                 //Si ya la tiene agregada no realiza ningun método
                 if(response.length()>0){
 
-                    Toast.makeText(context," ya tiene datos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context," ya tiene datos "+ context.toString(), Toast.LENGTH_SHORT).show();
                 }else {
                     //ejecuta el cambio de la localización
                     locationStart();
-                    Toast.makeText(context, " No tiene datos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, " No tiene datos ", Toast.LENGTH_SHORT).show();
 
                     //verifica si las variables son diferentes de nulas
                     if (latitud == "null" && longitud == "null") {

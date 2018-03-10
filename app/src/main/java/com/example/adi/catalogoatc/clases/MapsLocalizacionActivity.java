@@ -57,7 +57,7 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
     String url;
     private ProgressDialog progressDialog;
     private Configuracion configuracion;
-    LocalizacionCoordenadas lc = new LocalizacionCoordenadas(MapsLocalizacionActivity.this);
+    LocalizacionCoordenadas lc = new LocalizacionCoordenadas(getApplicationContext());
     HiloGeolocalizador ch = new HiloGeolocalizador(MapsLocalizacionActivity.this);
 
 
@@ -214,7 +214,7 @@ public class MapsLocalizacionActivity extends FragmentActivity implements OnMapR
 
                     //Actualizacion de la ubicacion cada detrminado momento
 
-                    LocalizacionCoordenadas lc = new LocalizacionCoordenadas(MapsLocalizacionActivity.this);
+                    LocalizacionCoordenadas lc = new LocalizacionCoordenadas(getApplicationContext());
 
 
 

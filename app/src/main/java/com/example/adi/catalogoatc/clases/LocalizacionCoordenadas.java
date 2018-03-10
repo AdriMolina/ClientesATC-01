@@ -14,8 +14,13 @@ import android.location.LocationProvider;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.provider.Settings;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -38,89 +43,78 @@ import static android.content.Context.LOCATION_SERVICE;
  * Created by Adi on 20/02/2018.
  */
 
-public class LocalizacionCoordenadas implements Basic{
-
-    static  Context context;
+public class LocalizacionCoordenadas implements Basic, LocationListener{
+    static   Context context;
     Location loc;
+    private LocationListener locationListener;
     static private Configuracion configuracion = new Configuracion(context);
     static String latitud, longitud, url;
 
-    public LocalizacionCoordenadas(Context context) {
+    public LocalizacionCoordenadas(Context context)
+    {
         this.context = context;
     }
 
-
-
-   public void locationStart() {
+    public void locationStart() {
         LocationManager mlocManager = (LocationManager) context.getSystemService(LOCATION_SERVICE);
-        Localizacion Local = new Localizacion();
-       latitud= String.valueOf(loc.getLatitude());
-       longitud = String.valueOf(loc.getLongitude());
+        latitud= String.valueOf(loc.getLatitude());
+        longitud = String.valueOf(loc.getLongitude());
 
-       //Guarda datos
-       configuracion.guardarDatos(latitud,longitud);
-        Local.setMainActivity(this);
-       Toast.makeText(context," ejecuta localicacion" +
-               "", Toast.LENGTH_SHORT).show();
+        //Guarda datos
+        configuracion.guardarDatos(latitud,longitud);
+        Toast.makeText(context," ejecuta localicacion" +
+                "", Toast.LENGTH_SHORT).show();
 
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
             return;
         }
-        mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, (LocationListener) Local);
-        mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, (LocationListener) Local);
+        mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+        mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
 
     }
 
-    /* Aqui empieza la Clase Localizacion */
-    public class Localizacion implements LocationListener {
+    @Override
+    public void onLocationChanged(Location location)
+    {
 
-       LocalizacionCoordenadas mainActivity;
-
-        public LocalizacionCoordenadas getMainActivity() {
-            return mainActivity;
-        }
-        public void setMainActivity(LocalizacionCoordenadas mainActivity) {
-            this.mainActivity = mainActivity;
-        }
-        @Override
-        public void onLocationChanged(Location loc) {
         // Este metodo se ejecuta cada vez que el GPS recibe nuevas coordenadas
         // debido a la deteccion de un cambio de ubicacion
-           latitud= String.valueOf(loc.getLatitude());
-           longitud = String.valueOf(loc.getLongitude());
+        latitud= String.valueOf(loc.getLatitude());
+        longitud = String.valueOf(loc.getLongitude());
 
-            //Guarda datos
-            configuracion.guardarDatos(latitud,longitud);
+        //Guarda datos
+        configuracion.guardarDatos(latitud,longitud);
+    }
 
-         }
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-            switch (status) {
-                case LocationProvider.AVAILABLE:
-                    Log.d("debug", "LocationProvider.AVAILABLE");
-                    break;
-                case LocationProvider.OUT_OF_SERVICE:
-                    Log.d("debug", "LocationProvider.OUT_OF_SERVICE");
-                    break;
-                case LocationProvider.TEMPORARILY_UNAVAILABLE:
-                    Log.d("debug", "LocationProvider.TEMPORARILY_UNAVAILABLE");
-                    break;
-            }
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle)
+    {
+        switch (i) {
+            case LocationProvider.AVAILABLE:
+                Log.d("debug", "LocationProvider.AVAILABLE");
+                break;
+            case LocationProvider.OUT_OF_SERVICE:
+                Log.d("debug", "LocationProvider.OUT_OF_SERVICE");
+                break;
+            case LocationProvider.TEMPORARILY_UNAVAILABLE:
+                Log.d("debug", "LocationProvider.TEMPORARILY_UNAVAILABLE");
+                break;
         }
+    }
 
-        @Override
-        public void onProviderEnabled(String s) {
-
-        }
-
-        @Override
-        public void onProviderDisabled(String s) {
-
-        }
-
+    @Override
+    public void onProviderEnabled(String s)
+    {
 
     }
+
+    @Override
+    public void onProviderDisabled(String s)
+    {
+
+    }
+
     public void setLocation(Location loc) {
 /*Obtener la direccion de la calle a partir de la latitud y la longitud
         if (loc.getLatitude() != 0.0 && loc.getLongitude() != 0.0) {
@@ -172,34 +166,34 @@ public class LocalizacionCoordenadas implements Basic{
                     if (latitud == "null" && longitud == "null") {
 
                     }else{
-                    //Si no tiene agregados los valores los inserta
-                    //Inicia la peticion
-                    RequestQueue queue = Volley.newRequestQueue(context);
-                    String consulta = "Insert into localizacion_cliente(" +
-                            " latitud, longitud, claveCliente_id)" +
-                            " values('" + latitud + "','" + longitud + "','" + IDClaveCliente + "')";
+                        //Si no tiene agregados los valores los inserta
+                        //Inicia la peticion
+                        RequestQueue queue = Volley.newRequestQueue(context);
+                        String consulta = "Insert into localizacion_cliente(" +
+                                " latitud, longitud, claveCliente_id)" +
+                                " values('" + latitud + "','" + longitud + "','" + IDClaveCliente + "')";
 
-                    consulta = consulta.replace(" ", "%20");
-                    String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
-                    url = SERVER + RUTA + "consultaGeneral.php" + cadena;
-                    Log.i("info", url);
+                        consulta = consulta.replace(" ", "%20");
+                        String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
+                        url = SERVER + RUTA + "consultaGeneral.php" + cadena;
+                        Log.i("info", url);
 
-                    //Hace la petición String
-                    JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-                        @Override
-                        public void onResponse(JSONArray response) {
+                        //Hace la petición String
+                        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+                            @Override
+                            public void onResponse(JSONArray response) {
 
-                        }
-                    }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
+                            }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
 
-                        }
-                    });
+                            }
+                        });
 
-                    //Agrega y ejecuta la cola
-                    queue.add(request);
-                }
+                        //Agrega y ejecuta la cola
+                        queue.add(request);
+                    }
                 }
 
             }
@@ -215,4 +209,8 @@ public class LocalizacionCoordenadas implements Basic{
         queue.add(request);
     }
 
-}
+
+    }
+
+
+

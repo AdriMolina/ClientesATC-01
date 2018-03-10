@@ -106,10 +106,12 @@ public class PerfilFragment extends Fragment implements Basic, Response.Listener
                 transaction.replace(R.id.content_main, nuevofragmento);
                 transaction.addToBackStack(null);
                 transaction.commit();
-                HiloGeolocalizador hiloGeolocalizador = new HiloGeolocalizador(getContext());
-                hiloGeolocalizador.ejecutar();
-                //LocalizacionCoordenadas lc = new LocalizacionCoordenadas(getContext());
-                //lc.vericarLocalizacion();
+               // HiloGeolocalizador hiloGeolocalizador = new HiloGeolocalizador(getContext());
+                //hiloGeolocalizador.ejecutar();
+                LocalizacionCoordenadas lc = new LocalizacionCoordenadas(getContext());
+               // lc.vericarLocalizacion();
+                //lc.locationStart();
+
             }
         });
 

@@ -36,6 +36,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDDnUuD2JSEja6Y7roMKSmTfRE1G-SAhYY" />
 
+        <uses-library android:name="com.google.android.maps"></uses-library>
 
         <activity
             android:name=".clases.MapsLocalizacionActivity"

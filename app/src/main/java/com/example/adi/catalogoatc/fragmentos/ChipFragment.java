@@ -93,7 +93,7 @@ public class ChipFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         //Inicia la peticion
         RequestQueue queue = Volley.newRequestQueue(getContext());
         String consulta = "select distinct a.id, ma.nombre as marca, mo.nombre as  modelo,a.precio" +
-                "                                                from marca ma, modelo mo, articulo a, punto_venta pv, cantidad ca, tipo_articulo ta" +
+                "                                                from marca ma, modelo mo, articulo a, punto_venta pv, cantidad ca, tipo_articulo ta, ca.id" +
                 "                                                where a.modelo_id = mo.id" +
                 "                                                and mo.marca_id = ma.id" +
                 "                                                and ca.puntoVenta_id = pv.id" +

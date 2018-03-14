@@ -17,6 +17,9 @@ public class modeloCatalogo {
     private String marca;
     private String modelo;
     private String precio;
+    private String cantidadID;
+    //agregar el id de la cantidad
+
 
 
     public modeloCatalogo(int id, String marca, String modelo, String precio) {

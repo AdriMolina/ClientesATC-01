@@ -28,14 +28,17 @@ public class CatalogoFragment extends Fragment {
     private AppBarLayout appBar;
     private TabLayout pestanas;
     private ViewPager viewPager;
+    int IDRuta;
     ClipData.Item item;
     public CatalogoFragment() {
 
     }
 
-    public static CatalogoFragment newInstance(String param1, String param2) {
+    public static CatalogoFragment newInstance(int ruta_ID) {
         CatalogoFragment fragment = new CatalogoFragment();
         Bundle args = new Bundle();
+        fragment.setArguments(args);
+        args.putInt("RUTA_ID", ruta_ID);
         return fragment;
     }
 
@@ -43,6 +46,10 @@ public class CatalogoFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
+        //compara si hay algun elemento guardado
+        if (getArguments() != null) {
+            IDRuta = getArguments().getInt("RUTA_ID");
+        }
     }
 
     @Override

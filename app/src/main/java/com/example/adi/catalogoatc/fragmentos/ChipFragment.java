@@ -49,12 +49,13 @@ public class ChipFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     CatalogoAdapter adapter;
     FragmentManager fm;
 
-    int IDRuta;
+    int IDRuta, IDClaveCliente;
 
-    public static ChipFragment newInstance(int ruta_id) {
+    public static ChipFragment newInstance(int ruta_id, int clavecliente_id) {
         ChipFragment fragment = new ChipFragment();
         Bundle args = new Bundle();
         args.putInt("RUTA_ID", ruta_id);
+        args.putInt("CLAVECLIENTE", clavecliente_id);
         fragment.setArguments(args);
         return fragment;
     }
@@ -68,6 +69,7 @@ public class ChipFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         //compara si hay algun elemento guardado
         if (getArguments() != null) {
             IDRuta = getArguments().getInt("RUTA_ID");
+            IDClaveCliente = getArguments().getInt("CLAVECLIENTE");
         }
     }
 

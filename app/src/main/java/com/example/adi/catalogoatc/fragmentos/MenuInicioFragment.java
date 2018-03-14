@@ -17,6 +17,8 @@ import com.example.adi.catalogoatc.R;
 
 public class MenuInicioFragment extends Fragment {
 
+    int IDRuta=2;
+    int IDClaveCliente=20;
 
     public MenuInicioFragment() {
         // Required empty public constructor
@@ -24,11 +26,11 @@ public class MenuInicioFragment extends Fragment {
 
 
     // TODO: Rename and change types and number of parameters
-    public static MenuInicioFragment newInstance(String param1, String param2) {
+    public static MenuInicioFragment newInstance(int ruta_id, int clavecliente_id) {
         MenuInicioFragment fragment = new MenuInicioFragment();
         Bundle args = new Bundle();
-        //args.putString(ARG_PARAM1, param1);
-        //args.putString(ARG_PARAM2, param2);
+        args.putInt("RUTA", ruta_id);
+        args.putInt("CLAVECLIENTE", clavecliente_id);
         fragment.setArguments(args);
         return fragment;
     }
@@ -37,8 +39,8 @@ public class MenuInicioFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-           // mParam1 = getArguments().getString(ARG_PARAM1);
-            //mParam2 = getArguments().getString(ARG_PARAM2);
+           IDRuta = getArguments().getInt("RUTA");
+           IDClaveCliente = getArguments().getInt("CLAVECLIENTE");
         }
     }
 
@@ -58,7 +60,7 @@ public class MenuInicioFragment extends Fragment {
             public void onClick(View arg0) {
                 arg0.startAnimation(animScale);
 
-                Fragment fragment = CatalogoFragment.newInstance(2);
+                Fragment fragment = CatalogoFragment.newInstance(IDRuta, IDClaveCliente);
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.content_main,fragment);
                 fragmentTransaction.addToBackStack(null);

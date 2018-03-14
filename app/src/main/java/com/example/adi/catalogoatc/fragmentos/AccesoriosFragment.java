@@ -49,18 +49,19 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
     CatalogoAdapter adapter;
     List<modeloCatalogo> listaAdapter;
     String url;
-    int IDRuta;
+    int IDRuta, IDClaveCliente;
     FragmentManager fm;
 
 
 
 
     // TODO: Rename and change types and number of parameters
-    public static TelefonoFragment newInstance(int ruta_id) {
+    public static TelefonoFragment newInstance(int ruta_id, int clavecliente_id) {
         TelefonoFragment fragment = new TelefonoFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         args.putInt("RUTA_ID", ruta_id);
+        args.putInt("CLIENTE__ID", clavecliente_id);
         return fragment;
     }
 
@@ -73,6 +74,7 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
         //compara si hay algun elemento guardado
         if (getArguments() != null) {
             IDRuta = getArguments().getInt("RUTA_ID");
+            IDClaveCliente = getArguments().getInt("CLIENTE_ID");
         }
     }
 
@@ -96,18 +98,18 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
 
         //Inicia la peticion
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String consulta = "select distinct a.id, ta.nombre, ma.nombre,a.precio" +
-                "                               from marca ma, modelo mo, articulo a, punto_venta pv, cantidad ca, tipo_articulo ta, ca.id" +
-                "                                where a.modelo_id = mo.id" +
-                "                                and mo.marca_id = ma.id" +
-                "                                and ca.puntoVenta_id = pv.id" +
-                "                                and ca.articulo_id = a.id" +
-                "                                and a.tipoArticulo_id = ta.id" +
-                "                                and pv.id =" +IDRuta+
-                "                                and ta.nombre !='Teléfono'" +
-                "                                and ta.nombre !='Chip'" +
-                "                                and ca.valor > 0" +
-                "                                order by ta.nombre asc;";
+        String consulta = "select distinct a.id, ta.nombre, ma.nombre,a.precio, ca.id" +
+                                " from marca ma, modelo mo, articulo a, punto_venta pv, cantidad ca, tipo_articulo ta" +
+                                " where a.modelo_id = mo.id" +
+                                " and mo.marca_id = ma.id" +
+                                " and ca.puntoVenta_id = pv.id" +
+                                " and ca.articulo_id = a.id" +
+                                " and a.tipoArticulo_id = ta.id" +
+                                " and pv.id =" +IDRuta+
+                                " and ta.nombre !='Teléfono'" +
+                                " and ta.nombre !='Chip'" +
+                                " and ca.valor > 0" +
+                                " order by ta.nombre asc;";
         consulta = consulta.replace(" ", "%20");
         String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
         url= SERVER + RUTA + "consultaGeneral.php" + cadena;
@@ -257,18 +259,18 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
     public void onRefresh() {
         //Inicia la peticion
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String consulta = "select distinct a.id, ta.nombre, ma.nombre,a.precio" +
-                "                               from marca ma, modelo mo, articulo a, punto_venta pv, cantidad ca, tipo_articulo ta" +
-                "                                where a.modelo_id = mo.id" +
-                "                                and mo.marca_id = ma.id" +
-                "                                and ca.puntoVenta_id = pv.id" +
-                "                                and ca.articulo_id = a.id" +
-                "                                and a.tipoArticulo_id = ta.id" +
-                "                                and pv.id =" +IDRuta+
-                "                                and ta.nombre !='Teléfono'" +
-                "                                and ta.nombre !='Chip'" +
-                "                                and ca.valor > 0" +
-                "                                order by ta.nombre asc;";
+        String consulta = "select distinct a.id, ta.nombre, ma.nombre,a.precio, ca.id" +
+                                " rom marca ma, modelo mo, articulo a, punto_venta pv, cantidad ca, tipo_articulo ta" +
+                                " where a.modelo_id = mo.id" +
+                                " and mo.marca_id = ma.id" +
+                                " and ca.puntoVenta_id = pv.id" +
+                                " and ca.articulo_id = a.id" +
+                                " and a.tipoArticulo_id = ta.id" +
+                                " and pv.id =" +IDRuta+
+                                " and ta.nombre !='Teléfono'" +
+                                " and ta.nombre !='Chip'" +
+                                " and ca.valor > 0" +
+                                " order by ta.nombre asc;";
         consulta = consulta.replace(" ", "%20");
         String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
         url= SERVER + RUTA + "consultaGeneral.php" + cadena;

@@ -92,18 +92,18 @@ public class ChipFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
         //Inicia la peticion
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String consulta = "select distinct a.id, ma.nombre as marca, mo.nombre as  modelo,a.precio" +
-                "                                                from marca ma, modelo mo, articulo a, punto_venta pv, cantidad ca, tipo_articulo ta, ca.id" +
-                "                                                where a.modelo_id = mo.id" +
-                "                                                and mo.marca_id = ma.id" +
-                "                                                and ca.puntoVenta_id = pv.id" +
-                "                                                and ca.articulo_id = a.id" +
-                "                                                and a.tipoArticulo_id = ta.id" +
-                "                                                and ta.nombre = 'Chip'" +
-                "                                                and pv.id =" +IDRuta+
-                "                                                and ta.nombre = 'Chip'" +
-                "                                                and ca.valor > 0" +
-                "                                                order by ma.nombre asc;";
+        String consulta = "select distinct a.id, ma.nombre as marca, mo.nombre as  modelo,a.precio, ca.id" +
+                                " from marca ma, modelo mo, articulo a, punto_venta pv, cantidad ca, tipo_articulo ta" +
+                                " where a.modelo_id = mo.id" +
+                                " and mo.marca_id = ma.id" +
+                                " and ca.puntoVenta_id = pv.id" +
+                                " and ca.articulo_id = a.id" +
+                                " and a.tipoArticulo_id = ta.id" +
+                                " and ta.nombre = 'Chip'" +
+                                " and pv.id =" +IDRuta+""+
+                                " and ta.nombre = 'Chip'" +
+                                " and ca.valor > 0" +
+                                " order by ma.nombre asc;";
         consulta = consulta.replace(" ", "%20");
         String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
         url= SERVER + RUTA + "consultaGeneral.php" + cadena;
@@ -250,20 +250,20 @@ public class ChipFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     public void onRefresh() {
         //Inicia la peticion
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String consulta = "select distinct a.id, ma.nombre as marca, mo.nombre as  modelo,a.precio" +
-                "                               from marca ma, modelo mo, articulo a, punto_venta pv, cantidad ca, tipo_articulo ta" +
-                "                                where a.modelo_id = mo.id" +
-                "                                and mo.marca_id = ma.id" +
-                "                                and ca.puntoVenta_id = pv.id" +
-                "                                and ca.articulo_id = a.id" +
-                "                                and a.tipoArticulo_id = ta.id" +
-                "                                and ta.nombre = 'Chip'" +
-                "                                and pv.tipo <> 'Local Zaragoza'" +
-                "                                and pv.tipo <> 'Local Juarez'" +
-                "                                and pv.tipo <> 'Local Atc'" +
-                "                                and ta.nombre = 'Chip'" +
-                "                                and ca.valor > 0" +
-                "                                order by ma.nombre asc;";
+        String consulta = "select distinct a.id, ma.nombre as marca, mo.nombre as  modelo,a.precio, ca.id" +
+                                    " from marca ma, modelo mo, articulo a, punto_venta pv, cantidad ca, tipo_articulo ta" +
+                                    " where a.modelo_id = mo.id" +
+                                    " and mo.marca_id = ma.id" +
+                                    " and ca.puntoVenta_id = pv.id" +
+                                    " and ca.articulo_id = a.id" +
+                                    " and a.tipoArticulo_id = ta.id" +
+                                    " and ta.nombre = 'Chip'" +
+                                    " and pv.tipo <> 'Local Zaragoza'" +
+                                    " and pv.tipo <> 'Local Juarez'" +
+                                    " and pv.tipo <> 'Local Atc'" +
+                                    " and ta.nombre = 'Chip'" +
+                                    " and ca.valor > 0" +
+                                    " order by ma.nombre asc;";
         consulta = consulta.replace(" ", "%20");
         String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
         url= SERVER + RUTA + "consultaGeneral.php" + cadena;

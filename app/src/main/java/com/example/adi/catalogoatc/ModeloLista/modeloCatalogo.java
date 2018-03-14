@@ -22,11 +22,12 @@ public class modeloCatalogo {
 
 
 
-    public modeloCatalogo(int id, String marca, String modelo, String precio) {
+    public modeloCatalogo(int id, String marca, String modelo, String precio, String cantidadID) {
         this.id = id;
         this.marca = marca;
         this.modelo = modelo;
         this.precio = precio;
+        this.cantidadID = cantidadID;
     }
 
     public int getId() {
@@ -61,6 +62,16 @@ public class modeloCatalogo {
         this.precio = precio;
     }
 
+    public String getCantidadID()
+    {
+        return cantidadID;
+    }
+
+    public void setCantidadID(String cantidadID)
+    {
+        this.cantidadID = cantidadID;
+    }
+
     public static List<modeloCatalogo> sacarListaClientes(JSONArray array)
     {
         List<modeloCatalogo> lista = new ArrayList<>();
@@ -72,7 +83,8 @@ public class modeloCatalogo {
                 modeloCatalogo catalogo = new modeloCatalogo(Integer.parseInt(jsonObject.getString("0")),
                                                                 jsonObject.getString("1"),
                                                                 jsonObject.getString("2"),
-                                                                jsonObject.getString("3"));
+                                                                jsonObject.getString("3"),
+                                                                jsonObject.getString("4"));
 
                 lista.add(catalogo);
             }

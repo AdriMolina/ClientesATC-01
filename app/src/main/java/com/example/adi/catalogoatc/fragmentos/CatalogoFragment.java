@@ -93,9 +93,12 @@ public class CatalogoFragment extends Fragment {
     //Agrega las pestañas para sus respectivos fragmentos
     private void llenarViewPager(ViewPager viewPager){
         SeccionesAdapter adapter = new SeccionesAdapter(getFragmentManager());
-        adapter.addFragment(new ChipFragment(), "Chips" );
-        adapter.addFragment(new TelefonoFragment(), "Teléfonos");
-        adapter.addFragment(new AccesoriosFragment(), "Accesorios");
+        adapter.addFragment(ChipFragment.newInstance(2), "Chips");
+        adapter.addFragment(TelefonoFragment.newInstance(2),"Teléfonos");
+        adapter.addFragment(AccesoriosFragment.newInstance(2),"Accesorios");
+        //adapter.addFragment(new ChipFragment(), "Chips" );
+       // adapter.addFragment(new TelefonoFragment(), "Teléfonos");
+        //adapter.addFragment(new AccesoriosFragment(), "Accesorios");
 
         viewPager.setAdapter(adapter);
 

@@ -37,6 +37,8 @@ import org.json.JSONArray;
 
 //Probado
 
+
+
 public class HistorialCreditoFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener,
         Basic, Response.Listener<JSONArray>, Response.ErrorListener {
     private ListView listView;
@@ -46,10 +48,12 @@ public class HistorialCreditoFragment extends Fragment implements SwipeRefreshLa
     int idOrden, idCredito;
     HistorialCreditoAdapter adapter;
 
-    public static HistorialCreditoFragment newInstance(String param1, String param2) {
+    int IDclavecliente;
+    public static HistorialCreditoFragment newInstance(int clavecliente_id) {
         HistorialCreditoFragment fragment = new HistorialCreditoFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
+        args.putInt("CLIENTE_ID", clavecliente_id);
         return fragment;
     }
 
@@ -61,7 +65,7 @@ public class HistorialCreditoFragment extends Fragment implements SwipeRefreshLa
 
         //compara si hay algun elemento guardado
         if (getArguments() != null) {
-
+            IDclavecliente = getArguments().getInt("CLIENTE_ID");
         }
     }
 
@@ -89,7 +93,7 @@ public class HistorialCreditoFragment extends Fragment implements SwipeRefreshLa
                 "                 where c.orden_id = o.id" +
                 "                 and cc.cliente_id = cl.id" +
                 "                 and o.cliente_id = cl.id" +
-                "                 and cc.id=" +IDClaveCliente+
+                "                 and cc.id=" +IDclavecliente+
                 "                 order by o.fecha desc;";
 
         consulta = consulta.replace(" ", "%20");
@@ -116,7 +120,7 @@ public class HistorialCreditoFragment extends Fragment implements SwipeRefreshLa
                 idCredito = (int)adapter.getOtroId(position);
                 total = txtTotal.getText().toString();
 
-                int idUsusario = Integer.parseInt(IDClaveCliente);
+                int idUsusario = IDclavecliente;
 
 
 
@@ -180,7 +184,7 @@ public class HistorialCreditoFragment extends Fragment implements SwipeRefreshLa
                 "                 where c.orden_id = o.id" +
                 "                 and cc.cliente_id = cl.id" +
                 "                 and o.cliente_id = cl.id" +
-                "                 and cc.id=" +IDClaveCliente+
+                "                 and cc.id=" +IDclavecliente+
                 "                 order by o.fecha desc;";
 
         consulta = consulta.replace(" ", "%20");

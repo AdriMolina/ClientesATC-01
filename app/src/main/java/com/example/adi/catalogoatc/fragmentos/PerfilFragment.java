@@ -45,12 +45,14 @@ public class PerfilFragment extends Fragment implements Basic, Response.Listener
     Context mContext;
     String url;
     Double lo;
+    int CC;
     Location location;
 
-    public static PerfilFragment newInstance(String param1, String param2) {
+    public static PerfilFragment newInstance(int clave) {
         PerfilFragment fragment = new PerfilFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
+        args.putInt("CLAVE_CLIENTE", clave);
         return fragment;
     }
 
@@ -64,7 +66,7 @@ public class PerfilFragment extends Fragment implements Basic, Response.Listener
 
         //compara si hay algun elemento guardado
         if (getArguments() != null) {
-
+            CC = getArguments().getInt("CLIENTE_ID");
         }
     }
 
@@ -89,7 +91,7 @@ public class PerfilFragment extends Fragment implements Basic, Response.Listener
         String consulta = "select cc.id, c.nombre, c.direccion, c.telefono, c.email" +
                             " from cliente c, clave_cliente cc" +
                             " where cc.cliente_id = c.id" +
-                            " and cc.id ="+IDClaveCliente;
+                            " and cc.id ="+CC;
         consulta = consulta.replace(" ", "%20");
         String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
         url= SERVER + RUTA + "consultaGeneral.php" + cadena;

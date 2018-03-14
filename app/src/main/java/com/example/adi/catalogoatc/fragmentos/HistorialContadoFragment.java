@@ -42,13 +42,14 @@ public class HistorialContadoFragment extends Fragment implements SwipeRefreshLa
     private ProgressDialog progressDialog;
     String url, totalContado;
     private SwipeRefreshLayout contenedor;
-    int idOrden;
+    int idOrden, id_ClaveCliente;
     HistorialAdapter adapter;
     ImageButton imageButton;
 
-    public static HistorialContadoFragment newInstance(String param1, String param2) {
+    public static HistorialContadoFragment newInstance(int clavecliente_id) {
        HistorialContadoFragment fragment = new HistorialContadoFragment();
         Bundle args = new Bundle();
+        args.putInt("CLIENTE_ID", clavecliente_id);
         fragment.setArguments(args);
         return fragment;
     }
@@ -65,7 +66,7 @@ public class HistorialContadoFragment extends Fragment implements SwipeRefreshLa
 
         //compara si hay algun elemento guardado
         if (getArguments() != null) {
-
+            id_ClaveCliente = getArguments().getInt("CLIENTE_ID");
         }
     }
 
@@ -100,7 +101,7 @@ public class HistorialContadoFragment extends Fragment implements SwipeRefreshLa
                 "                 and cc.cliente_id = cl.id" +
                 "                 and o.cliente_id = cl.id" +
                 "                 and oc.total >0" +
-                "                 and cc.id ="+IDClaveCliente+
+                "                 and cc.id ="+id_ClaveCliente+
                 "                 and ta.nombre != 'Chip'" +
                 "                order by o.fecha desc;";
 
@@ -188,7 +189,7 @@ public class HistorialContadoFragment extends Fragment implements SwipeRefreshLa
                 "                 and cc.cliente_id = cl.id" +
                 "                 and o.cliente_id = cl.id" +
                 "                 and oc.total >0" +
-                "                 and cc.id ="+IDClaveCliente+
+                "                 and cc.id ="+id_ClaveCliente+
                 "                 and ta.nombre != 'Chip'" +
                 "                order by o.fecha desc;";
 

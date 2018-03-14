@@ -72,7 +72,7 @@ public class MenuInicioFragment extends Fragment {
             public void onClick(View arg0) {
                 arg0.startAnimation(animScale);
 
-                Fragment fragment = HistorialFragment.newInstance("","");
+                Fragment fragment = HistorialFragment.newInstance(IDClaveCliente);
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.content_main,fragment);
                 fragmentTransaction.addToBackStack(null);
@@ -85,7 +85,7 @@ public class MenuInicioFragment extends Fragment {
             public void onClick(View arg0) {
                 arg0.startAnimation(animScale);
 
-                Fragment fragment = PedidosFragment.newInstance("","");
+                Fragment fragment = PedidosFragment.newInstance(IDClaveCliente);
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.content_main,fragment);
                 fragmentTransaction.addToBackStack(null);

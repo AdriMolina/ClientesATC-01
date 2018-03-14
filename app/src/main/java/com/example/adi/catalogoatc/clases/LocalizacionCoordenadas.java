@@ -49,10 +49,12 @@ public class LocalizacionCoordenadas implements Basic{
     static private Configuracion configuracion = new Configuracion(context);
     Gps gps = new Gps(context);
     static String latitud, longitud, url;
+    int IDClaveCliente;
 
-    public LocalizacionCoordenadas(Context context)
+    public LocalizacionCoordenadas(Context context, int clavecliente)
     {
         this.context = context;
+        this.IDClaveCliente = clavecliente;
     }
 
 

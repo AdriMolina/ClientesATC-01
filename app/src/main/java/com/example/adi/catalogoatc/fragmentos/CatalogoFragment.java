@@ -28,7 +28,6 @@ public class CatalogoFragment extends Fragment {
     private AppBarLayout appBar;
     private TabLayout pestanas;
     private ViewPager viewPager;
-    ClipData.Item item;
     public CatalogoFragment() {
 
     }

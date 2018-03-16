@@ -212,6 +212,7 @@ public class AbonosFragment extends Fragment implements Basic, Response.Listener
     public void onResponse(JSONArray response) {
         progressDialog.hide();
 
+        //asigna los valores al adapter
         AbonosAdapter adapter = new AbonosAdapter(getContext(), modeloAbonos.sacarListaAbonos(response));
         list.setAdapter(adapter);
     }

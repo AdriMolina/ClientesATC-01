@@ -23,7 +23,9 @@ public class CarritoFragment extends Fragment implements Basic, Response.Listene
         Response.ErrorListener,
         SearchView.OnQueryTextListener,
         SwipeRefreshLayout.OnRefreshListener {
-ListView listView;
+
+
+    ListView listView;
 
 
     public CarritoFragment() {

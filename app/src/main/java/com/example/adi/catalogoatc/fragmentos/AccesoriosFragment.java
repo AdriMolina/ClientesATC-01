@@ -42,26 +42,22 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
         Response.ErrorListener,
         SearchView.OnQueryTextListener,
         SwipeRefreshLayout.OnRefreshListener{
-    private ListView listView;
-    private ProgressDialog progressDialog;
-    int id_cantidad;
-    private SwipeRefreshLayout contenedor;
-    CatalogoAdapter adapter;
-    List<modeloCatalogo> listaAdapter;
-    String url;
-    FragmentManager fm;
+        private ListView listView;
+        private ProgressDialog progressDialog;
+        private SwipeRefreshLayout contenedor;
+        CatalogoAdapter adapter;
+        List<modeloCatalogo> listaAdapter;
+    String idpventa, nombrepv;
+        String url;
 
-
-
-
-    // TODO: Rename and change types and number of parameters
-    public static TelefonoFragment newInstance(String param1, String param2) {
+    public static TelefonoFragment newInstance(String IDPVenta, String nombrePV) {
         TelefonoFragment fragment = new TelefonoFragment();
         Bundle args = new Bundle();
+        args.putString("IDPVENTA", IDPVenta);
+        args.putString("NOMBREPV", nombrePV);
         fragment.setArguments(args);
         return fragment;
     }
-
 
     //Cuando se crea el fragmento
     @Override
@@ -70,7 +66,8 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
 
         //compara si hay algun elemento guardado
         if (getArguments() != null) {
-
+            idpventa = getArguments().getString("IDPVENTA");
+            nombrepv = getArguments().getString("NOMBREPV");
         }
     }
 
@@ -94,17 +91,18 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
 
         //Inicia la peticion
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String consulta = "select distinct a.id, ta.nombre, ma.nombre,a.precio" +
-                "                from marca ma, modelo mo, articulo a, punto_venta pv, cantidad ca, tipo_articulo ta" +
-                "                where a.modelo_id = mo.id" +
-                "                and mo.marca_id = ma.id" +
-                "                and ca.puntoVenta_id = pv.id" +
-                "                and ca.articulo_id = a.id" +
-                "                and a.tipoArticulo_id = ta.id" +
-                "                and ta.nombre !='Teléfono'" +
-                "                and ta.nombre !='Chip'" +
-                "                and ca.valor > 0;" +
-                "                order by ta.nombre asc;";
+        String consulta = "select ca.id,ta.nombre, ma.nombre,a.precio,ca.valor" +
+                                " from marca ma, modelo mo, articulo a, punto_venta pv, cantidad ca, tipo_articulo ta" +
+                                " where a.modelo_id = mo.id" +
+                                " and mo.marca_id = ma.id" +
+                                " and ca.puntoVenta_id = pv.id" +
+                                " and ca.articulo_id = a.id" +
+                                " and a.tipoArticulo_id = ta.id" +
+                                " and pv.id =" +idpventa+
+                                " and ta.nombre !='Teléfono'" +
+                                " and ta.nombre !='Chip'" +
+                                " and ca.valor > 0" +
+                                " order by ta.nombre asc;";
         consulta = consulta.replace(" ", "%20");
         String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
         url= SERVER + RUTA + "consultaGeneral.php" + cadena;
@@ -131,20 +129,6 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
             }
         });
 
-        /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                //SACA EL ID DEL ARTICULO
-                int idArticulo =  (int)adapter.getItemId(i);
-                Toast.makeText(getContext(), String.valueOf(idArticulo), Toast.LENGTH_SHORT).show();
-                Fragment nuevofragmento = DetallesCatalogoFragment.newInstance(idArticulo, "Accesorios");
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.content_main, nuevofragmento);
-                transaction.addToBackStack(null);
-                transaction.commit();
-            }
-        });*/
 
         //Parte que recarga el listview solamente si llega al tope
         listView.setOnScrollListener(new AbsListView.OnScrollListener()
@@ -172,7 +156,7 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-
+       //Asigna los items del menu
         MenuItem menuItem =menu.findItem(R.id.itembucar);
         MenuItem menuItem1 =menu.findItem(R.id.itemCarrito);
         menuItem.setVisible(true);
@@ -197,7 +181,7 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
 
     }
 
-
+    //Al dar error en la consulta
     @Override
     public void onErrorResponse(VolleyError error) {
         progressDialog.hide();
@@ -207,6 +191,7 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
 
     }
 
+    //cuando da respuesta la consulta
     @Override
     public void onResponse(JSONArray response) {
         progressDialog.hide();
@@ -250,21 +235,23 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
         return listaFiltrada;
     }
 
+    //Al volver a cargar el listView
     @Override
     public void onRefresh() {
         //Inicia la peticion
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String consulta = "select distinct a.id, ta.nombre, ma.nombre,a.precio" +
-                "                from marca ma, modelo mo, articulo a, punto_venta pv, cantidad ca, tipo_articulo ta" +
-                "                where a.modelo_id = mo.id" +
-                "                and mo.marca_id = ma.id" +
-                "                and ca.puntoVenta_id = pv.id" +
-                "                and ca.articulo_id = a.id" +
-                "                and a.tipoArticulo_id = ta.id" +
-                "                and ta.nombre !='Teléfono'" +
-                "                and ta.nombre !='Chip'" +
-                "                and ca.valor > 0;" +
-                "                order by ta.nombre asc;";
+        String consulta = "select ca.id,ta.nombre, ma.nombre,a.precio,ca.valor" +
+                                " from marca ma, modelo mo, articulo a, punto_venta pv, cantidad ca, tipo_articulo ta" +
+                                " where a.modelo_id = mo.id" +
+                                " and mo.marca_id = ma.id" +
+                                " and ca.puntoVenta_id = pv.id" +
+                                " and ca.articulo_id = a.id" +
+                                " and a.tipoArticulo_id = ta.id" +
+                                " and pv.id =" +idpventa+
+                                " and ta.nombre !='Teléfono'" +
+                                " and ta.nombre !='Chip'" +
+                                " and ca.valor > 0" +
+                                " order by ta.nombre asc;";
         consulta = consulta.replace(" ", "%20");
         String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
         url= SERVER + RUTA + "consultaGeneral.php" + cadena;

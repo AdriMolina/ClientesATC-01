@@ -66,8 +66,6 @@ public class PedidosFragment extends Fragment implements Basic, Response.Listene
          view = inflater.inflate(R.layout.fragment_pedidos, container, false);
 
 
-        // Inflate the layout for this fragment
-
         listView = (ListView)view.findViewById(R.id.listaPedidos);
 
         //Coloca el dialogo de carga

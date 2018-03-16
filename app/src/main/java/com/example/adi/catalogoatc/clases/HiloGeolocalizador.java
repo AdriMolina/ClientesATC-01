@@ -20,23 +20,7 @@ public class HiloGeolocalizador {
         this.context = context;
     }
 
-    //Funcion que hara que se el hilo se duerma cada segundo
-    public void hilo() {
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-
-        }
-
-    }
-    public void ejecutar(){
-     time ti = new time();
-        ti.execute();
-        Toast.makeText(context," primera clase de hilos", Toast.LENGTH_SHORT).show();
-
-    }
 
     public class time extends AsyncTask<Void, Integer,Boolean>
     {
@@ -60,5 +44,22 @@ public class HiloGeolocalizador {
            ejecutar();
             Toast.makeText(context," cada dos segundos", Toast.LENGTH_SHORT).show();
         }
+    }
+    //Funcion que hara que se el hilo se duerma cada segundo
+    public void hilo() {
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+
+        }
+
+    }
+    public void ejecutar(){
+        time ti = new time();
+        ti.execute();
+        Toast.makeText(context," primera clase de hilos", Toast.LENGTH_SHORT).show();
+
     }
     }

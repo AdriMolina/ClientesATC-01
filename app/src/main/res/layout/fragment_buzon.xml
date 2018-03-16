@@ -1,24 +1,22 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/margen_padding"
-    android:orientation="vertical"
     android:background="@color/colorWhite"
+    android:orientation="vertical"
+    android:padding="@dimen/margen_padding"
     tools:context="com.example.adi.catalogoatc.fragmentos.BuzonFragment">
 
     <TextView
         android:id="@+id/tituloBuzon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/margen_padding"
         android:text="@string/titulo_caja_comentarios"
         android:textColor="@color/primaryText"
-        android:textStyle="bold"
         android:textSize="@dimen/titulos_H1"
-        android:padding="@dimen/margen_padding"
-        android:gravity="center"
-        />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView"
@@ -26,14 +24,14 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/margen_padding"
         android:text="@string/texto_caja_comentarios"
-        android:textStyle="bold"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-        android:textColor="@color/secondarText" />
+        android:textColor="@color/secondarText"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/editText"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="362dp"
+        android:layout_height="105dp"
         android:inputType="textMultiLine"
         android:lines="8"
         android:maxLines="10"
@@ -50,5 +48,9 @@
         android:elevation="@dimen/elevacion_raised_buttom"
         android:src="@drawable/ic_enviar"
         android:theme="@style/StyleButton" />
+    <ListView
+        android:id="@+id/LvMensajes"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"></ListView>
 </LinearLayout>
 

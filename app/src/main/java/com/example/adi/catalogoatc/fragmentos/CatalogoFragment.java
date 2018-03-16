@@ -101,9 +101,6 @@ public class CatalogoFragment extends Fragment {
         adapter.addFragment(ChipFragment.newInstance(IDRuta, IDClaveCLiente), "Chips");
         adapter.addFragment(TelefonoFragment.newInstance(IDRuta, IDClaveCLiente),"Teléfonos");
         adapter.addFragment(AccesoriosFragment.newInstance(IDRuta, IDClaveCLiente),"Accesorios");
-        //adapter.addFragment(new ChipFragment(), "Chips" );
-       // adapter.addFragment(new TelefonoFragment(), "Teléfonos");
-        //adapter.addFragment(new AccesoriosFragment(), "Accesorios");
 
         viewPager.setAdapter(adapter);
 

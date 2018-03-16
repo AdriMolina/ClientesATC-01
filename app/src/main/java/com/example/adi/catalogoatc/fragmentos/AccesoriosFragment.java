@@ -51,10 +51,6 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
 
     int IDRuta, IDClaveCliente;
 
-
-
-
-    // TODO: Rename and change types and number of parameters
     public static TelefonoFragment newInstance(int ruta_id, int clavecliente_id) {
 
         TelefonoFragment fragment = new TelefonoFragment();

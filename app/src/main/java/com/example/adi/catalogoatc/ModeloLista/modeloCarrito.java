@@ -19,6 +19,8 @@ public class modeloCarrito {
     private String modelo;
     private String precio;
 
+    //Agregar id cantidad
+
 
     public modeloCarrito(int id, String tipo, String marca, String modelo, String precio) {
         this.id = id;

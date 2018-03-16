@@ -43,11 +43,13 @@ public class PedidosFragment extends Fragment implements Basic, Response.Listene
     private ListView listView;
     View view;
     HistorialAdapter adapter;
+    int CC;
 
-    public static PedidosFragment newInstance(String param1, String param2) {
+    public static PedidosFragment newInstance(int clavecliente) {
         PedidosFragment fragment = new PedidosFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
+            args.putInt("CLAVE_CLIENTE", clavecliente);
         return fragment;
     }
 
@@ -55,7 +57,7 @@ public class PedidosFragment extends Fragment implements Basic, Response.Listene
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-
+            CC = getArguments().getInt("CLIENTE_ID");
         }
     }
 
@@ -86,7 +88,7 @@ public class PedidosFragment extends Fragment implements Basic, Response.Listene
                 "                             where o.id not in(Select orden_id from orden_completa)" +
                 "                             and cc.cliente_id = cl.id" +
                 "                             and o.cliente_id = cl.id" +
-                "                             and cc.id =" +IDClaveCliente+
+                "                             and cc.id =" +CC+
                 "                             order by o.fecha desc;";
 
         consulta = consulta.replace(" ", "%20");

@@ -43,96 +43,21 @@ import static android.content.Context.LOCATION_SERVICE;
  * Created by Adi on 20/02/2018.
  */
 
-public class LocalizacionCoordenadas implements Basic, LocationListener{
+public class LocalizacionCoordenadas implements Basic{
     static   Context context;
-    Location loc;
-    private LocationListener locationListener;
-    static private Configuracion configuracion = new Configuracion(context);
-    static String latitud, longitud, url;
 
-    public LocalizacionCoordenadas(Context context)
+    static private Configuracion configuracion = new Configuracion(context);
+    Gps gps = new Gps(context);
+    static String latitud, longitud, url;
+    int IDClaveCliente;
+
+    public LocalizacionCoordenadas(Context context, int clavecliente)
     {
         this.context = context;
+        this.IDClaveCliente = clavecliente;
     }
 
-    public void locationStart() {
-        LocationManager mlocManager = (LocationManager) context.getSystemService(LOCATION_SERVICE);
-        latitud= String.valueOf(loc.getLatitude());
-        longitud = String.valueOf(loc.getLongitude());
 
-        //Guarda datos
-        configuracion.guardarDatos(latitud,longitud);
-        Toast.makeText(context," ejecuta localicacion" +
-                "", Toast.LENGTH_SHORT).show();
-
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            return;
-        }
-        mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-        mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-
-    }
-
-    @Override
-    public void onLocationChanged(Location location)
-    {
-
-        // Este metodo se ejecuta cada vez que el GPS recibe nuevas coordenadas
-        // debido a la deteccion de un cambio de ubicacion
-        latitud= String.valueOf(loc.getLatitude());
-        longitud = String.valueOf(loc.getLongitude());
-
-        //Guarda datos
-        configuracion.guardarDatos(latitud,longitud);
-    }
-
-    @Override
-    public void onStatusChanged(String s, int i, Bundle bundle)
-    {
-        switch (i) {
-            case LocationProvider.AVAILABLE:
-                Log.d("debug", "LocationProvider.AVAILABLE");
-                break;
-            case LocationProvider.OUT_OF_SERVICE:
-                Log.d("debug", "LocationProvider.OUT_OF_SERVICE");
-                break;
-            case LocationProvider.TEMPORARILY_UNAVAILABLE:
-                Log.d("debug", "LocationProvider.TEMPORARILY_UNAVAILABLE");
-                break;
-        }
-    }
-
-    @Override
-    public void onProviderEnabled(String s)
-    {
-
-    }
-
-    @Override
-    public void onProviderDisabled(String s)
-    {
-
-    }
-
-    public void setLocation(Location loc) {
-/*Obtener la direccion de la calle a partir de la latitud y la longitud
-        if (loc.getLatitude() != 0.0 && loc.getLongitude() != 0.0) {
-            try {
-            //    Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-              //  List<Address> list = geocoder.getFromLocation(
-                        loc.getLatitude(), loc.getLongitude(), 1);
-                if (!list.isEmpty()) {
-                    Address DirCalle = list.get(0);
-                     direccion = DirCalle.getAddressLine(0);
-                    //mensaje2.setText("Mi direccion es: \n"
-                      //      + DirCalle.getAddressLine(0));
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }*/
-    }
 
     //Verifica si el cliente ya tiene registrada la latitud y longitud
     public void vericarLocalizacion(){
@@ -159,11 +84,11 @@ public class LocalizacionCoordenadas implements Basic, LocationListener{
                     Toast.makeText(context," ya tiene datos "+ context.toString(), Toast.LENGTH_SHORT).show();
                 }else {
                     //ejecuta el cambio de la localización
-                    locationStart();
+                  //  gps.locationStart();
                     Toast.makeText(context, " No tiene datos ", Toast.LENGTH_SHORT).show();
 
                     //verifica si las variables son diferentes de nulas
-                    if (latitud == "null" && longitud == "null") {
+                    if (latitud == null && longitud == null) {
 
                     }else{
                         //Si no tiene agregados los valores los inserta

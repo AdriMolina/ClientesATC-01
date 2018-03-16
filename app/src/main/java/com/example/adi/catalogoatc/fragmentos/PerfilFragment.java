@@ -2,6 +2,7 @@ package com.example.adi.catalogoatc.fragmentos;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -25,8 +26,10 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.adi.catalogoatc.R;
 import com.example.adi.catalogoatc.Recursos.Basic;
+import com.example.adi.catalogoatc.clases.Gps;
 import com.example.adi.catalogoatc.clases.HiloGeolocalizador;
 import com.example.adi.catalogoatc.clases.LocalizacionCoordenadas;
+import com.example.adi.catalogoatc.clases.LocationReader;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,11 +44,15 @@ public class PerfilFragment extends Fragment implements Basic, Response.Listener
     View view;
     Context mContext;
     String url;
+    Double lo;
+    int CC;
+    Location location;
 
-    public static PerfilFragment newInstance(String param1, String param2) {
+    public static PerfilFragment newInstance(int clave) {
         PerfilFragment fragment = new PerfilFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
+        args.putInt("CLAVE_CLIENTE", clave);
         return fragment;
     }
 
@@ -59,7 +66,7 @@ public class PerfilFragment extends Fragment implements Basic, Response.Listener
 
         //compara si hay algun elemento guardado
         if (getArguments() != null) {
-
+            CC = getArguments().getInt("CLIENTE_ID");
         }
     }
 
@@ -84,7 +91,7 @@ public class PerfilFragment extends Fragment implements Basic, Response.Listener
         String consulta = "select cc.id, c.nombre, c.direccion, c.telefono, c.email" +
                             " from cliente c, clave_cliente cc" +
                             " where cc.cliente_id = c.id" +
-                            " and cc.id ="+IDClaveCliente;
+                            " and cc.id ="+CC;
         consulta = consulta.replace(" ", "%20");
         String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
         url= SERVER + RUTA + "consultaGeneral.php" + cadena;
@@ -106,9 +113,40 @@ public class PerfilFragment extends Fragment implements Basic, Response.Listener
                 transaction.replace(R.id.content_main, nuevofragmento);
                 transaction.addToBackStack(null);
                 transaction.commit();
+
+                Gps gps = new Gps(getContext());
+
+                if (gps.canGetLocation()){
+                  Double la = gps.getLatitude(); // returns latitude
+                    gps.getLongitude(); // returns longitude
+                    Toast.makeText(getContext(), String.valueOf(la),Toast.LENGTH_LONG).show();
+                }
+
                // HiloGeolocalizador hiloGeolocalizador = new HiloGeolocalizador(getContext());
                 //hiloGeolocalizador.ejecutar();
-                LocalizacionCoordenadas lc = new LocalizacionCoordenadas(getContext());
+            /*    LocalizacionCoordenadas lc = new LocalizacionCoordenadas(getContext());
+
+
+               final LocationReader locReader = (LocationReader) new LocationReader(getContext(), true);
+
+                LocationReader.OnLocationObtainedListener locationObtainedListener = new LocationReader.OnLocationObtainedListener() {
+
+                    @Override
+                    public void onLocationObtained(Location loc) {
+                        // TODO Auto-generated method stub
+                       // mostrarPosicion(loc);
+                         lo = loc.getLatitude();
+
+
+                    }
+                };
+                locReader.setOnLocationObtainedListener(locationObtainedListener);
+
+
+
+                Toast.makeText(getContext(), String.valueOf(lo), Toast.LENGTH_SHORT).show();
+
+*/
                // lc.vericarLocalizacion();
                 //lc.locationStart();
 

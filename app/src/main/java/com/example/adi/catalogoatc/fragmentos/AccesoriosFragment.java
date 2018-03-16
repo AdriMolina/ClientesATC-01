@@ -47,15 +47,21 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
         private SwipeRefreshLayout contenedor;
         CatalogoAdapter adapter;
         List<modeloCatalogo> listaAdapter;
-    String idpventa, nombrepv;
         String url;
 
-    public static TelefonoFragment newInstance(String IDPVenta, String nombrePV) {
+    int IDRuta, IDClaveCliente;
+
+
+
+
+    // TODO: Rename and change types and number of parameters
+    public static TelefonoFragment newInstance(int ruta_id, int clavecliente_id) {
+
         TelefonoFragment fragment = new TelefonoFragment();
         Bundle args = new Bundle();
-        args.putString("IDPVENTA", IDPVenta);
-        args.putString("NOMBREPV", nombrePV);
         fragment.setArguments(args);
+        args.putInt("RUTA_ID", ruta_id);
+        args.putInt("CLIENTE__ID", clavecliente_id);
         return fragment;
     }
 
@@ -66,8 +72,9 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
 
         //compara si hay algun elemento guardado
         if (getArguments() != null) {
-            idpventa = getArguments().getString("IDPVENTA");
-            nombrepv = getArguments().getString("NOMBREPV");
+
+            IDRuta = getArguments().getInt("RUTA_ID");
+            IDClaveCliente = getArguments().getInt("CLIENTE_ID");
         }
     }
 
@@ -98,7 +105,7 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
                                 " and ca.puntoVenta_id = pv.id" +
                                 " and ca.articulo_id = a.id" +
                                 " and a.tipoArticulo_id = ta.id" +
-                                " and pv.id =" +idpventa+
+                                " and pv.id =" +IDRuta+
                                 " and ta.nombre !='Teléfono'" +
                                 " and ta.nombre !='Chip'" +
                                 " and ca.valor > 0" +
@@ -247,7 +254,7 @@ public class AccesoriosFragment extends Fragment implements Basic, Response.List
                                 " and ca.puntoVenta_id = pv.id" +
                                 " and ca.articulo_id = a.id" +
                                 " and a.tipoArticulo_id = ta.id" +
-                                " and pv.id =" +idpventa+
+                                " and pv.id =" +IDRuta+
                                 " and ta.nombre !='Teléfono'" +
                                 " and ta.nombre !='Chip'" +
                                 " and ca.valor > 0" +

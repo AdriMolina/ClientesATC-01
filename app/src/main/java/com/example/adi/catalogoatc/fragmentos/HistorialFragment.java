@@ -25,17 +25,23 @@ public class HistorialFragment extends Fragment {
     private AppBarLayout appBar;
     private TabLayout pestanas;
     private ViewPager viewPager;
+    int IDClaveCliente=20;
 
 
-    public static HistorialFragment newInstance(String param1, String param2) {
+    public static HistorialFragment newInstance(int Clavecliente) {
         HistorialFragment fragment = new HistorialFragment();
         Bundle args = new Bundle();
+        fragment.setArguments(args);
+        args.putInt("CLAVE_CLIENTE", Clavecliente);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            IDClaveCliente = getArguments().getInt("CLAVE_CLIENTE");
+        }
 
     }
 
@@ -89,8 +95,8 @@ public class HistorialFragment extends Fragment {
     private void llenarViewPager(ViewPager viewPager){
 
         SeccionesAdapter adapter1 = new SeccionesAdapter(getFragmentManager());
-        adapter1.addFragment(new HistorialContadoFragment(), "Contado" );
-        adapter1.addFragment(new HistorialCreditoFragment(), "Credito");
+        adapter1.addFragment(HistorialContadoFragment.newInstance(IDClaveCliente), "Contado" );
+        adapter1.addFragment(HistorialCreditoFragment.newInstance(IDClaveCliente), "Credito");
 
 
         viewPager.setAdapter(adapter1);

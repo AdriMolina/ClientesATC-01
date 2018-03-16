@@ -28,13 +28,21 @@ public class CatalogoFragment extends Fragment {
     private AppBarLayout appBar;
     private TabLayout pestanas;
     private ViewPager viewPager;
+
+    int IDRuta=2;
+    int IDClaveCLiente=20;
+    ClipData.Item item;
+
     public CatalogoFragment() {
 
     }
 
-    public static CatalogoFragment newInstance(String param1, String param2) {
+    public static CatalogoFragment newInstance(int ruta_ID, int clavecliente_id) {
         CatalogoFragment fragment = new CatalogoFragment();
         Bundle args = new Bundle();
+        fragment.setArguments(args);
+        args.putInt("RUTA_ID", ruta_ID);
+        args.putInt("CLAVECLIENTE", clavecliente_id);
         return fragment;
     }
 
@@ -42,6 +50,11 @@ public class CatalogoFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
+        //compara si hay algun elemento guardado
+        if (getArguments() != null) {
+            IDRuta = getArguments().getInt("RUTA_ID");
+            IDClaveCLiente =getArguments().getInt("CLAVECLIENTE");
+        }
     }
 
     @Override
@@ -85,9 +98,12 @@ public class CatalogoFragment extends Fragment {
     //Agrega las pestañas para sus respectivos fragmentos
     private void llenarViewPager(ViewPager viewPager){
         SeccionesAdapter adapter = new SeccionesAdapter(getFragmentManager());
-        adapter.addFragment(new ChipFragment(), "Chips" );
-        adapter.addFragment(new TelefonoFragment(), "Teléfonos");
-        adapter.addFragment(new AccesoriosFragment(), "Accesorios");
+        adapter.addFragment(ChipFragment.newInstance(IDRuta, IDClaveCLiente), "Chips");
+        adapter.addFragment(TelefonoFragment.newInstance(IDRuta, IDClaveCLiente),"Teléfonos");
+        adapter.addFragment(AccesoriosFragment.newInstance(IDRuta, IDClaveCLiente),"Accesorios");
+        //adapter.addFragment(new ChipFragment(), "Chips" );
+       // adapter.addFragment(new TelefonoFragment(), "Teléfonos");
+        //adapter.addFragment(new AccesoriosFragment(), "Accesorios");
 
         viewPager.setAdapter(adapter);
 

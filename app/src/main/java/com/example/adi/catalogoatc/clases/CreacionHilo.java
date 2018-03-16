@@ -12,13 +12,15 @@ public class CreacionHilo extends android.os.AsyncTask<Void, Integer,Boolean>
 {
  Context context;
     Activity activity;
+    int idClavecliente;
 
-    public CreacionHilo(Context context)
+    public CreacionHilo(Context context, int idCliente)
     {
         this.context = context;
+        this.idClavecliente = idCliente;
     }
 
-    LocalizacionCoordenadas lc = new LocalizacionCoordenadas(context);
+    LocalizacionCoordenadas lc = new LocalizacionCoordenadas(context, idClavecliente);
     HiloGeolocalizador hg = new HiloGeolocalizador(context);
 
     //metodo que trabaja en segundo plano

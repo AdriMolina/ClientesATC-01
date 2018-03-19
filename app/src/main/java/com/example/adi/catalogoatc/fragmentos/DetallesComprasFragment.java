@@ -88,16 +88,14 @@ public class DetallesComprasFragment extends Fragment implements Basic, Response
         //Inicia la peticion
         RequestQueue queue = Volley.newRequestQueue(getContext());
         String consulta = "SELECT od.tipoVentaId, ta.nombre, ma.nombre, mo.nombre , od.cantidad, od.precio_final, (od.cantidad * od.precio_final)" +
-                " FROM tipo_articulo ta,marca ma, modelo mo, orden_descripcion od,orden_completa oc, orden ord, cantidad ca, articulo ar" +
+                " FROM tipo_articulo ta,marca ma, modelo mo, orden_descripcion od, orden ord, cantidad ca, articulo ar" +
                 " where od.tipoVentaId = ca.id" +
                 " and ord.id = od.orden_id" +
-                " and ord.id = oc.orden_id" +
                 " and mo.id = ar.modelo_id" +
                 " and ma.id = mo.marca_id" +
                 " and ca.articulo_id = ar.id" +
                 " and ar.tipoArticulo_id = ta.id" +
-                " and od.orden_id = "+orden_id;
-
+                " and od.orden_id =7156; "+orden_id;
         consulta = consulta.replace(" ", "%20");
         String cadena = "?host=" + HOST + "&db=" + DB + "&usuario=" + USER + "&pass=" + PASS + "&consulta=" + consulta;
         url= SERVER + RUTA + "consultaGeneral.php" + cadena;

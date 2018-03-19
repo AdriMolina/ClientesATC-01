@@ -75,7 +75,7 @@ public class BuzonFragment extends Fragment implements Basic {
 
                 //verifica que el campo no este vacio
                 if(mensaje.equals(" ")) {
-                    
+
                     //Coloca el dialogo de carga
                     progressDialog = new ProgressDialog(getContext());
                     progressDialog.setTitle("En Proceso");
@@ -99,6 +99,7 @@ public class BuzonFragment extends Fragment implements Basic {
                         public void onResponse(JSONArray response) {
                             progressDialog.hide();
                             Toast.makeText(getContext(), "Su mensaje se ha enviado", Toast.LENGTH_SHORT).show();
+                            //enviar notificación
 
                         }
                     }, new Response.ErrorListener() {
